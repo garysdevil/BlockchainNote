@@ -2,6 +2,8 @@
 1. Loot
     - https://github.com/NFTLootBox/contracts
     - https://etherscan.io/address/0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7
+    - 创始人 Dom Hofmann
+    - https://www.lootproject.com/
 
 2. Dragon
     - https://github.com/nourharidy/LairOfWisdom/
