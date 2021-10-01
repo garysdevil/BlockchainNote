@@ -1,33 +1,30 @@
 ## 语言对比
 - 一个contract看成Java的一个Class类。
 - 一个contract的一个实例看成Java的一个对象。
-- contract也拥有Java类似的封装、继承的特性。
+- contract也拥有Java类似的封装、继承、多态的特性。
 - contract也拥有golang结构体的数据结构。
 
-## 以太坊标准
-- ERC20 
-    - 以太坊同质化代币标准
-    - Vitalik Buterin于2015年6月提
-- ERC165 
-    - 标准接口检测协议；创建一个标准方法以发布和检测智能合约实现了哪些接口
-- ERC721 
-    - 以太坊非同质化代币标准（Non-Fungible Tokens，简写为NFT）
-- ERC1155
-    - 介于同质化代币与非同质化代币之间可以相互切换的代币标准
+## 
+```js
+// 如何使用库
+// 使用using语句将库中的函数附加到uint256数据类型上
+using 库名 for uint256;
+```
 
-- 兼容 ERC-165的合约应该实现以下接口
-    ```js
-    interface ERC165 {
-        /// @notice 查询一个合约时实现了一个接口
-        /// @param interfaceID  参数：接口ID, 参考上面的定义
-        /// @return true 如果函数实现了 interfaceID (interfaceID 不为 0xffffffff )返回true, 否则为 false
-        function supportsInterface(bytes4 interfaceID) external view returns (bool);
-    }
-    ```
 ## 全局变量
-- msg.sender  消息发送者（当前调用智能合约函数者）
+```js
+msg.sender (address) // 消息发送者（当前调用智能合约函数的账户地址） 
+msg.value (uint) // 这个消息所附带的以太币，单位为wei。
 
-## 变量
+block.coinbase (address) // 当前块矿工的地址
+
+block.number (uint) // 当前区块的块号
+block.difficulty (uint) // 当前块的难度
+block.timestamp (uint) // 当前块的Unix时间戳（从1970/1/1 00:00:00 UTC开始所经过的秒数）
+now // block.timestamp的简写模式，以及被定义为deprecated
+```
+
+## 变量/数据
 - 变量的三种存储类型
     - memory 
         - 默认的函数参数，包括返回的参数，都是memory存储类型
@@ -48,6 +45,7 @@
     5. 定长字节数组
     6. 变长字节数组
     7. 枚举 enum
+    8. 映射 
 
 ```js
 pragma solidity >=0.7.0 <0.9.0;
@@ -55,6 +53,10 @@ contract Person {
     // 变量的声明
     // 数据类型 变量可见性 变量名称
     uint public varname;
+    
+    // 映射 基本类型 映射到 基本类型/引用类型
+    mapping(基本类型 => 基本类型/引用类型) 可见性 变量名
+    mapping(uint256 => address) private varname;
 
     // 结构体
     struct Gender {
@@ -68,28 +70,30 @@ contract Person {
 }
 ```
 
+- 状态变量：默认可见性为 internal ，不能设置为 external 。
+- 可见性程度 public  > internal > private 
+- 三种可见性
+    1. public  生成一个自动 getter 函数
+    3. internal 只能在内部进行访问
+    4. private 仅在当前合约可以被访问，不能被继承
 
 ## 合约
-### 可见性类型
-- 内部调用：又被称为“消息调用”。常见的有合约内部函数、父合约的函数以及库函数的调用。
+### 函数可见性
+- 内部调用：又被称为“消息调用”。常见的有对合约内部函数、父合约函数、库函数的调用。
 - 外部调用：又被称为“EVM 调用”。一般为跨合约的函数调用。
 
 - 可见性程度 public > external > internal > private 
-- 四种可见性类型
+- 四种可见性
     1. public 同时支持内部和外部调用
     2. external 只支持外部调用
     3. internal 只支持内部调用
     4. private 仅在当前合约可以被使用，不能被继承
 
-- 函数：默认可见性类型为 public
+- 函数：默认可见性为 public
 
-- 状态变量：默认可见性类型为 internal ，不能设置为 external 。
 
 ### 函数修饰器
 - 修饰器用于限制函数的行为；类似于 Spring 中的切面功能，作用于一个函数上；
-    - view  禁止修改状态
-    - pure  禁止读取和修改状态
-    - payable 允许修改状态（允许从消息调用中接收以太币Ether）
 
 ```js
 pragma solidity >=0.7.1 <0.9.0;
@@ -102,17 +106,20 @@ contract owned {
             msg.sender == owner,
             "Only owner can call this function."
         );
-        _;
+        _; // 修饰器固定格式
     }
 }
 ```
-
+### 函数状态可变性
+- view  禁止修改状态
+- pure  禁止读取和修改状态
+- payable 允许修改状态（允许从消息调用中接收以太币Ether）
 
 ### 函数
 ```js
 contract C {
     // 格式
-    function 函数名(参数) 函数可见性类型 函数状态可变性类型/函数修饰器名称 returns (变量类型) {
+    function 函数名(参数) 函数可见性 状态可变性 函数修饰器... returns (变量类型) {
         函数体
         return 值;
     }
@@ -143,18 +150,67 @@ const fs = require('fs')
 const web3 = new Web3(wsURL)
 ```
 
+### 库
+- 库的特征
+    - 如果库函数不修改状态，则可以直接调用它们。这意味着纯函数或视图函数只能从库外部调用。
+    - 库不能被销毁，因为它被认为是无状态的。
+    - 库不能有状态变量。
+    - 库不能继承任何其他元素。
+    - 库不能被继承。
+
+```js
+// 将库的函数附加到指定类型
+// 格式：using 库名 for 数据类型  
+using Search for uint[]; // 将Search库附加给unit[]类型，之后unit[]类型声明的数据就可以直接使用Search库里的函数
+
+```
+
+### 继承
+```js
+pragma solidity ^0.5.0;
+
+contract Base {
+   uint data;
+   constructor(uint _data) public {
+      data = _data;   
+   }
+}
+// 继承时直接初始化父合约的构造函数
+contract Derived is Base (5) {
+   constructor() public {}
+}
+// 继承时间接初始化父合约的构造函数
+contract DerivedA is Base{
+    constructor(uint _info) Base(_info * _info) public {}
+}
+
+// 抽象合约可以不实现父合约的构造函数
+```
+### 错误处理
+1. assert(bool condition) − 如果不满足条件，此方法调用将导致一个无效的操作码，对状态所做的任何更改将被还原。这个方法是用来处理内部错误的。
+
+2. require(bool condition) − 如果不满足条件，此方法调用将恢复到原始状态。此方法用于检查输入或外部组件的错误。
+
+3. require(bool condition, string memory message) − 如果不满足条件，此方法调用将恢复到原始状态。此方法用于检查输入或外部组件的错误。它提供了一个提供自定义消息的选项。
+
+4. revert() − 此方法将中止执行并将所做的更改还原为执行前状态。
+
+5. revert(string memory reason) − 此方法将中止执行并将所做的更改还原为执行前状态。它提供了一个提供自定义消息的选项
+
+6. try/catch 捕捉错误
+
+### 内联汇编
+- 可以在assembly块内直接写solidity的汇编语言
+```js
+    // 判断账户地址是用户地址还是合约地址，size为0则是用户地址
+    uint256 size;
+    assembly {
+        size := extcodesize(account)
+    }
+```
+
 ## 调用与交易
-- 交易(Transaction)具有如下特征：
-    1. 需要gas（Ether）
-    2. 改变网络的状态
-    3. 不会立即执行
-    4. 不会暴露返回结果(仅有交易ID)
-    
-- 调用(Call)具有如下特征：
-    1. 免费（不花费gas）
-    2. 不改变网络状态
-    3. 立即执行
-    4. 有返回结果。
+–
 
 ## 高级特性
 1. 继承

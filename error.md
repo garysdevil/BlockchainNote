@@ -15,3 +15,6 @@
 
 3. err="authentication needed: password or unlock"
     1. 可能是账户未解锁导致
+
+4. err="the method personal_unlockAccount does not exist/is not available"
+    1. 节点启动时没有开启personal模块访问权限 --http.api eth,web3,personal,net,db

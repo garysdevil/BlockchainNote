@@ -939,7 +939,8 @@ contract ERC721 is Context, ERC165, IERC721, IERC721Metadata {
      * Emits a {Transfer} event.
      */
     function _safeMint(address to, uint256 tokenId) internal virtual {
-        _safeMint(to, tokenId, "");
+        
+        (to, tokenId, "");
     }
 
     /**
@@ -1502,6 +1503,7 @@ contract Loot is ERC721Enumerable, ReentrancyGuard, Ownable {
         return pluck(tokenId, "RING", rings);
     }
     
+    // 通过TokenID生成一套装备
     function pluck(uint256 tokenId, string memory keyPrefix, string[] memory sourceArray) internal view returns (string memory) {
         uint256 rand = random(string(abi.encodePacked(keyPrefix, toString(tokenId))));
         string memory output = sourceArray[rand % sourceArray.length];

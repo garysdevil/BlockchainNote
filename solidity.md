@@ -8,9 +8,12 @@
     - solidity英文文档 https://docs.soliditylang.org
     - solidity中文文档 https://solidity-cn.readthedocs.io
     - solidity中文文档 https://www.qikegu.com/docs/4852
+    - 以太坊标准 https://github.com/ethereum/EIPs/tree/master/EIPS
+    - 以太坊标准合约/库 https://github.com/OpenZeppelin/openzeppelin-contracts 
+        - OpenZeppelin代码库包含了经过社区审查的ERC代币标准、安全协议以及很多的辅助工具库，这些代码可以帮助开发者专注业务逻辑的，而无需重新发明轮子。
 
 - web3.js
-    - web3.js英文文档 https://web3js.readthedocs.io/en/v1.5.2/
+    - web3.js官方文档 https://web3js.readthedocs.io/en/v1.5.2/
     - web3.js中文文档 https://web3.tryblockchain.org/
     - web3.js中文文档 http://cw.hubwiz.com/card/c/web3.js-1.0/
 
@@ -26,6 +29,7 @@
     - 自建区块链游览器 https://github.com/etherparty/explorer 简单  nodev8.17.0运行成功 nodev16.9.1运行失败
 
 - 以太坊开发各种工具链接 https://zhuanlan.zhihu.com/p/316741673
+- 最佳实践 https://github.com/ConsenSys/smart-contract-best-practices
 
 ## 通过truffle进行合约编译部署
 - 安装编译器
@@ -112,7 +116,7 @@ mv geth /usr/local/bin/
 # 用bash启动以太坊，私有网络
 geth --dev --datadir=~/ethereumData/ --networkid 65535 --nodiscover --http --http.addr 127.0.0.1 --http.port  8545 --port 30303 --allow-insecure-unlock console
 # --http.corsdomain "*"  # 跨域访问
-# --http.api eth,web3,personal,net,db 
+# --http.api eth,web3,personal,net,db # 允许通过http方式访问相关的模块
 # --verbosity
 # --ws --ws.addr 127.0.0.1 --ws.port 8544
 
