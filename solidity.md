@@ -5,11 +5,11 @@
 ## 相关链接
 - Solidity
     - Solidity源码  https://github.com/ethereum/solidity
-    - solidity英文文档 https://docs.soliditylang.org
+    - solidity官方文档 https://docs.soliditylang.org
     - solidity中文文档 https://solidity-cn.readthedocs.io
     - solidity中文文档 https://www.qikegu.com/docs/4852
     - 以太坊标准 https://github.com/ethereum/EIPs/tree/master/EIPS
-    - 以太坊标准合约/库 https://github.com/OpenZeppelin/openzeppelin-contracts 
+    - 以太坊标准合约/常用库的实现 https://github.com/OpenZeppelin/openzeppelin-contracts 
         - OpenZeppelin代码库包含了经过社区审查的ERC代币标准、安全协议以及很多的辅助工具库，这些代码可以帮助开发者专注业务逻辑的，而无需重新发明轮子。
 
 - web3.js

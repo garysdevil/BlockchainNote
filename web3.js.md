@@ -24,12 +24,12 @@ abi = JSON.parse(source).abi
 const contractAddress = '0xdc64ae94db27325cdf53b9c336bbe5484100e177'
 const contractInstance = new web3.eth.Contract(abi, contractAddress)
 
-// 执行一次交易，会改变链上的状态
-contractInstance.methods.send(参数)).send({from: 账户地址},(err, result) => { console.log(result) })
+// 发送一次交易，会改变链上的状态
+contractInstance.methods.方法名(参数)).send({from: 账户地址},(err, result) => { console.log(result) })
 
 // 执行一次调用，并不会改变链上的状态
-contractInstance.methods.get(参数).call((err, result) => { console.log(result) })
-contractInstance.methods.get(参数).call({gasPrice:1000,gas:10000},(err, result) => { console.log(result) })
+contractInstance.methods.方法名(参数).call((err, result) => { console.log(result) })
+contractInstance.methods.方法名(参数).call({gasPrice:1000,gas:10000},(err, result) => { console.log(result) })
 
 // 查看合约之前的所有事件
 contractInstance.getPastEvents(
