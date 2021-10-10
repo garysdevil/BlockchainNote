@@ -4,23 +4,19 @@
 - contract也拥有Java类似的封装、继承、多态的特性。
 - contract也拥有golang结构体的数据结构。
 
-## 
+## 代码结构
 ```js
 // SPDX-License-Identifier: GPL-3.0 //指定开源协议
 pragma solidity >=0.6.0 <0.9.0; //指定编译版本在0.6.0到0.9.0范围内 // ^0.6.0;指定编译版本为0.6.*系列
 
-// 倒入模块
-import "./ERC20.sol"; // 直接倒入
-import * as BaseERC20 from "./ERC20.sol"; // 倒入此模块并命名为BaseERC20
-
-// 如何使用库
-// 使用using语句将库中的函数附加到uint256数据类型上
-using 库名 for uint256;
+// 导入模块
+import "./ERC20.sol"; // 直接导入
+import * as BaseERC20 from "./ERC20.sol"; // 导入此模块并命名为BaseERC20
 ```
 
 ## 全局变量
 ```js
-blockhash(uint) return (bytes32)	
+blockhash(uint) returns (bytes32) // 取最新的256个区块号对应的hash，但不包括当前区块的
 
 msg.sender returns (address) // 消息发送者（当前调用智能合约函数的账户地址） 
 msg.value returns (uint) // 这个消息所附带的以太币，单位为wei。
@@ -30,11 +26,11 @@ block.number returns (uint) // 当前区块的块号
 block.difficulty returns (uint) // 当前块的难度
 block.timestamp returns (uint) // 当前块的Unix时间戳（从1970/1/1 00:00:00 UTC开始所经过的秒数）
 now // block.timestamp的简写模式，以及被定义为deprecated
-block.gaslimit return (uint) // 当前区块的gaslimit
+block.gaslimit returns (uint) // 当前区块的gaslimit
 
 ```
 
-## 变量/数据
+## 数据/变量
 - 数据的三种存储形式
     - memory 
         - 函数参数，函数返回的参数，默认都是memory存储类型
@@ -64,8 +60,8 @@ block.gaslimit return (uint) // 当前区块的gaslimit
         4. 字符串 string
     - 枚举 enum
 
-- 状态变量可见性程度 public > internal > private
 - 状态变量三种可见性
+    - 状态变量可见性程度 public > internal > private
     1. public  生成一个自动 getter 函数
     3. internal 只能在内部进行访问
     4. private 仅在当前合约可以被访问，不能被继承
@@ -121,6 +117,24 @@ for (初始化; 测试条件; 迭代语句) {
 // if else
 ```
 ## 函数
+```js
+contract C {
+    // 格式
+    function 函数名(参数) 函数可见性 状态可变性 函数修饰器... returns (变量类型,变量类型) {
+        函数体
+        return 值,值;
+    }
+    // 实例
+    function double(uint num) public pure returns (uint,uint){
+        return (num*2,num*3);
+    }
+    function test() public pure returns (uint8[2] memory){
+        uint8[2] memory data = [1,2];
+        uint8[] memory data1 = new uint8[](3); data1[0] = 1;
+        return data;
+    }
+}
+```
 ### 函数可见性
 - 内部调用：又被称为“消息调用”。常见的有对合约内部函数、父合约函数、库函数的调用。
 - 外部调用：又被称为“EVM 调用”。一般为跨合约的函数调用。
@@ -161,20 +175,6 @@ contract owned {
 ### 重载
 同一个作用域内，相同函数名可以定义多个函数。这些函数的参数(参数类型或参数数量)必须不一样。仅仅是返回值不一样不被允许。
 
-### 函数
-```js
-contract C {
-    // 格式
-    function 函数名(参数) 函数可见性 状态可变性 函数修饰器... returns (变量类型,变量类型) {
-        函数体
-        return 值,值;
-    }
-    // 实例
-    function double(uint num) public view returns (uint,uint){
-        return num*2,num*3;
-    }
-}
-```
 ### 常用函数
 - 数学函数
     - addmod(uint x, uint y, uint k) returns (uint) 计算(x + y) % k
@@ -182,10 +182,7 @@ contract C {
 - 加密函数
     - keccak256(bytes memory) returns (bytes32) 计算输入的Keccak-256散列。
 
-## 常用模式
-1. 提款模式 Withdrawal
-2. 限制访问 restricted
-##
+## 合约
 ### 事件Event
 - 链下可以对事件进行持续的监听
 - 事件主要分为定义事件和触发事件两部分。
@@ -206,7 +203,7 @@ const fs = require('fs')
 const web3 = new Web3(wsURL)
 ```
 
-### 库
+### 库Library
 - 库的特征
     - 如果库函数不修改状态，则可以直接调用它们。这意味着纯函数或视图函数只能从库外部调用。
     - 库不能被销毁，因为它被认为是无状态的。
@@ -218,10 +215,9 @@ const web3 = new Web3(wsURL)
 // 将库的函数附加到指定类型
 // 格式：using 库名 for 数据类型  
 using Search for uint[]; // 将Search库附加给unit[]类型，之后unit[]类型声明的数据就可以直接使用Search库里的函数
-
 ```
 
-### 继承
+### 继承/构造函数
 ```js
 pragma solidity ^0.8.0;
 
@@ -265,10 +261,7 @@ contract DerivedA is Base1{
     }
 ```
 
-## 调用与交易
-–
-
-## 高级特性
+### 抽象合约/接口
 1. 继承
 2. 抽象合约
     ```js
@@ -284,3 +277,11 @@ contract DerivedA is Base1{
     }
     ```
 3. 接口
+
+## 设计模式
+1. 提款模式 Withdrawal
+2. 限制访问 restricted
+3. 合约的升级
+    - 使用代理合约
+        - 代理合约使用delegatecall操作码将函数调用转发到可更新的目标合约。 由于delegatecall保留了函数调用的状态，因此可以更新目标合约的逻辑，并且状态将保留在代理合约中以供更新后的目标合约的逻辑使用。 与delegatecall一样，msg.sender将保持代理合约的调用者身份。
+    - 将逻辑和数据分离成不同的合约

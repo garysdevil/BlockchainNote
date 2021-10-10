@@ -29,7 +29,13 @@
     - 自建区块链游览器 https://github.com/etherparty/explorer 简单  nodev8.17.0运行成功 nodev16.9.1运行失败
 
 - 以太坊开发各种工具链接 https://zhuanlan.zhihu.com/p/316741673
-- 最佳实践 https://github.com/ConsenSys/smart-contract-best-practices
+- 最佳安全开发指南 https://github.com/ConsenSys/smart-contract-best-practices
+
+- 智能合约的升级
+    - https://github.com/NoharaHiroshi/upgradability-solidity-demo
+    - https://blog.openzeppelin.com/the-state-of-smart-contract-upgrades/
+    - https://juejin.cn/post/6844903599407890445
+    - https://ethfans.org/posts/flexible-upgradability-for-smart-contracts
 
 ## 通过truffle进行合约编译部署
 - 安装编译器
@@ -114,7 +120,7 @@ brew install solidity
 mv geth /usr/local/bin/
 
 # 用bash启动以太坊，私有网络
-geth --dev --datadir=~/ethereumData/ --networkid 65535 --nodiscover --http --http.addr 127.0.0.1 --http.port  8545 --port 30303 --allow-insecure-unlock console
+geth --dev --datadir=~/ethereumData/ --networkid 65535 --nodiscover --http --http.addr 127.0.0.1 --http.port  8545 --ws --ws.addr 127.0.0.1 --ws.port 8544 --port 30303 --allow-insecure-unlock console
 # --http.corsdomain "*"  # 跨域访问
 # --http.api eth,web3,personal,net,db # 允许通过http方式访问相关的模块
 # --verbosity
