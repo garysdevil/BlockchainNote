@@ -8,7 +8,28 @@ const rpcURL = "http://127.0.0.1:8545" // 连接节点的地址
 const web3 = new Web3(rpcURL) // 创建Web3连接
 
 
-const address = "0x03118E2c88676d31ee397E1eEf7789fECfbC40b9"
+const account1 = "0x03118E2c88676d31ee397E1eEf7789fECfbC40b9"
+const account2 = ""
+
+// 创建账户/解锁账户
+const createAccount = _ =>{
+    // 方式一
+    // var newAccount = web3.eth.accounts.create();
+    // var address = newAccount.address
+    // var privateKey = newAccount.privateKey
+    // // console.log("address=" + address,"\nprivateKey=" + privateKey)
+    // web3.eth.accounts.privateKeyToAccount(privateKey) // 解锁账户
+    // return address
+
+    // 方式二
+    password="123456"
+    web3.eth.personal.newAccount(password,(err, address)=>{
+        console.log(address)
+        web3.eth.personal.unlockAccount(address, password, 14400).then(console.log('Account unlocked!'));
+    });
+    // 返回账户列表；web3.eth.accounts.create() 创建的账户不会被添加到这个列表中
+    web3.eth.personal.getAccounts().then(console.log);
+}
 
 // 获取账户余额
 web3.eth.getBalance(address, (err, wei) => {
@@ -17,6 +38,15 @@ web3.eth.getBalance(address, (err, wei) => {
     console.log("balance: " + balance)
 })
 
+// 私链转账以太坊
+web3.eth.sendTransaction({
+    from: account0,
+    to: account1,
+    value: "1000000000000000000"
+})
+.then(function(receipt){
+    console.log(receipt);
+});
 
 // 获取合约实例
 const source = fs.readFileSync("./Coin.json", 'utf8'); 

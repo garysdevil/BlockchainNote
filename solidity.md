@@ -16,6 +16,7 @@
     - web3.js官方文档 https://web3js.readthedocs.io/en/v1.5.2/
     - web3.js中文文档 https://web3.tryblockchain.org/
     - web3.js中文文档 http://cw.hubwiz.com/card/c/web3.js-1.0/
+    - web3.js中文文档 https://learnblockchain.cn/docs/web3.js/index.html
 
 - 开发工具
     - 开发框架truffle https://github.com/trufflesuite/truffle
@@ -174,7 +175,7 @@ txpool.status # 查看交易状态
 abivar=abi内容 // abi内容
 binvar="0x"+"bin内容" // 字节码内容
 myaddress=eth.accounts[0]
-personal.unlockAccount(myaddress,'123456')
+personal.unlockAccount(eth.accounts[1],'123456',10000000)
 
 // 部署合约,记住生成的合约地址
 contractObject=eth.contract(abivar) // 生成合约对象
@@ -209,10 +210,11 @@ contractInstance.合约函数名()
 - 1ETH = 1000Finney
 - 1Finney = 1000Szabo
 - 1Szabo = 1000Gwei
+- 1Gwei = 1000Mwei
 - 1Mwei = 1000Kwei
 - 1Kwei = 1000Wei
 
-- 一个ETH 等于一千 Finney，一百万 Szabo，十亿Gwei，万亿Kwei，千万亿 Mwei，百万万亿 Wei
+- 一个ETH 等于一千 Finney，一百万 Szabo，十亿Gwei，万亿Mwei，千万亿 Kwei，百万万亿 Wei
 
 - Gas由两个部分组成： 限制（Gas limit）和价格（Gas Price）
 - Gas Limit 是用户愿意为执行某个操作或确认交易支付的最大Gas量（最少21,000）

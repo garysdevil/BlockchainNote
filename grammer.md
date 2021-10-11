@@ -278,6 +278,60 @@ contract DerivedA is Base1{
     ```
 3. 接口
 
+## 合约间的调用
+- 方式一 call
+    - 调用后内置变量 msg 的值会修改为调用者的值。
+    - 调用后执行环境为被调用者的运行环境(合约的 storage)。
+
+- 方式二 delegatecall
+    - 调用后内置变量 msg 的值任然是外部账户的值，不会被修改为调用者的值。
+    - 调用后执行环境为调用者的运行环境(合约的 storage)。
+
+- 调用格式
+    - 合约地址.call(abi.encodeWithSignature("合约函数名"));
+
+- fallback() external {} // 合约内定义此函数，则当函数未被找到时，默认执行此函数；否则 err="execution reverted"
+- receive() payable external {} // 合约内定义此函数，才能接收转账，否则 err="execution reverted"
+
+
+
+```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0; 
+contract Test1 {
+   address public temp1; uint256 public temp2;
+   // call
+   function call_1(address contractAddr) public {
+      (bool success,) = contractAddr.call(abi.encodeWithSignature("test()")); require(success);
+   }
+   // delegatecall
+   function call_2(address contractAddr) public {
+      (bool success,) = contractAddr.delegatecall(abi.encodeWithSignature("test()")); require(success);      
+   }
+   // 触发fallback函数
+   function call_3(address contractAddr) public {
+      (bool success,) = contractAddr.delegatecall(abi.encodeWithSignature("(noExistFunction)")); require(success);      
+   }
+   // 转账
+   function call_4(address payable addr) public { addr.transfer(1 ether); }
+} 
+
+contract Test2 {
+   address public temp1;
+   uint256 public temp2;    
+   function test() public  {
+      temp1 = msg.sender;        temp2 = 100;    
+   }
+   receive() payable external {
+      temp1 = msg.sender;        temp2 = 300;    
+   }
+   fallback() external {
+      temp1 = msg.sender;        temp2 = 200;  
+   }
+}
+```
+
+
 ## 设计模式
 1. 提款模式 Withdrawal
 2. 限制访问 restricted

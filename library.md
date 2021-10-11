@@ -24,12 +24,3 @@ contract test{
 }
 ```
 
-- 
-```js
-fallback () payable external {}
-receive () payable external {}
-
-function deposit() payable{}
-
-address(this).call(bytes32(keccak256("eat()")),2);
-```
