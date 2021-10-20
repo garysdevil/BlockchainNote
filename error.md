@@ -12,9 +12,11 @@
 
 2. err="execution reverted"
     1. 可能是部署合约时未传入参数导致
+    2. 可能是外部调用函数，函数返回数组
 
 3. err="authentication needed: password or unlock"
     1. 可能是账户未解锁导致
 
 4. err="the method personal_unlockAccount does not exist/is not available"
     1. 节点启动时没有开启personal模块访问权限 --http.api eth,web3,personal,net,db
+

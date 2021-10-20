@@ -1,9 +1,11 @@
-## 语言对比
-- 一个contract看成Java的一个Class类。
-- 一个contract的一个实例看成Java的一个对象。
-- contract也拥有Java类似的封装、继承、多态的特性。
-- contract也拥有golang结构体的数据结构。
+## 智能合约语言
+- Solidity和java、golang的类比
+    - 一个contract看成Java的一个Class类。
+    - 一个contract的一个实例看成Java的一个对象。
+    - contract也拥有Java类似的封装、继承、多态的特性。
+    - contract也拥有golang结构体的数据结构。
 
+- Solidity、Vyper、Yul 、Yul+
 ## 代码结构
 ```js
 // SPDX-License-Identifier: GPL-3.0 //指定开源协议
@@ -33,17 +35,19 @@ block.gaslimit returns (uint) // 当前区块的gaslimit
 ## 数据/变量
 - 数据的三种存储形式
     - memory 
-        - 函数参数，函数返回的参数，默认都是memory存储类型
-        - 数据存储在内存里；即分配，即使用，越过作用域即不可被访问；等待被回收；
-        - memory之间是引用传递，并不会拷贝数据
+        - 数据存储在内存里；即分配，即使用，越过作用域即不可被访问；等待被回收。
+        - 函数参数，函数返回的参数，默认都是memory存储类型。
+        - memory之间是引用传递，并不会拷贝数据。
     - storage 状态变量
-        - 函数外的变量一定是storage存储形式，也称为状态变量。
         - 数据永远存在于区块链上。
+        - 函数外的变量,存储模式一定是storage。
+        - 存储由一个个存储槽组成，一个存储槽=32字节。
     - calldata 
-        - 一般只有外部函数的参数（不包括返回参数）被强制指定为calldata。
         - 数据位置是只读的，不会持久化到区块链。
+        - 一般只有外部函数的参数（不包括返回参数）被强制指定为calldata。
     - stack
         - 堆栈是由EVM (Ethereum虚拟机)维护的非持久性数据。EVM使用堆栈数据位置在执行期间加载变量。堆栈位置最多有1024个级别的限制。
+        - 局部变量若是整型、定长字节数组等类型，则存储模式一定是stack。
 
 - 数据类型
     - 基本类型
@@ -67,6 +71,12 @@ block.gaslimit returns (uint) // 当前区块的gaslimit
     4. private 仅在当前合约可以被访问，不能被继承
     
 - 支持隐式转换和显示转换
+
+- 引用类型变量之间的相互赋值
+    - 存储位置为 storage，则是值传递
+    - 存储位置为 memory，则是引用传递
+
+- 数组，存储位置为 memory时，则必须被初始化后才能使用。
 
 ```js
 pragma solidity >=0.7.0 <0.9.0;
@@ -124,6 +134,8 @@ contract C {
         函数体
         return 值,值;
     }
+
+
     // 实例
     function double(uint num) public pure returns (uint,uint){
         return (num*2,num*3);
@@ -252,7 +264,7 @@ contract DerivedA is Base1{
 6. try/catch 捕捉错误
 
 ### 内联汇编
-- 可以在assembly块内直接写solidity的汇编语言
+- 可以在assembly代码块内直接写solidity的汇编语言：
 ```js
     // 判断账户地址是用户地址还是合约地址，size为0则是用户地址
     uint256 size;
@@ -279,12 +291,17 @@ contract DerivedA is Base1{
 3. 接口
 
 ## 合约间的调用
-- 方式一 call
+
+1. 方式一 call
     - 调用后内置变量 msg 的值会修改为调用者的值。
     - 调用后执行环境为被调用者的运行环境(合约的 storage)。
 
-- 方式二 delegatecall
+2. 方式二 delegatecall
     - 调用后内置变量 msg 的值任然是外部账户的值，不会被修改为调用者的值。
+    - 调用后执行环境为调用者的运行环境(合约的 storage)。
+
+3. 方式三 callcode  ---- 即将被废弃的函数
+    - 调用后内置变量 msg 的值会修改为调用者。
     - 调用后执行环境为调用者的运行环境(合约的 storage)。
 
 - 调用格式

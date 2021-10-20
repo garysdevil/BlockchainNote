@@ -123,7 +123,7 @@ mv geth /usr/local/bin/
 # 用bash启动以太坊，私有网络
 geth --dev --datadir=~/ethereumData/ --networkid 65535 --nodiscover --http --http.addr 127.0.0.1 --http.port  8545 --ws --ws.addr 127.0.0.1 --ws.port 8544 --port 30303 --allow-insecure-unlock console
 # --http.corsdomain "*"  # 跨域访问
-# --http.api eth,web3,personal,net,db # 允许通过http方式访问相关的模块
+# --http.api eth,web3,personal,net,db,miner # 允许通过http方式访问相关的模块
 # --verbosity
 # --ws --ws.addr 127.0.0.1 --ws.port 8544
 
@@ -150,6 +150,7 @@ txpool    # 包含查看交易内存池的方法
 # 账户相关的操作
 personal.newAccount('密码') # 创建账户 # 输出账户的地址 0xd139feabc9d47f8c95f0c14b6f3d6dcefe549161
 personal.listAccounts # 列出所有账户地址
+personal.unlockAccount(eth.accounts[1],'密码',解锁多少秒)
 
 # 矿工相关的操作
 eth.coinbase # 挖矿所得的代币会进入矿工账户，称呼为coinbase，默认情况下coinbase是本地账户中的第一个账户 
@@ -254,4 +255,16 @@ true
 # --optimize 进行优化编译
 # -o ./ 输出结果到当前文件夹内
 solc --bin --abi --optimize -o ./  代码文件 
+```
+
+## 区块链游览器
+- https://github.com/etherparty/explorer 
+```bash
+git clone https://github.com/etherparty/explorer 
+cd explorer 
+npm install -g bower -y 
+bower init
+bower install --allow-root
+bower install angular --save-dev  --allow-root
+npm start
 ```

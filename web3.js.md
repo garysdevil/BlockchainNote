@@ -42,7 +42,7 @@ web3.eth.getBalance(address, (err, wei) => {
 web3.eth.sendTransaction({
     from: account0,
     to: account1,
-    value: "1000000000000000000"
+    value: "1000000000000000000" //1 eth
 })
 .then(function(receipt){
     console.log(receipt);
