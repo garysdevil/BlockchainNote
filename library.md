@@ -24,3 +24,8 @@ contract test{
 }
 ```
 
+3. 字符串操作
+  - https://github.com/ethereum/dapp-bin/blob/master/library/stringUtils.sol
+
+4. 随机数
+  - https://github.com/randao/randao

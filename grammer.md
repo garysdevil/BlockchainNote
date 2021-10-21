@@ -76,7 +76,9 @@ block.gaslimit returns (uint) // 当前区块的gaslimit
     - 存储位置为 storage，则是值传递
     - 存储位置为 memory，则是引用传递
 
-- 数组，存储位置为 memory时，则必须被初始化后才能使用。
+- 数组，存储位置为 memory时
+    - 必须被初始化后才能使用。
+    - 不可以使用push进行动态扩容。
 
 ```js
 pragma solidity >=0.7.0 <0.9.0;
@@ -127,6 +129,10 @@ for (初始化; 测试条件; 迭代语句) {
 // if else
 ```
 ## 函数
+- 注意
+    - 当函数返回结构体时，外部调用无法返回数据。
+    - 只可以将以太币一起发送至拥有 payable 修饰符的函数，不然会抛出异常。
+
 ```js
 contract C {
     // 格式
@@ -144,6 +150,13 @@ contract C {
         uint8[2] memory data = [1,2];
         uint8[] memory data1 = new uint8[](3); data1[0] = 1;
         return data;
+    }
+    // 合约函数想要接收以太坊，则必须添加 payable 关键字
+    function receivePay() payable public{}
+
+    // 获取合约本身的余额
+    function getBalance() external view returns (uint){
+        return address(this).balance;
     }
 }
 ```
@@ -305,10 +318,13 @@ contract DerivedA is Base1{
     - 调用后执行环境为调用者的运行环境(合约的 storage)。
 
 - 调用格式
-    - 合约地址.call(abi.encodeWithSignature("合约函数名"));
+    - 合约地址.call(abi.encodeWithSignature("合约函数名()",参数));
+- 返回值（0.6.8版本后）
+    - 第一个表示是delegatecall是否调用成功的布尔变量。
+    - 第二个表示是被调用函数的返回值。
 
 - fallback() external {} // 合约内定义此函数，则当函数未被找到时，默认执行此函数；否则 err="execution reverted"
-- receive() payable external {} // 合约内定义此函数，才能接收转账，否则 err="execution reverted"
+- receive() payable external {} // 合约内定义此函数，则当函数未被找到时，也能接收转账，否则 err="execution reverted"
 
 
 
@@ -316,34 +332,58 @@ contract DerivedA is Base1{
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0; 
 contract Test1 {
-   address public temp1; uint256 public temp2;
-   // call
-   function call_1(address contractAddr) public {
-      (bool success,) = contractAddr.call(abi.encodeWithSignature("test()")); require(success);
-   }
-   // delegatecall
-   function call_2(address contractAddr) public {
-      (bool success,) = contractAddr.delegatecall(abi.encodeWithSignature("test()")); require(success);      
-   }
-   // 触发fallback函数
-   function call_3(address contractAddr) public {
-      (bool success,) = contractAddr.delegatecall(abi.encodeWithSignature("(noExistFunction)")); require(success);      
-   }
-   // 转账
-   function call_4(address payable addr) public { addr.transfer(1 ether); }
+    address public temp1; uint256 public temp2;
+    // call
+    function call_1(address contractAddr) public {
+        (bool success,) = contractAddr.call(abi.encodeWithSignature("test1()")); require(success);
+    }
+        // call
+    function call_1(address contractAddr) public {
+        // 对于test2(uint256)，必须写uint256，不能写uint，否则找不到对应的函数
+        (bool success,) = contractAddr.call(abi.encodeWithSignature("test2(uint256)",22)); require(success);
+    }
+    // delegatecall
+    function call_2(address contractAddr) public {
+        (bool success,) = contractAddr.delegatecall(abi.encodeWithSignature("test1()")); require(success);      
+    }
+    // 触发fallback函数
+    function call_3(address contractAddr) public {
+        (bool success,) = contractAddr.delegatecall(abi.encodeWithSignature("noExistFunction()")); require(success);      
+    }
+
+    // 转账给 _to
+    // function call_4(address payable _to) public { _to.transfer(1 ether); }
+    function testTransfer(address payable _to) public payable{
+        // msg.value 对应VALUE 这个输入框
+        _to.transfer(msg.value); // transfer 转账失败会throw异常
+        // _to.send(msg.value); // send 转账失败不会throw异常
+    }
+    // 转给  _to  // 运行失败
+    function withdrawCall(address payable _to, uint256 amount) external payable{
+        // This forwards all available gas. Be sure to check the return value!
+        (bool success, ) = _to.call{value:amount}("");
+        require(success, "Transfer failed.");
+    }
 } 
 
 contract Test2 {
    address public temp1;
    uint256 public temp2;    
-   function test() public  {
-      temp1 = msg.sender;        temp2 = 100;    
+   function test1() public  {
+      temp1 = msg.sender;        
+      temp2 = 100;    
+   }
+   function test2(uint age) public  {
+      temp1 = msg.sender;        
+      temp2 = age;    
    }
    receive() payable external {
-      temp1 = msg.sender;        temp2 = 300;    
+      temp1 = msg.sender;        
+      temp2 = 300;    
    }
    fallback() external {
-      temp1 = msg.sender;        temp2 = 200;  
+      temp1 = msg.sender;        
+      temp2 = 200;  
    }
 }
 ```

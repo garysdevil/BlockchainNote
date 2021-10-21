@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 
 import "https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/ERC20.sol";
 
-contract Test2 is ERC20 ('GGWorld', 'GG'){
+contract MyERC20 is ERC20 ('GGWorld', 'GG'){
     string private _name;
     string private _symbol;
     constructor(string memory name_, string memory symbol_) {

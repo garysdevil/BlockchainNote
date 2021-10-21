@@ -32,6 +32,10 @@
 - 以太坊开发各种工具链接 https://zhuanlan.zhihu.com/p/316741673
 - 最佳安全开发指南 https://github.com/ConsenSys/smart-contract-best-practices
 
+- 社区交流
+    - https://gitter.im/ethereum/remix
+    - https://gitter.im/ethereum/solidity#
+
 - 智能合约的升级
     - https://github.com/NoharaHiroshi/upgradability-solidity-demo
     - https://blog.openzeppelin.com/the-state-of-smart-contract-upgrades/
@@ -216,6 +220,7 @@ contractInstance.合约函数名()
 - 1Kwei = 1000Wei
 
 - 一个ETH 等于一千 Finney，一百万 Szabo，十亿Gwei，万亿Mwei，千万亿 Kwei，百万万亿 Wei
+- 1ETH=1000000000000000000
 
 - Gas由两个部分组成： 限制（Gas limit）和价格（Gas Price）
 - Gas Limit 是用户愿意为执行某个操作或确认交易支付的最大Gas量（最少21,000）

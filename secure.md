@@ -21,3 +21,8 @@
 - slither
     - 用 Python 3 编写的 Solidity 静态分析框架
     - https://github.com/crytic/slither
+
+## 反编译
+- 参考
+    - https://github.com/comaeio/porosity
+    - https://www.pnfsoftware.com/blog/ethereum-smart-contract-decompiler/
