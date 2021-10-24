@@ -13,13 +13,11 @@
 - ERC165 
     - 标准接口检测协议；创建一个标准方法以发布和检测智能合约实现了哪些接口
 
-- 
-
 - ERC721 
     - 非同质化代币标准（Non-Fungible Tokens，简写为NFT），可以作为产权进行交易
 
 
-
+## ERC165
 - 兼容 ERC-165的合约应该实现以下接口
     ```js
     interface ERC165 {
@@ -42,7 +40,7 @@
 
 ### 状态变量
 1. mapping(address => uint256) private _balances; 
-    - 记录某用户拥有多少的Token数量
+    - 记录某用户拥有Token的数量
 2. mapping(address => mapping(address => uint256)) private _allowances;  
     - 记录某操作员可以操作某用户的Token数量
 3. uint256 private _totalSupply; 
@@ -62,7 +60,7 @@
 4. totalSupply()
     - 返回Token的总供应量
 5. balanceOf
-    - 返回账户地址上的Token数量
+    - 返回用户拥有的Token数量
 6. transfer
     - 用户转账给另一个用户
 7. allowance
@@ -105,11 +103,11 @@
     - 记录某个Token被授权给哪位操作员
 
 6. mapping(address => mapping(address => bool)) private _operatorApprovals;
-    - 记录某位用户的所有Token授权了给哪位代理人
+    - 记录某位用户的所有Token授权给了哪位代理人
 
 ### 函数
 1. balanceOf
-    - 返回用户拥有Token的数量
+    - 返回用户拥有的Token数量
 2. ownerOf
     - 判断用户是否持有这枚Token
 3. tokenURI
@@ -119,9 +117,9 @@
 5. getApproved
     - 返回Token的操作员
 6. setApprovalForAll
-    - 用户授权给某个账户地址使其成为代理人
+    - Token拥有者授权给某个用户使其成为代理人
 7. isApprovedForAll
-    - 判断账户地址是否是用户的代理人
+    - 判断用户是否是指定Token拥有者的代理人
 8. transferFrom
     - 转账
 9. safeTransferFrom
@@ -130,3 +128,45 @@
     - 用户获取一枚Token
 11. _burn
     - 用户烧毁一枚Token（用户需要是这枚Token的拥有者）
+
+## ERC1155
+- https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1155.md
+
+### 状态变量
+1. mapping(uint256 => mapping(address => uint256)) private _balances;
+    - 记录一位用户拥有的指定类型Token的数量
+
+2. mapping(address => mapping(address => bool)) private _operatorApprovals;
+    - 记录一位用户的所有Token授权给了哪位代理人
+
+3. string private _uri;
+    - 记录指定类型的Token的元数据地址
+
+### 函数
+#### 公开
+1. uri
+    - 返回指定类型的Token的元数据，通过id区别不同的类型Token
+2. balanceOf
+    - 返回用户拥有指定类型的Token的数量
+3. balanceOfBatch
+    - 返回多个用户拥有所指定类型的Token的数量
+4. setApprovalForAll
+    - Token拥有者授权给某个用户使其成为代理人
+5. isApprovedForAll
+    - 判断用户是否是指定Token拥有者的代理人
+6. safeTransferFrom
+    - 将指定用户的指定类型的代币转给指定用户
+7. safeBatchTransferFrom
+    - 将指定用户的多个指定类型的代币转给指定用户
+#### 内部
+1. _mint
+    - 指定用户获取指定类型指定数量的Token
+2. _mintBatch
+    - 指定用户获取多个指定类型指定数量的Token
+3. _burn
+    - 燃烧指定用户指定类型的指定数量的Token
+4. _burnBatch
+    - 燃烧指定用户多个指定类型的指定数量的Token
+
+5. _setURL
+    - 设置指定类型的Token的元数据地址，通过id区别不同的类型Token
