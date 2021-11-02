@@ -29,6 +29,32 @@
 
 6. LootCrate
     - https://stupendous-antique-90e.notion.site/Loot-Crate-as-an-ERC1155-ba9ae485f5784e498d85d488b54ec1e7
+
+## NFT拆分项目
+1. ShardingDAO/SHD
+    - NFT分解合成协议
+    - https://github.com/ShardingDAOProject/ShardingDAOMining
+    - https://www.chainnews.com/articles/185788003789.htm
+
+2. K21/K21
+    - 是Kanon旗下的一个封闭型艺术品藏品库
+
+3. Fractional
+    - 将单个 NFT 或 NFT 的集合碎片化
+    - 必须有一定比例的 token 总供应量赞成解锁集合，以便将 NFT 分配给竞标者。
+    - NFT作品持有者可以在Fractional平台铸造NFT保险库来保管NFT作品，保险库将向持有者发放所有的所有权代币，代币可以出售或者赠与。
+
+4. Unicly/UNIC
+    - 将单个 NFT 或 NFT 的集合碎片化，分解成一定数量的ERC20代币 uToken
+    - 必须有一定比例的 uToken 总供应量赞成解锁集合，以便将 NFT 分配给竞标者。这个比例是由 uToken 的创造者在分化过程开始时设定的。
+    - 代币在中心化交易所MEXC上有流通
+
+5. NFTX/NFTX
+    -  将同等价值的 NFT 汇集成指数基金，vTOken
+
+
+
+
 ##
 3. cryptozombie 学习资料
     - Github https://github.com/loomnetwork/cryptozombie-lessons
