@@ -29,7 +29,10 @@
     - 自建区块链游览器 https://github.com/blockscout/blockscout 复复杂
     - 自建区块链游览器 https://github.com/etherparty/explorer 简单  nodev8.17.0运行成功 nodev16.9.1运行失败
 
-- 以太坊开发各种工具链接 https://zhuanlan.zhihu.com/p/316741673
+- 以太坊开发各种工具链接 
+    - https://zhuanlan.zhihu.com/p/316741673
+    - https://zhuanlan.zhihu.com/p/82411709
+    
 - 最佳安全开发指南 https://github.com/ConsenSys/smart-contract-best-practices
 
 - 社区交流
