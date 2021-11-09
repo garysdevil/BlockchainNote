@@ -44,4 +44,12 @@
     - 存储hash值的一棵树。Merkle树的叶子节点存储数据块，非叶节点是其对应子节点串联字符串的哈希值。
 
 - MPT（Merkle Patricia Tree），又经常叫梅克尔帕特里夏树
-    - 
+    
+### 默克尔树
+- 链下默克尔树的生成       https://github.com/miguelmota/merkletreejs
+- 链上默克尔树的验证/合约   https://github.com/miguelmota/merkletreejs-solidity
+- 链上默克尔树的验证/库     https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/cryptography/MerkleProof.sol
+- 默克尔树在线工具          https://lab.miguelmota.com/merkletreejs/example/
+
+- keccak256
+    - https://www.npmjs.com/package/keccak256
