@@ -66,6 +66,7 @@ block.gaslimit returns (uint) // 当前区块的gaslimit
 
 - 状态变量三种可见性
     - 状态变量可见性程度 public > internal > private
+    - 默认为 internal 类型
     1. public  生成一个自动 getter 函数
     3. internal 只能在内部进行访问
     4. private 仅在当前合约可以被访问，不能被继承
