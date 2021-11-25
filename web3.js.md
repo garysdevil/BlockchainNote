@@ -1,6 +1,7 @@
 ## web3.js
 - web3.js库是一个javascript库，可以执行很多与区块链进行交互的任务
-- npm install web3 -g
+- 下载web3.js库 npm install web3 -g
+
 ```js
 const Web3 = require('web3')
 const fs = require('fs')
@@ -56,10 +57,22 @@ const contractInstance = new web3.eth.Contract(abi, contractAddress)
 
 // 发送一次交易，会改变链上的状态
 contractInstance.methods.方法名(参数)).send({from: 账户地址},(err, result) => { console.log(result) })
-
 // 执行一次调用，并不会改变链上的状态
 contractInstance.methods.方法名(参数).call((err, result) => { console.log(result) })
 contractInstance.methods.方法名(参数).call({gasPrice:1000,gas:10000},(err, result) => { console.log(result) })
+
+contractInstance.methods.方法名(参数).send(
+    {   from: accountArr[0],
+        gasLimit: 3000000, 
+        gas: 400000,
+        gasPrice: 21000,
+        value: 1000000000000000000
+    },
+    (err, result) => { 
+        console.log("result=", result) 
+        console.log("error=", err)
+    }
+)
 
 // 查看合约之前的所有事件
 contractInstance.getPastEvents(
@@ -70,6 +83,7 @@ contractInstance.getPastEvents(
     },
     (err, events) => { console.log(events) } // 回调函数
 )
+
 // 查看abi接口
 console.log(contractInstance.options.jsonInterface)
 // 查看当前块高

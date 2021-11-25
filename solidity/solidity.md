@@ -153,6 +153,7 @@ mv geth /usr/local/bin/
 
 # 启动以太坊私有网络
 geth --dev --datadir=~/ethereumData/ --networkid 65535 --nodiscover --http --http.addr 127.0.0.1 --http.port 8545 --ws --ws.addr 127.0.0.1 --ws.port 8544 --port 30303 --allow-insecure-unlock console
+# --dev 开发者模式。 默认为被动挖矿模式，当进行交易时，系统才会挖矿打包。 开发者模式主动挖矿 --dev --dev.period 1
 # --http.corsdomain "*"  # 跨域访问
 # --http.api eth,web3,personal,net,db,miner # 允许通过http方式访问相关的模块
 # --verbosity

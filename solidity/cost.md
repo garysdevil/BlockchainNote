@@ -8,7 +8,7 @@
     - 1Mwei = 1000Kwei
     - 1Kwei = 1000Wei
     - 一个ETH 等于一千 Finney，一百万 Szabo，十亿Gwei，万亿Mwei，千万亿 Kwei，百万万亿 Wei
-    - 1ETH=1000000000000000000 Wei
+    - 1 ETH = 1000000000000000000 Wei = 1000000000 Gwei
 
 ## solidity
 - 参考 https://zhuanlan.zhihu.com/p/54662099

@@ -335,34 +335,35 @@ pragma solidity ^0.8.0;
 contract Test1 {
     address public temp1; uint256 public temp2;
     // call
-    function call_1(address contractAddr) public {
+    function call_test1(address contractAddr) public {
         (bool success,) = contractAddr.call(abi.encodeWithSignature("test1()")); require(success);
     }
-        // call
-    function call_1(address contractAddr) public {
+    // delegatecall
+    function delegatecall_test1(address contractAddr) public {
+        (bool success,) = contractAddr.delegatecall(abi.encodeWithSignature("test1()")); require(success);      
+    }
+    // call
+    function call_test2(address contractAddr) public {
         // 对于test2(uint256)，必须写uint256，不能写uint，否则找不到对应的函数
         (bool success,) = contractAddr.call(abi.encodeWithSignature("test2(uint256)",22)); require(success);
     }
-    // delegatecall
-    function call_2(address contractAddr) public {
-        (bool success,) = contractAddr.delegatecall(abi.encodeWithSignature("test1()")); require(success);      
-    }
+
     // 触发fallback函数
     function call_3(address contractAddr) public {
         (bool success,) = contractAddr.delegatecall(abi.encodeWithSignature("noExistFunction()")); require(success);      
     }
 
-    // 转账给 _to
-    // function call_4(address payable _to) public { _to.transfer(1 ether); }
-    function testTransfer(address payable _to) public payable{
+
+    // 转账方式一 转账给 _to
+    function moneyByTransfer(address payable _to) public payable{
         // msg.value 对应VALUE 这个输入框
         _to.transfer(msg.value); // transfer 转账失败会throw异常
+        // _to.transfer(1 ether);
         // _to.send(msg.value); // send 转账失败不会throw异常
     }
-    // 转给  _to  // 运行失败
-    function withdrawCall(address payable _to, uint256 amount) external payable{
-        // This forwards all available gas. Be sure to check the return value!
-        (bool success, ) = _to.call{value:amount}("");
+    // 转账方式二 转账给  _to  方式一的手续费大约是方式二的三倍
+    function moneyByCall(address payable _to, uint256 amount) external payable{
+        (bool success, ) = _to.call{value: amount}("");
         require(success, "Transfer failed.");
     }
 } 

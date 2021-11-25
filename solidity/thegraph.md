@@ -20,6 +20,12 @@
 - 去中心化费用 https://thegraph.com/docs/studio/billing
 
 ### 构建Subgraph
+- Subgraph的结构
+    - Manifest (subgraph.yaml) - 定义Subgraph要进行索引的数据源
+        - https://github.com/graphprotocol/graph-node/blob/master/docs/subgraph-manifest.md
+    - Schema (schema.graphql) - 定义存储在Subgraph的数据 和 索引数据的格式
+    - AssemblyScript Mappings (mapping.ts) - 定义代码流程，将数据源的数据转为Subgraph定义的数据格式
+
 - 参考文档 https://thegraph.com/docs/developer/quick-start
     ```bash
     # 安装 The Graph CLI 
@@ -29,12 +35,15 @@
     SUBGRAPH_SLUG=定义Subgraph的名字
     graph init --studio ${SUBGRAPH_SLUG}
     # graph init --studio ${SUBGRAPH_SLUG} --product subgraph-studio --index-events --network mainnet --contract-name Loot --from-contract 0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7
-    # --index-events
-    # Loot合约部署于 13108877 块高
+    # graph init --studio ${SUBGRAPH_SLUG} --product subgraph-studio --index-events --network rinkeby --contract-name Loot --from-contract 0x117814e91a04067f11b5c16c75e8e21845a506ea
+    # --index-events 合约内所有的事件都生成对应的schema
+    # 以太坊主网Loot合约部署于 13108877 块高，rinkeby网络 为9243123，为了节省时间设置从特定的块高开始同步 dataSources[0].source.startBlock = 13108877
 
     # build
     cd ${SUBGRAPH_SLUG}
-    graph codegen # 生成mapping.ts文件，默认创建并放进generated文件夹内
+    # 根据需求，在 schema.graphql 文件内添加schema
+    graph codegen # 根据schema.graphql生成了ts文件，默认放进generated文件夹内
+    # 根据需求，修改 src/mapping.ts 文件，如果在 src/mapping.ts 内添加了新的事件则需要修改 subgraph.yaml 文件
     graph build # 本地构建wasm文件核实是否有语法错误，结果默认创建并放进build文件夹内
 
     # 部署进官方的Subgraph Studio
@@ -43,9 +52,3 @@
 
     # 假如需要部署进去中心化区块链网络里则需要在网页上支付对应的链上代币进行部署
     ```
-
-- Subgraph的结构
-    - Manifest (subgraph.yaml) - 定义Subgraph要进行索引的数据源
-        - https://github.com/graphprotocol/graph-node/blob/master/docs/subgraph-manifest.md
-    - Schema (schema.graphql) - 定义存储在Subgraph的数据 和 索引数据的格式
-    - AssemblyScript Mappings (mapping.ts) - 定义代码流程，将数据源的数据转为Subgraph定义的数据格式
