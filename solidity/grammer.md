@@ -294,6 +294,7 @@ contract DerivedA is Base1{
     // SPDX-License-Identifier: GPL-3.0
     pragma solidity >=0.6.0 <0.9.0;
     // 定义一个抽象合约
+    // 当函数需要被复写（override）时，则定义函数时必须添加virtual关键字
     abstract contract Feline {
         function utterance() public pure virtual returns (bytes32);
     }
