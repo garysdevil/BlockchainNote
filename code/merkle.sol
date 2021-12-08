@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: MIT
+// 参考 https://github.com/miguelmota/merkletreejs-solidity
+
 pragma solidity ^0.8.0;
 
 contract MerkleProof {

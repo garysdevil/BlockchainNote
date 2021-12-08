@@ -101,6 +101,12 @@ contract Person {
     // 枚举
     enum Fruit { Apple, Peach, Watermelon } // 枚举 // 对应着uint8类型的 0 1 2
     Fruit constant favoriteFruit = Fruit.Apple;
+
+    // 数组
+    uint256[] public array = [1,2,3];
+    delete array[0]; // 删除指定下标的元素，但数组长度未变
+    array.push(2); // 在动态数组的末端添加一个元素
+    array.pop(); // 在动态数组的末端删除一个元素
 }
 ```
 
