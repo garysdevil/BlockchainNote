@@ -16,12 +16,15 @@ import "./ERC20.sol"; // 直接导入
 import * as BaseERC20 from "./ERC20.sol"; // 导入此模块并命名为BaseERC20
 ```
 
-## 全局变量
+## 内置API
+### 基本
 ```js
-blockhash(uint) returns (bytes32) // 取最新的256个区块号对应的hash，但不包括当前区块的
+blockhash(uint) returns (bytes32) // 返回给定区块号的哈希值，只支持最近256个区块，且不包含当前区块。
 
 msg.sender returns (address) // 消息发送者（当前调用智能合约函数的账户地址） 
 msg.value returns (uint) // 这个消息所附带的以太币，单位为wei。
+
+tx.gasprice returns (uint) // 交易的gas价格。
 
 block.coinbase returns (address) // 当前块矿工的地址
 block.number returns (uint) // 当前区块的块号
@@ -30,6 +33,39 @@ block.timestamp returns (uint) // 当前块的Unix时间戳（从1970/1/1 00:00:
 now // block.timestamp的简写模式，以及被定义为deprecated
 block.gaslimit returns (uint) // 当前区块的gaslimit
 
+// 编码
+abi.encode(...) returns (bytes) // 计算参数的ABI编码。
+abi.encodePacked(...) returns (bytes) // 计算参数的紧密打包编码
+abi.encodeWithSelector(bytes4 selector, ...) returns (bytes) // 计算函数选择器和参数的ABI编码
+abi.encodeWithSignature(string signature, ...) returns (bytes) // 等价于* abi.encodeWithSelector(bytes4(keccak256(signature), ...)
+
+
+// 数学函数
+addmod(uint x, uint y, uint k) returns (uint) // 计算(x + y) % k
+
+
+// 加密函数
+keccak256(bytes memory) returns (bytes32) // 计算输入的Keccak-256散列。
+
+```
+### 错误处理
+```js
+// 1. 用于判断内部错误，条件不满足时抛出异常，对状态所做的任何更改将被还原。
+assert(bool condition)
+
+// 2. 用于判断输入或外部组件错误，条件不满足时抛出异常，恢复到原始状态。
+require(bool condition)
+
+// 3. 用于判断输入或外部组件错误，条件不满足时抛出异常，恢复到原始状态。提供了一个提供自定义异常消息的选项。
+require(bool condition, string memory message)
+
+// 4. 此方法将中止执行并将所做的更改还原为执行前状态。
+revert()
+
+// 5. 此方法将中止执行并将所做的更改还原为执行前状态。它提供了一个提供自定义消息的选项
+revert(string memory reason)
+
+// 6. 捕捉错误 try/catch 
 ```
 
 ## 数据/变量
@@ -207,13 +243,6 @@ contract owned {
 ### 重载
 同一个作用域内，相同函数名可以定义多个函数。这些函数的参数(参数类型或参数数量)必须不一样。仅仅是返回值不一样不被允许。
 
-### 常用函数
-- 数学函数
-    - addmod(uint x, uint y, uint k) returns (uint) 计算(x + y) % k
-
-- 加密函数
-    - keccak256(bytes memory) returns (bytes32) 计算输入的Keccak-256散列。
-
 ## 合约
 ### 事件Event
 - 链下可以对事件进行持续的监听
@@ -270,18 +299,6 @@ contract DerivedA is Base1{
 
 // 抽象合约可以不实现父合约的构造函数
 ```
-### 错误处理
-1. assert(bool condition) − 如果不满足条件，此方法调用将导致一个无效的操作码，对状态所做的任何更改将被还原。这个方法是用来处理内部错误的。
-
-2. require(bool condition) − 如果不满足条件，此方法调用将恢复到原始状态。此方法用于检查输入或外部组件的错误。
-
-3. require(bool condition, string memory message) − 如果不满足条件，此方法调用将恢复到原始状态。此方法用于检查输入或外部组件的错误。它提供了一个提供自定义消息的选项。
-
-4. revert() − 此方法将中止执行并将所做的更改还原为执行前状态。
-
-5. revert(string memory reason) − 此方法将中止执行并将所做的更改还原为执行前状态。它提供了一个提供自定义消息的选项
-
-6. try/catch 捕捉错误
 
 ### 内联汇编
 - 可以在assembly代码块内直接写solidity的汇编语言：

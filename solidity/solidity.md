@@ -2,6 +2,8 @@
 # Solidity
 
 - 智能合约概念于1995年由Nick Szabo首次提出
+
+- ABI = Application Binary Interface
 ## 相关链接
 - Solidity
     - Solidity源码  https://github.com/ethereum/solidity
