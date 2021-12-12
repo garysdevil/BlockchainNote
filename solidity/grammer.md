@@ -296,8 +296,6 @@ contract Derived is Base1 (5) {
 contract DerivedA is Base1{
     constructor() Base1(5) public {}
 }
-
-// 抽象合约可以不实现父合约的构造函数
 ```
 
 ### 内联汇编
@@ -317,6 +315,7 @@ contract DerivedA is Base1{
     // SPDX-License-Identifier: GPL-3.0
     pragma solidity >=0.6.0 <0.9.0;
     // 定义一个抽象合约
+    // 抽象合约可以不实现父合约的构造函数
     // 当函数需要被复写（override）时，则定义函数时必须添加virtual关键字
     abstract contract Feline {
         function utterance() public pure virtual returns (bytes32);
@@ -382,8 +381,8 @@ contract Test1 {
     function moneyByTransfer(address payable _to) public payable{
         // msg.value 对应VALUE 这个输入框
         _to.transfer(msg.value); // transfer 转账失败会throw异常
-        // _to.transfer(1 ether);
-        // _to.send(msg.value); // send 转账失败不会throw异常
+        _to.transfer(1 ether);
+        _to.send(msg.value); // send是transfer的底层实现。 _to.transfer(y)和if (!_to.send(y)) throw;是等价的
     }
     // 转账方式二 转账给  _to  方式一的手续费大约是方式二的三倍
     function moneyByCall(address payable _to, uint256 amount) external payable{

@@ -1,6 +1,8 @@
 # 安全
 - 参考
     - https://ethereum.org/zh/developers/docs/security/
+    - 最佳安全开发指南 https://github.com/ConsenSys/smart-contract-best-practices
+    - 以太坊官方博客，带有Security标签的博客 https://blog.ethereum.org/category/security/
 ## 常见的 Solidity 的漏洞类型
 - Reentrancy - 重入
 - Access Control - 访问控制

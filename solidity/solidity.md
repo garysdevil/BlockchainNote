@@ -37,8 +37,6 @@
 - 以太坊开发各种工具链接 
     - https://zhuanlan.zhihu.com/p/316741673
     - https://zhuanlan.zhihu.com/p/82411709
-    
-- 最佳安全开发指南 https://github.com/ConsenSys/smart-contract-best-practices
 
 - 社区交流
     - https://gitter.im/ethereum/remix
