@@ -119,7 +119,7 @@
 6. setApprovalForAll
     - Token拥有者授权给某个用户使其成为代理人
 7. isApprovedForAll
-    - 判断用户是否是指定Token拥有者的代理人
+    - 判断一位用户是否是另一位用户的代理人
 8. transferFrom
     - 转账
 9. safeTransferFrom
@@ -153,7 +153,7 @@
 4. setApprovalForAll
     - Token拥有者授权给某个用户使其成为代理人
 5. isApprovedForAll
-    - 判断用户是否是指定Token拥有者的代理人
+    - 判断一位用户是否是另一位用户的代理人
 6. safeTransferFrom
     - 将指定用户的指定类型的代币转给指定用户
 7. safeBatchTransferFrom
