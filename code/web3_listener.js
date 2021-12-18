@@ -55,6 +55,7 @@ const eventWatch = async _ =>{
             console.log("error", error)
         }
     })
+
     // 监听一个事件的一次触发
     await contractInstance.once(事件名称, {}, (error, result) => {})
     // 获取所有的历史事件
