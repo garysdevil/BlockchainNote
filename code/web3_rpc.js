@@ -31,19 +31,23 @@ const createAccount = _ =>{
     web3.eth.personal.getAccounts().then(console.log);
 }
 
-const getBalance = (address) =>{
-    // 获取账户余额
-    web3.eth.getBalance(address, (err, wei) => {
-        // 余额单位从wei转换为ether
+const getBalance = async address =>{
+    await web3.eth.getBalance(address, (err, wei) => {
+        if (err){
+            throw new Error('Function getBalance:' + err)
+            // exit(1)
+        }
+        // 余额单位从wei转换为eth
         balance = web3.utils.fromWei(wei, 'ether')
         console.log("balance: " + balance)
+        // return balance
     })
 }
 
 
-const sendTransaction = (addressFrom, addressTo) =>{
+const sendTransaction = async (addressFrom, addressTo) =>{
     // 私链转账以太坊
-    web3.eth.sendTransaction({
+    await web3.eth.sendTransaction({
         from: addressFrom,
         to: addressTo,
         value: "1000000000000000000" //1 eth
@@ -110,3 +114,34 @@ const contract = _ =>{
     )
 }
 
+
+// web3.js 获取metamask签名进行交易 https://www.cxyzjd.com/article/xilibi2003/82700542
+// const tx = {
+//     // 合约地址 或 账户地址
+//     to: contractAddress,
+//     // gasLimit，指定gas的限制；以太坊程序内部设置了矿工打包块交易的gas费不能超过8百万，因此可以设置的最大值为8000000
+//     gas: 8000000,
+//     // optional if you are invoking say a payable function 
+//     value: 100000000000000000,
+//     // this encodes the ABI of the method and the arguements；如果进行转账操作则设置data为空字符串
+//     data: contractInstance.methods.buy(1, ["0x"]).encodeABI() 
+// };
+const signTransaction = async (tx, privateKey) =>{
+    const signPromise = web3.eth.accounts.signTransaction(tx, privateKey); // 对交易进行签名
+    await signPromise.then(async (signedTx) => {
+        // 对交易进行广播
+        return await web3.eth.sendSignedTransaction(signedTx.raw || signedTx.rawTransaction);
+    }).then(async (receipt,err) => {
+        if (err){
+            console.log("Function signTransaction:", err)
+        }else{
+            console.log("Function signTransaction:", receipt)
+        }
+    }).catch((err) => {
+        console.log("Function signTransaction:", err)
+    });
+}
+
+module.exports = {
+    sendTransaction
+};

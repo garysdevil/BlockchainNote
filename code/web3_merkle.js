@@ -1,3 +1,12 @@
+// </html>
+// </body>
+// <script src="https://cdn.jsdelivr.net/npm/keccak256@latest/keccak256.js"></script>
+// <script src="https://cdn.jsdelivr.net/npm/merkletreejs@latest/merkletree.js"></script>
+// <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script> -->
+// <script type="text/javascript">
+// </script>
+// </body>
+// </html>
 const { MerkleTree } = require('merkletreejs')
 const keccak256 = require('keccak256')
 // const SHA256 = require('crypto-js/sha256')
