@@ -31,6 +31,7 @@ const createAccount = _ =>{
     web3.eth.personal.getAccounts().then(console.log);
 }
 
+// 获取账户余额
 const getBalance = async address =>{
     await web3.eth.getBalance(address, (err, wei) => {
         if (err){
@@ -44,9 +45,8 @@ const getBalance = async address =>{
     })
 }
 
-
+// 私链转账以太坊
 const sendTransaction = async (addressFrom, addressTo) =>{
-    // 私链转账以太坊
     await web3.eth.sendTransaction({
         from: addressFrom,
         to: addressTo,
@@ -57,8 +57,8 @@ const sendTransaction = async (addressFrom, addressTo) =>{
     });
 }
 
+// 查看当前块高
 const getBlockNumber = _ =>{
-    // 查看当前块高
     web3.eth.getBlockNumber().then(console.log);
 }
 
@@ -117,6 +117,7 @@ const contract = _ =>{
 
 // web3.js 获取metamask签名进行交易 https://www.cxyzjd.com/article/xilibi2003/82700542
 // const tx = {
+//     // nonce: 账户地址的第n笔交易, // nonce值必须=（此账户已完成的交易数+1）
 //     // 合约地址 或 账户地址
 //     to: contractAddress,
 //     // gasLimit，指定gas的限制；以太坊程序内部设置了矿工打包块交易的gas费不能超过8百万，因此可以设置的最大值为8000000
