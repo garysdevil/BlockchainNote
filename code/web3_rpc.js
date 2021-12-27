@@ -84,6 +84,15 @@ const contract = _ =>{
     // 查看abi接口
     console.log(contractInstance.options.jsonInterface)
 
+    // 合约函数gas费评估
+    // contractInstance.methods.方法名(参数).estimateGas({value: 如果合约函数需要收取一定的以太坊费用,则需要填写})
+    contractInstance.methods.buy(1,["0x"]).estimateGas({value: 100000000000000000})
+    .then(function(gasAmount){
+        console.log("Function estimateGas", gasAmount);
+    })
+    .catch(function(error){
+        console.log("Function estimateGas", error);
+    });
 
     // 执行一次调用，并不会改变链上的状态
     contractInstance.methods.方法名(参数).call((err, result) => { console.log(result) })

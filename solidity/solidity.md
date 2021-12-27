@@ -28,11 +28,11 @@
     - remix网页版 https://github.com/ethereum/remix-project
 
 - 开源区块链游览器
-    - 自建区块链游览器 https://github.com/blockscout/blockscout 复复杂
-    - 自建区块链游览器 https://github.com/etherparty/explorer 2017年停止更新，简单，nodev8.17.0运行成功 nodev16.9.1运行失败
+    - https://github.com/blockscout/blockscout 2012年12月继续更新中，功能齐全版
+    - https://github.com/etherparty/explorer 2017年停止更新，轻量版，nodev8.17.0运行成功 nodev16.9.1运行失败
     - https://github.com/EthVM/EthVM 只开源了前端代码
-    - https://github.com/wmitsuda/otterscan 2021.12还在更新，docker运行成功
-    - https://github.com/metaspartan/explorer 2018年停止更新，可能不兼容最新的以太坊接口，运行失败
+    - https://github.com/metaspartan/explorer 2018年停止更新，轻量版，可能不兼容最新的以太坊接口，运行失败
+    - http://ethscan.hubwiz.com/
 
 - 区块链游览器 https://etherscan.io/
     - 以太坊网络拥堵情况 https://etherscan.io/chart/pendingtx
@@ -147,23 +147,4 @@ npx init
 npx hardhat # 生成配置文件
 npx hardhat compile
 npx hardhat test
-```
-
-## 自建区块链游览器
-- https://github.com/etherparty/explorer 
-```bash
-git clone https://github.com/etherparty/explorer 
-cd explorer 
-npm install -g bower -y 
-bower init
-bower install --allow-root
-bower install angular --save-dev  --allow-root
-npm start
-```
-
-- https://github.com/wmitsuda/otterscan
-```bash
-# 注意容器所在的网络和本地网络不是同一个网络
-docker run --rm -p 5000:80 --name otterscan -d --env ERIGON_URL="http://IP:8545" otterscan/otterscan:latest
-
 ```
