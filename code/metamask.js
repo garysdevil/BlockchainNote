@@ -1,1 +1,0 @@
-// 文档 https://docs.metamask.io/guide/#why-metamask

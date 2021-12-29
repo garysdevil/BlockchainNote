@@ -1,0 +1,71 @@
+</html>
+</body>
+
+
+<script type="module">
+    // import { ethers } from "https://cdn.ethers.io/lib/ethers-5.2.esm.min.js";
+    import { ethers } from "./ethers-5.2.esm.min.js";
+    
+    const contractAbi = [
+      {
+        "inputs": [
+          {
+            "internalType": "string",
+            "name": "tokenName",
+            "type": "string"
+          },
+          {
+            "internalType": "string",
+            "name": "tokenSymbol",
+            "type": "string"
+          }
+        ]
+      }
+    ]
+    
+    
+    // https://github.com/ethers-io/ethers.js/issues/457
+    if (typeof window.ethereum !== 'undefined' || (typeof window.web3 !== 'undefined')) {
+        var result
+
+        // 连接以太坊网络
+        // Web3 browser user detected. You can now use the provider.
+        const accounts = await window.ethereum.enable();
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        console.log('accounts: ', accounts);
+        console.log('provider: ', provider);
+
+        // 查看以太坊网络块高
+        result = await provider.getBlockNumber()
+        console.log(result)
+
+        // 获取签名器
+        const signer = provider.getSigner();
+        
+        // 合约地址
+        const contractAddress = '0x079bED7A520c172983DEAA44f655B008963dfd15'
+        
+        // 连接合约
+        // let contract = new ethers.Contract(contractAddress, contractAbi, provider);
+        // console.log('contract', contract)
+        // const contractInstance = contract.connect(signer);
+        let contractInstance = new ethers.Contract(contractAddress, contractAbi, signer);
+        console.log('contractInstance', contractInstance)
+
+        // 签名消息
+        // signature = await signer.signMessage("Hello World");
+
+        // 调用合约方法，不改变状态的方法
+        result = await contractInstance.name()
+        console.log('合约名字=', result)
+
+        // 调用合约方法，改变状态的方法
+        const options = {value: ethers.utils.parseEther("1.0")}
+        let tx = await contractInstance.buy(1, ["0x0b42b6393c1f53060fe3ddbfcd7aadcca894465a5a438f69c87d790b2299b9b2"],options)
+        console.log('回执单=', tx);
+    }
+</script>
+
+
+</body>
+</html>

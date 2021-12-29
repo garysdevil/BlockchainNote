@@ -1,0 +1,52 @@
+<!-- 参考文档 https://docs.metamask.io/guide/#why-metamask -->
+
+</html>
+</body>
+
+<!-- 方式一 -->
+<!-- <script src="https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js"></script> -->
+<!-- import detectEthereumProvider from '@metamask/detect-provider'; -->
+<script type="module">
+    import "https://unpkg.com/@metamask/detect-provider/dist/detect-provider.min.js";
+    (async _ =>{ 
+        const provider = await detectEthereumProvider();
+        if (provider) {
+            // From now on, this should always be true:
+            // provider === window.ethereum
+            startApp(provider); // initialize your app
+        } else {
+            console.log('Please install MetaMask!');
+        }
+    })()
+
+    const startApp = async (provider) =>{
+        // If the provider returned by detectEthereumProvider is not the same as
+        // window.ethereum, something is overwriting it, perhaps another wallet.
+        if (provider !== window.ethereum) {
+            console.error('Do you have multiple wallets installed?');
+        }
+        
+        // 查看网络块高
+        const eth_blockNumber = await provider.request({ method: 'eth_blockNumber' });
+        console.log("1ethereum=", parseInt(eth_blockNumber, 16))
+    }
+
+</script>
+
+
+<!-- 方式二 -->
+<script type="text/javascript">
+    if (typeof window.ethereum !== 'undefined') {
+        console.log('MetaMask is installed!');
+    }
+    (async _ =>{ 
+        // 查看网络块高
+        const eth_blockNumber = await ethereum.request({ method: 'eth_blockNumber' });
+        console.log("2ethereum=", parseInt(eth_blockNumber, 16))
+    })()
+
+</script>
+
+</body>
+</html>
+    
