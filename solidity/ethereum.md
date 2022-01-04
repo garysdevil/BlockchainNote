@@ -54,18 +54,29 @@ geth --datadir ./ethereumData init genesis.json
 ### 启动
 ```bash
 # 启动以太坊私有网络
-geth --dev --datadir=~/ethereumData/ --networkid 1337 --nodiscover --http --http.addr 127.0.0.1 --http.port 8545 --ws --ws.addr 127.0.0.1 --ws.port 8544 --port 30303 --allow-insecure-unlock console
-# --dev 开发者模式。 默认为被动挖矿模式，当进行交易时，系统才会挖矿打包。 开发者模式主动挖矿 --dev --dev.period 1
+./geth --dev --gcmode archive --datadir=./ethereumData/ --networkid 1337 --nodiscover --http --http.addr 127.0.0.1 --http.port  8545 --ws --ws.addr 127.0.0.1 --ws.port 8544 --port 30303 --allow-insecure-unlock --http.corsdomain "*" --http.api "admin debug web3 eth txpool personal clique miner net" --rpc.txfeecap 0 --rpc.gascap 0 console
+# --dev # 开发者模式。
+# --dev.period 0 # 0 或者 1 # 开发者模式下，0: 默认为被动挖矿模式，即当进行交易时，系统才会挖矿打包。 1: 开发者模式主动挖矿。
+# --verbosity 3
+
+# --identity ${name} 给节点自定义名字
+# --gcmode archive # 区块的垃圾回收模式 full 和 archive ，默认是 full # archive模式将保留智能合约中的所有值状态以及帐户余额的完整历史记录
+# --syncmode full # 同步模式 "light", "fast", "full"
+
+# --http
+# --http.api # available="[admin debug web3 eth txpool personal clique miner net]" # 允许通过http方式访问相关的模块
 # --http.corsdomain "*"  # 跨域访问
-# --http.api eth,web3,personal,net,db,miner # 允许通过http方式访问相关的模块
-# --verbosity
-# --ws --ws.addr 127.0.0.1 --ws.port 8544
-# --identity 给私有链起个名
+
+# --ws 
+# --ws.addr 127.0.0.1 --ws.port 8544
+# --ws.api eth,net,web3
+# --ws.origins '*'
+
 # console 进入控制台
 
 # 进入以太坊控制台
-geth --datadir=~/ethereumData/ attach
-geth attach ~/ethereumData/geth.ipc
+geth --datadir=./ethereumData/ attach
+geth attach ./ethereumData/geth.ipc
 geth attach http://127.0.0.1:8545
 geth attach ws://127.0.0.1:8544
 ```
