@@ -5,7 +5,7 @@
     
 ### 下载
 ```bash
-# 1. 从官网https://geth.ethereum.org/downloads/下载geth，解压即可得到可执行指令
+# 1. 从官网 https://geth.ethereum.org/downloads/ 下载geth，解压即可得到可执行指令
 # 2. 
 mv geth /usr/local/bin/
 ```
@@ -54,7 +54,11 @@ geth --datadir ./ethereumData init genesis.json
 ### 启动
 ```bash
 # 启动以太坊私有网络
-./geth --dev --gcmode archive --datadir=./ethereumData/ --networkid 1337 --nodiscover --http --http.addr 127.0.0.1 --http.port  8545 --ws --ws.addr 127.0.0.1 --ws.port 8544 --port 30303 --allow-insecure-unlock --http.corsdomain "*" --http.api "admin debug web3 eth txpool personal clique miner net" --rpc.txfeecap 0 --rpc.gascap 0 console
+./geth --dev --miner.threads 1 --gcmode archive --datadir=./ethereumData/ --networkid 1337 --nodiscover --http --http.addr 127.0.0.1 --http.port  8545 --ws --ws.addr 127.0.0.1 --ws.port 8544 --port 30303 --allow-insecure-unlock --http.corsdomain "*" --http.api "admin debug web3 eth txpool personal miner net" --rpc.txfeecap 0 --rpc.gascap 0 console
+
+# --mine
+# --miner.threads 1 # 启动N个CPU线程进行挖矿，默认为0
+
 # --dev # 开发者模式。
 # --dev.period 0 # 0 或者 1 # 开发者模式下，0: 默认为被动挖矿模式，即当进行交易时，系统才会挖矿打包。 1: 开发者模式主动挖矿。
 # --verbosity 3
@@ -64,12 +68,12 @@ geth --datadir ./ethereumData init genesis.json
 # --syncmode full # 同步模式 "light", "fast", "full"
 
 # --http
-# --http.api # available="[admin debug web3 eth txpool personal clique miner net]" # 允许通过http方式访问相关的模块
+# --http.api "" # available="[admin,debug,web3,eth,txpool,personal,ethash,miner,net]" # 允许通过http方式访问相关的模块
 # --http.corsdomain "*"  # 跨域访问
 
 # --ws 
 # --ws.addr 127.0.0.1 --ws.port 8544
-# --ws.api eth,net,web3
+# --ws.api ""
 # --ws.origins '*'
 
 # console 进入控制台
