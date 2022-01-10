@@ -12,7 +12,7 @@
     - https://github.com/ethnamed/eth-explorer
     - https://github.com/Magicking/Clixplorer
     - https://github.com/ethereumproject/explorer
-    - http://ethscan.hubwiz.com/ 可行。轻量版，功能集合在一个html+css+js的文件内。
+    - http://ethscan.hubwiz.com/ 可行。轻量版，直接运行一个html文件即可。
 
 ### blockscout/blockscout
 - https://github.com/blockscout/blockscout
