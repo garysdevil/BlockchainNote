@@ -1,4 +1,4 @@
-## 交易平台
+## NFT交易平台
 1. opensea
     - 以太坊 公链
     - https://opensea.io/
@@ -24,6 +24,10 @@
 6. Solanart
     - solana 公链
     - https://solanart.io/
+
+## NFT稀有度和价格排名
+- https://www.traitsniper.com/
+- https://opensea.io/rankings
 
 ## 图片存储方式
 - 不存储
@@ -121,7 +125,7 @@
 
 
 
-##
+## 学习资料
 3. cryptozombie 学习资料
     - Github https://github.com/loomnetwork/cryptozombie-lessons
     - 官网 https://cryptozombies.io/
