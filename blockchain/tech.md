@@ -101,8 +101,8 @@
 - 定义：零知识证明是指，证明者能够在不向验证者提供任何有用的信息的情况下，使验证者相信某个论断是正确的。
 
 - 零知识证明算法
-    - zkSNARK
-    - zkSTARKs
+    - zkSNARK   零知识简洁非交互式知识论证 | Succinct Non-interactive Argument of Knowledge
+    - zkSTARKs  零知识可扩展的透明知识论证 | Scalable Transparent Argument of Knowledge
     - zkBoo
     - Sonic
     - BulletProofs
@@ -111,3 +111,11 @@
 - zk-SNARK
     - Zero-Knowledge Succinct Non-Interactive Argument of Knowledge
     - 零知识简洁的非交互知识论证
+
+## 跨链
+- 目前的跨链技术，主要有以下几种实现模式：
+    1. 公证人机制（Notary Schemes）公证人机制是链与链交互操作最简单的方法，由某个或某组受信任的团体来声明A链对B链上发生了某件事情。比较有代表的项目是Ripple，这种方式更关注金融资产的转移。
+    2. 侧链/中继（Sidechains/Relays）是指由侧链或中继链来进行交易，用多中心化的方式来解决信任问题。比较有代表性的项目是Cosmos和Polkadot，它们比较侧重于解决跨链基础设施方面，也是现阶段关注度很高的技术热点。
+    3. 哈希锁定（Hash-Locking）是通过智能合约来保障任意两个人之间的转账都可以通过一条“支付”通道来实现，完成“中介”的角色，比较有代表的项目是闪电网络。
+    4. 分布式私钥控制（Distributed Private Key Control）是一种相对较新的跨链方式，它引入锁定和解锁的概念，通过这样的一个锁定和解锁的操作，可以对原有链上的Token进行管理权的操作。比较有代表性的项目是FUSION，实现了多Token种类的智能合约。
+

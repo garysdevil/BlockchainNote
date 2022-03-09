@@ -31,13 +31,14 @@
 
 - Optimistic Rollup
     - 优点：有验证、交易数据完整性、数据压缩性。返回给Layer1的有交易结果和交易的信息，这些数据被压缩后返回给Layer1。
-    - 
+    - 缺点：提款到链上需要等待一定的周期。
     - 相关项目
         - Optimism（OVM虚拟机）
         - Arbitrum
 
 - ZK Rollup
     - Zero—Knowledge Proof，零知识证明
+    - ZK Rollup 是基于零知识证明的二层扩容方案(layer2)， ZK Rollup方案起源于18年下半年，由Barry Whitehat和Vitalik先后提出。Rollup顾名思义有“卷起”和“汇总”的意思，将大量的交易“卷起/汇总”打包成一个交易。原理为链下进行复杂的计算和证明的生成，链上进行证明的校验并存储部分数据保证数据可用性。
     - 优点：有验证、匿名性、数据压缩性。
     - 相关项目
         - zkSync
