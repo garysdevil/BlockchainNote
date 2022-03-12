@@ -47,6 +47,9 @@
 ### FIlecoin
 - https://www.dgm.xyz/
 
+### Conflux
+- https://confluxnetwork.org/zh/developers/grants
+
 ## 组织
 ### DEVgrants 组织 ESP
 - 给予区块链项目开发者进行补助，主要是关于以太坊生态的。
