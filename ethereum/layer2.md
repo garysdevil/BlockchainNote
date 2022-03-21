@@ -44,3 +44,12 @@
         - zkSync
         - Loopring
         - StarkEx
+
+## ZK Rollup 和 StarkEx
+- 参考
+    - https://newsletter.banklesshq.com/p/the-best-comparison-on-zkrollups?s=r
+
+- 对比
+    - StarkEx has introduced a new system termed validium to offer a cheaper option to apps and users.
+    - Validium’s mechanism is very similar to a zkRollup, the only difference being that data-availability in a zkRollup is on-chain, while Validium keeps it off-chain. This permits Validium to achieve considerably higher throughput
+
