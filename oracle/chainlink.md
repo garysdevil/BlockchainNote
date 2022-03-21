@@ -1,20 +1,20 @@
+<!-- - 第三方文档
+    - 旧版本 https://chainlink-chinese.readme.io/docs/%E8%BF%90%E8%A1%8Cchainlink%E8%8A%82%E7%82%B9
+    - https://developer.aliyun.com/article/770252
+    - https://segmentfault.com/a/1190000022774144 -->
 
 # Chainlink
 - 什么是预言机：在区块链领域，预言机被认为是可以为区块链智能合约提供外部数据源的系统。
 - Oraclize项目：中心化预言机。
 - Chainlink项目：去中心化预言机。
 
-- Github https://github.com/smartcontractkit/
-- 文档 https://docs.chain.link/docs/running-a-chainlink-node/
-<!-- - 第三方文档
-    - 旧版本 https://chainlink-chinese.readme.io/docs/%E8%BF%90%E8%A1%8Cchainlink%E8%8A%82%E7%82%B9
-    - https://developer.aliyun.com/article/770252
-    - https://segmentfault.com/a/1190000022774144 -->
+- Github [https://github.com/smartcontractkit/](https://github.com/smartcontractkit/)
+- 文档 [https://docs.chain.link/docs/running-a-chainlink-node/](https://docs.chain.link/docs/running-a-chainlink-node/)
 
 - 部署步骤
-    - 部署以太坊节点 或者 获取一个可以被访问的ws连接地址
-    - 部署postgresql数据库 或者 获取一个可以被被访问的postgres数据库地址账户密码
-    - 部署chanlink节点
+    1. 部署以太坊节点 或者 获取一个可以被访问的以太坊ws连接地址。
+    2. 部署postgresql数据库 或者 获取一个可以被被访问的postgres数据库地址账户密码。
+    3. 部署chanlink节点。
 
 - 部署方式
     - docker
@@ -28,7 +28,7 @@ docker run --name chainlink_postgres -p 127.0.0.1:5432:5432 -e POSTGRES_PASSWORD
 ```
 
 ## 二 部署以太坊节点
-- 笔者是通过在第三方平台 https://infura.io/ 注册账户，获取拥有一定额度以太坊节点访问频率的接口，如下所示。
+- 笔者是通过在第三方平台 https://infura.io/ 注册账户，获取访问以太坊节点ws接口权限，如下所示。
     - wss://rinkeby.infura.io/ws/v3/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ## 三 部署chainlink节点
@@ -41,7 +41,7 @@ docker run --name chainlink_postgres -p 127.0.0.1:5432:5432 -e POSTGRES_PASSWORD
     ETH_CHAIN_ID=4
     MIN_OUTGOING_CONFIRMATIONS=2 # 节点发出交易所需要的最小确认块数，在达到最小确认块数之前，同一个run不会开始下一个任务。如果不设置，默认值为12。
     MIN_INCOMING_CONFIRMATIONS=0
-    LINK_CONTRACT_ADDRESS=0x01BE23585060835E02B77ef475b0Cc51aA1e0709 # LINK token的发行地址，这里有测试网和主网的LINK发行地址，您可以根据自己的网络进行配置。如果不进行配置，默认是主网的LINK发行地址。
+    LINK_CONTRACT_ADDRESS=0x01BE23585060835E02B77ef475b0Cc51aA1e0709 # LINK token的发行地址，这里是公链网络上的LINK智能合约发行地址，您可以根据自己的网络进行配置。如果不进行配置，默认是以太坊主网上的LINK智能合约代币发行地址。
     GAS_UPDATER_ENABLED=true # 如果设置为true，节点会在提交事务失败时提高gas费用重新提交。默认为false。
 
     # CHAINLINK_DEV=true
@@ -64,7 +64,7 @@ docker run --name chainlink_postgres -p 127.0.0.1:5432:5432 -e POSTGRES_PASSWORD
     # Ctr+a 按下后再按下d 退出screen前台
     ```
 
-3. 转一些以太坊代币进Chainlink节点的以太坊地址上。Chainlink节点获取外部数据后，调用预言机合约时需要支付一定的以太坊手续费。
+3. 转一些以太坊代币进Chainlink节点的以太坊地址上，笔者转了0.5个。Chainlink节点获取外部数据后，调用预言机合约时需要支付一定的以太坊手续费。
     - 笔者部署的Chainlink节点的以太坊地址 0x5Bd3C7bF84B38279Da7b819eBc9f52bdE98fa0A3
 
 ## 四 部署预言机合约
