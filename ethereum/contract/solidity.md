@@ -66,8 +66,10 @@
 
 - truffle 编译测试部署一体化工具包
     ```bash
-    # mac安装truffle。truffle是一套开发智能合约的集成开发框架，它是基于javascript的，它的好处是能够解决从智能合约的编译，单元测试，发布，调试一体系的管理
+    # 在Mac操作系统上安装truffle。truffle是一套开发智能合约的集成开发框架，它是基于javascript的，它的好处是能够解决从智能合约的编译，单元测试，发布，调试一体系的管理
     brew install truffle
+    # 通过npm安装
+    npm install truffle -g
     ```
 
 - solcjs 编译器
