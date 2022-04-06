@@ -95,10 +95,10 @@ const contract = _ =>{
     });
 
     // 执行一次调用，并不会改变链上的状态
-    contractInstance.methods.方法名(参数).call((err, result) => { console.log(result) })
+    contractInstance.methods.方法名(参数).call((err, result) => { console.log("error="+err+"\n"+"result="+result) })
     
     // 发送一次交易，会改变链上的状态
-    contractInstance.methods.方法名(参数).send({from: 账户地址},(err, result) => { console.log(result) })
+    contractInstance.methods.方法名(参数).send({from: 账户地址},(err, result) => { console.log("error="+err+"\n"+"result="+result) })
     contractInstance.methods.方法名(参数).send(
         {   from: accountArr[0],
             gasLimit: 3000000, 
