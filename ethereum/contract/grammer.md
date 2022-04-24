@@ -231,7 +231,7 @@ contract owned {
             msg.sender == owner,
             "Only owner can call this function."
         );
-        _; // 修饰器固定格式
+        _; // 修饰器修饰的函数体会被插入到这个符号的位置
     }
 }
 ```
