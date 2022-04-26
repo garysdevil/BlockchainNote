@@ -6,14 +6,21 @@
     - contract也拥有golang结构体的数据结构。
 
 - Solidity、Vyper、Yul 、Yul+
-## 代码结构
+
+## 代码结构 Hello World
 ```js
 // SPDX-License-Identifier: GPL-3.0 //指定开源协议
-pragma solidity >=0.6.0 <0.9.0; //指定编译版本在0.6.0到0.9.0范围内 // ^0.6.0;指定编译版本为0.6.*系列
+pragma solidity ^0.8.0;
+// pragma solidity >=0.6.0 <0.9.0; //指定编译版本在0.6.0到0.9.0范围内 // ^0.6.0;指定编译版本为0.6.*系列
 
 // 导入模块
 import "./ERC20.sol"; // 直接导入
 import * as BaseERC20 from "./ERC20.sol"; // 导入此模块并命名为BaseERC20
+
+// hello world
+contract Hello {
+    string public hello = "hello world!";
+}
 ```
 
 ## 内置API
@@ -118,14 +125,23 @@ revert(string memory reason)
     - 不可以使用push进行动态扩容。
 
 ```js
-pragma solidity >=0.7.0 <0.9.0;
+// SPDX-License-Identifier: GPL-3.0 //指定开源协议
+pragma solidity ^0.8.0;
+
 contract Person {
     // 变量的声明
     // 数据类型 变量可见性 变量名称
     uint public varname;
+    int public minInt = type(int).min; // 获取int类型的最小值
     
+    // 地址类型
+    address public addr = 0xfeda2DCb016567DEb02C3b59724cf09Dbc41A64D;
+
+    // 
+    byte32 public b32 = 0xwerwer;
+
     // 映射 基本类型 映射到 基本类型/引用类型
-    mapping(基本类型 => 基本类型/引用类型) 可见性 变量名
+    // mapping(基本类型 => 基本类型/引用类型) 可见性 变量名
     mapping(uint256 => address) private varname;
 
     // 结构体
@@ -138,11 +154,12 @@ contract Person {
     enum Fruit { Apple, Peach, Watermelon } // 枚举 // 对应着uint8类型的 0 1 2
     Fruit constant favoriteFruit = Fruit.Apple;
 
-    // 数组
+    // 数组 
     uint256[] public array = [1,2,3];
-    delete array[0]; // 删除指定下标的元素，但数组长度未变
-    array.push(2); // 在动态数组的末端添加一个元素
-    array.pop(); // 在动态数组的末端删除一个元素
+    // ^0.7.0; 0.8版本后以下方法被淘汰了
+    // delete array[0]; // 删除指定下标的元素，但数组长度未变
+    // array.push(2); // 在动态数组的末端添加一个元素
+    // array.pop(); // 在动态数组的末端删除一个元素
 }
 ```
 

@@ -55,6 +55,19 @@
     - https://infura.io/
 
 ## 编译部署智能合约
+### Remix 游览器IDE
+```bash
+# 方式一 通过npm进行安装
+npm install remix-ide -g
+npm install -g remixd
+remix-ide
+
+# 方式二 通过源码安装 https://github.com/ethereum/remix-project
+
+# 下载solidity所有版本的编译器进一个目录里
+# https://github.com/ethereum/solc-bin
+```
+
 ### 安装编译部署工具
 - solidity编译器
     ```bash

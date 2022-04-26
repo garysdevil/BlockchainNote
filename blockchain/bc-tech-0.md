@@ -141,19 +141,27 @@
     - https://zhuanlan.zhihu.com/p/293203956
 
 - 诞生：零知识证明，是由S.Goldwasser、S.Micali、C.Rackoff这三个人在20世纪80年代初提出的概念。
-- 定义：零知识证明是指，证明者能够在不向验证者提供任何有用的信息的情况下，使验证者相信某个论断是正确的。
+- 定义：零知识证明是指，证明者能够在不向验证者提供任何新信息的情况下，使验证者相信某个论断是正确的。
 
 - 零知识证明算法
-    - zkSNARK   零知识简洁非交互式知识论证 | Succinct Non-interactive Argument of Knowledge
-    - zkSTARKs  零知识可扩展的透明知识论证 | Scalable Transparent Argument of Knowledge
+    - zkSNARKs   零知识简洁非交互式知识论证 | Zero-Knowledge Succinct Non-interactive Argument of Knowledge
+    - zkSTARKs  零知识可扩展的透明知识论证 | Zero-Knowledge Scalable Transparent Argument of Knowledge
     - zkBoo
     - Sonic
     - BulletProofs
 
+- 区块链里的ZKP算法 https://github.com/matter-labs/awesome-zero-knowledge-proofs
+    1. 最初的Pinocchio（Zcash Sprout）
+    2. 更快的Groth16（Zcash Saping、Filecoin）
+    3. no trusted setup的ZK-STARKs（StarkWare）
+    4. universal trusted setup的PLONK（zkSync），Marlin（Aleo）
+    5. no trusted setup、recursive的Halo2（ZCash NU5）
 
-- zk-SNARK
-    - Zero-Knowledge Succinct Non-Interactive Argument of Knowledge
-    - 零知识简洁的非交互知识论证
+- zkSNARKs
+    - 特性
+        - 简洁的。Prover提供很小的证明给Verifier，就可以进行证明。
+        - 非交互式的。
+        - 可编程的。
 
 ## 跨链
 - 目前的跨链技术，主要有以下几种实现模式：
