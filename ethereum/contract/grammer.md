@@ -10,6 +10,8 @@
 ## 代码结构 Hello World
 ```js
 // SPDX-License-Identifier: GPL-3.0 //指定开源协议
+// SPDX-License-Identifier: MIT
+
 pragma solidity ^0.8.0;
 // pragma solidity >=0.6.0 <0.9.0; //指定编译版本在0.6.0到0.9.0范围内 // ^0.6.0;指定编译版本为0.6.*系列
 
@@ -58,115 +60,232 @@ keccak256(bytes memory) returns (bytes32) // 计算输入的Keccak-256散列。
 ### 错误处理
 ```js
 // 1. 用于判断内部错误，条件不满足时抛出异常，对状态所做的任何更改将被还原。
-assert(bool condition)
+assert(bool condition);
+assert(1==2);
 
 // 2. 用于判断输入或外部组件错误，条件不满足时抛出异常，恢复到原始状态。
-require(bool condition)
+require(bool condition);
 
 // 3. 用于判断输入或外部组件错误，条件不满足时抛出异常，恢复到原始状态。提供了一个提供自定义异常消息的选项。
-require(bool condition, string memory message)
+require(bool condition, string memory message);
+require(1 >= 10, "MyError 1 >= 10");
 
 // 4. 此方法将中止执行并将所做的更改还原为执行前状态。
-revert()
+revert();
 
 // 5. 此方法将中止执行并将所做的更改还原为执行前状态。它提供了一个提供自定义消息的选项
-revert(string memory reason)
+revert(string memory reason);
+if(1 < 10){
+    revert("MyError");
+}
 
-// 6. 捕捉错误 try/catch 
+// 6. 自定义错误 // 可以传递参数
+error Unautorized(address caller);
+function test() public {revert Unautorized(msg.sender);}
+
+// 7. 捕捉错误 try/catch 
 ```
 
 ## 数据/变量
-- 数据的三种存储形式
-    - memory 
-        - 数据存储在内存里；即分配，即使用，越过作用域即不可被访问；等待被回收。
-        - 函数参数，函数返回的参数，默认都是memory存储类型。
-        - memory之间是引用传递，并不会拷贝数据。
-    - storage 状态变量
-        - 数据永远存在于区块链上。
-        - 函数外的变量,存储模式一定是storage。
-        - 存储由一个个存储槽组成，一个存储槽=32字节。
-    - calldata 
-        - 数据位置是只读的，不会持久化到区块链。
-        - 一般只有外部函数的参数（不包括返回参数）被强制指定为calldata。
-    - stack
-        - 堆栈是由EVM (Ethereum虚拟机)维护的非持久性数据。EVM使用堆栈数据位置在执行期间加载变量。堆栈位置最多有1024个级别的限制。
-        - 局部变量若是整型、定长字节数组等类型，则存储模式一定是stack。
+### 数据类型
+- 基本类型
+    1. 布尔 bool
+    2. 整型 int/uint
+    3. 定长浮点型 fixed/unfixed
+    4. 地址 address
 
-- 数据类型
-    - 基本类型
-        1. 布尔 bool
-        2. 整型 int/uint
-        3. 定长浮点型 fixed/unfixed
-        4. 地址 address
+- 引用类型
+    1. 数组
+        - 局部变量数组，需要被定义存储在memory里。
+            - 必须先初始化，再赋值。
+            - 数组长度是固定的。
+            - 不可以使用pop、push等方法，因为这些方法会更改数组的长度。
 
-    - 引用类型
-        1. 数组
-            - 当数组是被存储在memory时，可以声明为动态数组
-        2. 结构体 struct 
-        3. 映射 map
-        4. 字符串 string
-    - 枚举 enum
-
-- 状态变量三种可见性
-    - 状态变量可见性程度 public > internal > private
-    - 默认为 internal 类型
-    1. public  生成一个自动 getter 函数
-    3. internal 只能在内部进行访问
-    4. private 仅在当前合约可以被访问，不能被继承
-    
-- 支持隐式转换和显示转换
+    2. 结构体 struct 
+    3. 映射 map
+    4. 字符串 string
 
 - 引用类型变量之间的相互赋值
     - 存储位置为 storage，则是值传递
     - 存储位置为 memory，则是引用传递
 
-- 数组，存储位置为 memory时
-    - 必须被初始化后才能使用。
-    - 不可以使用push进行动态扩容。
+- 枚举 enum
 
+- 常量 constant
+
+- 数据类型支持隐式转换和显示转换
+
+### 数据的三种存储形式
+- memory 
+    - 数据存储在内存里；即分配，即使用，越过作用域即不可被访问；等待被回收。
+    - 函数参数，函数返回的参数，默认都是memory存储类型。
+    - memory之间是引用传递，并不会拷贝数据。
+- storage 状态变量
+    - 数据永远存在于区块链上。
+    - 函数外的变量,存储模式一定是storage。
+    - 存储由一个个存储槽组成，一个存储槽=32字节。
+- calldata 
+    - 数据位置是只读的，不会持久化到区块链。
+    - 一般只有外部函数的参数（不包括返回参数）被强制指定为calldata。
+- stack
+    - 堆栈是由EVM (Ethereum虚拟机)维护的非持久性数据。EVM使用堆栈数据位置在执行期间加载变量。堆栈位置最多有1024个级别的限制。
+    - 局部变量若是整型、定长字节数组等类型，则存储模式一定是stack。
+
+### 状态变量的三种可见性
+- 状态变量可见性程度 public > internal > private
+- 默认为 internal 类型
+1. public   可以被外部访问；会自动生成一个 getter 函数。
+3. internal 只能在内部进行访问。
+4. private  仅在当前合约可以被访问，不能被继承。
+    
+### 代码示例
 ```js
-// SPDX-License-Identifier: GPL-3.0 //指定开源协议
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-
-contract Person {
+contract BasicTypeC {
     // 变量的声明
     // 数据类型 变量可见性 变量名称
     uint public varname;
     int public minInt = type(int).min; // 获取int类型的最小值
     
     // 地址类型
-    address public addr = 0xfeda2DCb016567DEb02C3b59724cf09Dbc41A64D;
+    address public addr = 0xfeda2DCb016567DEb02C3b59724cf09Dbc41A64D; // 消耗23600 gas
+    // 常量
+    address public constant addr1 = 0xfeda2DCb016567DEb02C3b59724cf09Dbc41A64D; // 消耗21508 gas
 
-    // 
-    byte32 public b32 = 0xwerwer;
+    // bytes32
+    bytes32 public b32 = "0x00";
+}
 
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+contract ArrayContract {
+    // 固定长度数组
+    uint256[5] public array1 = [1,2,3,4,5];
+    // 动态数组 
+    uint256[] public array2 = [1,2,3,4,5];
+    // 操作数组
+    function operateArray() external{
+        delete array2[0]; // 删除指定下标的元素的值，数组长度未变
+        array2[0] = 11; // 修改数组元素的值
+        array2.push(2); // 在动态数组的末端添加一个元素
+        array2.pop(); // 在动态数组的末端删除一个元素
+        // 定义局部变量数组，长度为5
+        uint256[] memory arrayLocal = new uint[](5);
+        arrayLocal[0] = 1;
+    }
+
+    uint256[]  array = array2;
+    // 返回整个数组
+    function getArray() external view returns(uint[] memory){
+        return array;
+    }
+    // 删除状态变量里的数组元素 // 通过移动数组元素位置的方式 // 很浪费gas
+    function removeArrEleByMove(uint _index) public{
+        require(_index < array.length, "index out of bound");
+        for (uint i = _index; i < array.length - 1; i++){
+            array[i] = array[i+1];
+        }
+        array.pop();
+    }
+    // 删除状态变量里的数组元素 // 通过替换数组元素的方式 // 会打乱数组的顺序
+    function removeArrEleByReplace(uint _index) public{
+        require(_index < array.length, "index out of bound");
+        array[_index] = array[array.length - 1];
+        array.pop();
+    }
+    // 获取状态变量里的数组长度
+    function getArrLen() public view returns(uint len){
+        len = array.length; // 获取数组长度
+    }
+}
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+contract MapTypeC {
     // 映射 基本类型 映射到 基本类型/引用类型
     // mapping(基本类型 => 基本类型/引用类型) 可见性 变量名
-    mapping(uint256 => address) private varname;
-
-    // 结构体
-    struct Gender {
-        bool femail;
-        address account;
+    mapping(address => uint256) public varmap1;
+    mapping(address => mapping(address => uint256)) public varmap2; // 嵌套映射，类似于二维数组
+    function example() external{
+        varmap2[msg.sender][address(this)] = 100;
     }
     
+    // 可遍历的map //
+    mapping(address => uint256) public walletBalance;
+    mapping(address => bool) public walletInserted;
+    address[] public walletArr;
+    function setWalletAddr(address _addr, uint _val) public{
+        if (!walletInserted[_addr]){
+            walletInserted[_addr] = true;
+            walletArr.push(_addr);
+            walletBalance[_addr] = _val;
+        }else{
+            revert("Existed the address!!");
+        }
+    }
+    function getBalanceByIndex(uint _index) public view returns(uint){
+        require(_index < walletArr.length, "index out of walletArr bound");
+        return walletBalance[walletArr[_index]];
+    }
+}
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+contract StructTypeC {
+    // 结构体
+    struct Person {
+        string name;
+        uint grade;
+        address owner;
+    }
+    Person[] public persons;
+    function examples() external{
+        // 结构体的三种声明赋值方式
+        Person memory gary = Person("gary", 10, msg.sender);
+        Person memory adam = Person({name:"adam", grade:10, owner:msg.sender});
+        Person memory jack;
+        jack.name = "jack";
+        persons.push(gary);
+        persons.push(adam);
+        persons.push(jack);
+        persons.push(Person("ruby", 10, msg.sender));
+        // 更改结构体属性
+        Person storage _person = persons[0];
+        _person.grade = 11;
+        // 删除结构体属性
+        delete _person.grade;
+        // 删除一个结构体
+        delete persons[2];
+    }
+}
+
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+contract EnumTypeC {
     // 枚举
     enum Fruit { Apple, Peach, Watermelon } // 枚举 // 对应着uint8类型的 0 1 2
     Fruit constant favoriteFruit = Fruit.Apple;
-
-    // 数组 
-    uint256[] public array = [1,2,3];
-    // ^0.7.0; 0.8版本后以下方法被淘汰了
-    // delete array[0]; // 删除指定下标的元素，但数组长度未变
-    // array.push(2); // 在动态数组的末端添加一个元素
-    // array.pop(); // 在动态数组的末端删除一个元素
 }
 ```
 
 ## 控制符
 ```js
-// 条件运算符
+// if条件
+if (true){
+}else{}
+
+// 三元运算符
 uint result = (5 > 2? 1: 2);  
+
+
+// for循环
+// for (初始化; 测试条件; 迭代语句) {
+// }
+for (uint i = 0; i<10; i++){
+}
+// continue – 跳出本次循环，继续执行接下来的循环
+// break – 跳出整个循环(或跳出代码块)
 
 // while循环
 while (表达式) {
@@ -178,22 +297,14 @@ do {
    被执行语句(如果表示为真)
 } while (表达式);
 
-// for循环
-for (初始化; 测试条件; 迭代语句) {
-   被执行语句(如果表示为真)
-}
-
-// continue – 跳出本次循环，继续执行接下来的循环
-// break – 跳出循环(或跳出代码块)
-
-// if else
 ```
 ## 函数
 - 注意
-    - 当函数返回结构体时，外部调用无法返回数据。
-    - 只可以将以太币一起发送至拥有 payable 修饰符的函数，不然会抛出异常。
+    - 只可以将以太币发送至拥有 payable 修饰符的函数，否则会抛出异常。
 
 ```js
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
 contract C {
     // 格式
     function 函数名(参数) 函数可见性 状态可变性 函数修饰器... returns (变量类型,变量类型) {
@@ -201,16 +312,26 @@ contract C {
         return 值,值;
     }
 
+    // 实例一
+    function double1(uint num) public pure returns (uint, uint){
+        return (num * 2, num * 3);
+    }
+    // 实例二 // 隐式返回
+    function double2(uint num) public pure returns (uint x, uint y){
+        x = num * 2;
+        y = num * 3;
+    }
+    // 实例三 // 返回数组
+    function returnArray() public pure returns (uint8[2] memory){
+        uint8[2] memory data1 = [1,2];
+        // uint8[2] memory data2 = new uint8[](2);
+        return data1;
+    }
+    // 示例四 // 调用函数
+    function revokeFunc(uint num) public pure{
+        (, uint y) = double1(2);
+    }
 
-    // 实例
-    function double(uint num) public pure returns (uint,uint){
-        return (num*2,num*3);
-    }
-    function test() public pure returns (uint8[2] memory){
-        uint8[2] memory data = [1,2];
-        uint8[] memory data1 = new uint8[](3); data1[0] = 1;
-        return data;
-    }
     // 合约函数想要接收以太坊，则必须添加 payable 关键字
     function receivePay() payable public{}
 
@@ -238,10 +359,14 @@ contract C {
 - 修饰器用于限制函数的行为；类似于 Spring 中的切面功能，作用于一个函数上；
 
 ```js
-pragma solidity >=0.7.1 <0.9.0;
-contract owned {
-    constructor() { owner = payable(msg.sender); }
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+contract Ownable {
     address payable owner;
+    uint public count; 
+    
+    constructor() { owner = payable(msg.sender); }
+
     // 自定义一个修饰器
     modifier onlyOwner {
         require(
@@ -249,6 +374,12 @@ contract owned {
             "Only owner can call this function."
         );
         _; // 修饰器修饰的函数体会被插入到这个符号的位置
+        count += 1;
+    }
+    // 
+    function setOwner(address _newOwner) external onlyOwner{
+        require(_newOwner != address(0), "invalid address");
+        owner = payable(_newOwner);
     }
 }
 ```
@@ -258,7 +389,10 @@ contract owned {
 - payable 允许修改状态（允许从消息调用中接收以太币Ether）
 
 ### 重载
-同一个作用域内，相同函数名可以定义多个函数。这些函数的参数(参数类型或参数数量)必须不一样。仅仅是返回值不一样不被允许。
+- 重载的定义
+    - 同一个作用域内，相同函数名可以定义多个函数。
+    - 这些函数的参数(参数类型或参数数量)必须不一样。
+    - 仅仅是返回值不一样不被允许。
 
 ## 合约
 ### 事件Event
