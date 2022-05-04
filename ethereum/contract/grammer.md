@@ -116,17 +116,16 @@ function test() public {revert Unautorized(msg.sender);}
 - 数据类型支持隐式转换和显示转换
 
 ### 数据的三种存储形式
-- memory 
-    - 数据存储在内存里；即分配，即使用，越过作用域即不可被访问；等待被回收。
-    - 函数参数，函数返回的参数，默认都是memory存储类型。
-    - memory之间是引用传递，并不会拷贝数据。
 - storage 状态变量
     - 数据永远存在于区块链上。
     - 函数外的变量,存储模式一定是storage。
     - 存储由一个个存储槽组成，一个存储槽=32字节。
+- memory 
+    - 数据存储在内存里；即分配，即使用，越过作用域即不可被访问；等待被回收；不会持久化到区块链。
+    - 函数参数，函数返回的参数，默认都是memory存储类型。
 - calldata 
-    - 数据位置是只读的，不会持久化到区块链。
-    - 一般只有外部函数的参数（不包括返回参数）被强制指定为calldata。
+    - 数据位置是只读的；不会持久化到区块链。
+    - 一般将输入参数指定为calldata存储位置，以节省gas。（calldata可以理解为内存里的引用，memory可以理解为内存里的拷贝，所以比较浪费gas）
 - stack
     - 堆栈是由EVM (Ethereum虚拟机)维护的非持久性数据。EVM使用堆栈数据位置在执行期间加载变量。堆栈位置最多有1024个级别的限制。
     - 局部变量若是整型、定长字节数组等类型，则存储模式一定是stack。
@@ -149,9 +148,11 @@ contract BasicTypeC {
     int public minInt = type(int).min; // 获取int类型的最小值
     
     // 地址类型
-    address public addr = 0xfeda2DCb016567DEb02C3b59724cf09Dbc41A64D; // 消耗23600 gas
-    // 常量
-    address public constant addr1 = 0xfeda2DCb016567DEb02C3b59724cf09Dbc41A64D; // 消耗21508 gas
+    address public addr1 = 0xfeda2DCb016567DEb02C3b59724cf09Dbc41A64D; // 消耗23600 gas
+    // 通过constant定义常量
+    address public constant addr2 = 0xfeda2DCb016567DEb02C3b59724cf09Dbc41A64D; // 消耗21508 gas
+    // 通过immutable定义常量 // 必须在部署合约的时候进行赋值
+    address public immutable owner = msg.sender;
 
     // bytes32
     bytes32 public b32 = "0x00";
@@ -250,13 +251,22 @@ contract StructTypeC {
         persons.push(adam);
         persons.push(jack);
         persons.push(Person("ruby", 10, msg.sender));
+        // 实例化一个结构体 // 引用
+        Person storage _person0 = persons[0];
+        // 实例化一个结构体 // 拷贝
+         Person memory _person1 = persons[1];
         // 更改结构体属性
-        Person storage _person = persons[0];
-        _person.grade = 11;
+        _person0.grade = 11;
         // 删除结构体属性
-        delete _person.grade;
+        delete _person0.grade;
+        // 更改结构体属性 // 并不会更改状态变量，因为更改的是内存里的
+        _person1.grade = 11;
         // 删除一个结构体
         delete persons[2];
+    }
+    // 返回整个结构体数组
+    function getPersons() external view returns(Person[] memory){
+        return persons;
     }
 }
 
@@ -264,8 +274,11 @@ contract StructTypeC {
 pragma solidity ^0.8.0;
 contract EnumTypeC {
     // 枚举
-    enum Fruit { Apple, Peach, Watermelon } // 枚举 // 对应着uint8类型的 0 1 2
-    Fruit constant favoriteFruit = Fruit.Apple;
+    enum Fruit { Apple, Peach, Watermelon } // 枚举 // 对应着uint8类型的 0 1 2 // 默认值为0
+    Fruit public favoriteFruit = Fruit.Apple;
+    function setFavoriteFruit(Fruit _fruit) external {
+        favoriteFruit = _fruit;
+    }
 }
 ```
 
@@ -306,11 +319,11 @@ do {
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 contract C {
-    // 格式
-    function 函数名(参数) 函数可见性 状态可变性 函数修饰器... returns (变量类型,变量类型) {
-        函数体
-        return 值,值;
-    }
+    // // 格式
+    // function 函数名(参数) 函数可见性 状态可变性 函数修饰器... returns (变量类型,变量类型) {
+    //     函数体
+    //     return 值,值;
+    // }
 
     // 实例一
     function double1(uint num) public pure returns (uint, uint){
@@ -338,6 +351,10 @@ contract C {
     // 获取合约本身的余额
     function getBalance() external view returns (uint){
         return address(this).balance;
+    }
+    function example() view external{
+        // external 修饰的函数不能被内部合约调用，但可以通过this来进行调用，但会浪费gas
+        this.getBalance();
     }
 }
 ```
@@ -401,18 +418,14 @@ contract Ownable {
 ```js
 contract Coin {
     // 定义一个事件
-    event Sent(address from, address to, uint amount);
-    
+    event SentLog(address from, address to, uint amount);
+    // 定义一个带有索引的事件 // 最多只能有3个索引，否则会报错。 // 索引可以被web3 SDK工具进行搜索查询
+    event IndexedSentLog(address indexed from, address indexed to, uint amount);
     function send(address receiver, uint amount) public {
-        函数体
-        emit Sent(msg.sender, receiver, amount); // 触发一个事件
+        // 函数体
+        emit SentLog(msg.sender, receiver, amount); // 触发一个事件
     }
 }
-```
-```js
-const Web3 = require('web3')
-const fs = require('fs')
-const web3 = new Web3(wsURL)
 ```
 
 ### 库Library
@@ -431,21 +444,45 @@ using Search for uint[]; // 将Search库附加给unit[]类型，之后unit[]类�
 
 ### 继承/构造函数
 ```js
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 contract Base1 {
    uint data;
-   constructor(uint _data) public {
+   constructor(uint _data) { // 定义构造函数
       data = _data;   
    }
+   function test1() public pure virtual returns(string memory){ // 如果函数想要被重写，则必须添加virtual关键字
+       return "Base1 contract, test1 function";
+   }
+   function test2() public pure virtual returns(string memory){
+       return "Base1 contract, test2 function";
+   }
 }
+contract Base2 {
+}
+
 // 继承时直接初始化父合约的构造函数
-contract Derived is Base1 (5) {
-   constructor() public {}
+contract Derived1 is Base1(1), Base2 {
+   constructor() {}
+
+   // 如果想要重写父合约的函数，则必须添加overide关键字
+   function test1() public pure override returns(string memory){
+       return "Derived1 contract, test1 function";
+   }
+
+   // 如果函数想要被重写，则必须添加virtual关键字 // 如果想要重写父合约的函数，则必须添加overide关键字
+   function test2() public pure virtual override returns(string memory){
+       return "Derived1 contract, test2 function";
+   }
 }
 // 继承时间接初始化父合约的构造函数
-contract DerivedA is Base1{
-    constructor() Base1(5) public {}
+contract Derived2 is Base1, Base2{
+    constructor() Base1(1) Base2() {}
+}
+// 继承时间接初始化父合约的构造函数，父合约的构造函数参数由子合约的输入参数决定
+contract Derived3 is Base1{
+    constructor(uint _data) Base1(_data) {}
 }
 ```
 
@@ -506,11 +543,16 @@ contract DerivedA is Base1{
 ```js
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0; 
-contract Test1 {
+
+contract CallTestContract {
     address public temp1; uint256 public temp2;
+    bytes public data;
     // call
     function call_test1(address contractAddr) public {
-        (bool success,) = contractAddr.call(abi.encodeWithSignature("test1()")); require(success);
+        // 调用函数并发送100个Wei的以太坊过去
+        (bool success,) = contractAddr.call{value: 110}(abi.encodeWithSignature("test1()")); require(success);
+        // 当设置gas时，可能因为gas不足而导致调用失败
+        // (bool success,) = contractAddr.call{value: 11, gas: 50000}(abi.encodeWithSignature("test1()")); require(success);
     }
     // delegatecall
     function delegatecall_test1(address contractAddr) public {
@@ -518,48 +560,36 @@ contract Test1 {
     }
     // call
     function call_test2(address contractAddr) public {
-        // 对于test2(uint256)，必须写uint256，不能写uint，否则找不到对应的函数
+        // 对于被调用合约的方法test2(uint)，必须写uint256，不能写uint，否则找不到对应的函数而出发fallback函数
         (bool success,) = contractAddr.call(abi.encodeWithSignature("test2(uint256)",22)); require(success);
     }
-
-    // 触发fallback函数
-    function call_3(address contractAddr) public {
-        (bool success,) = contractAddr.delegatecall(abi.encodeWithSignature("noExistFunction()")); require(success);      
-    }
-
-
-    // 转账方式一 转账给 _to
-    function moneyByTransfer(address payable _to) public payable{
-        // msg.value 对应VALUE 这个输入框
-        _to.transfer(msg.value); // transfer 转账失败会throw异常
-        _to.transfer(1 ether);
-        _to.send(msg.value); // send是transfer的底层实现。 _to.transfer(y)和if (!_to.send(y)) throw;是等价的
-    }
-    // 转账方式二 转账给  _to  方式一的手续费大约是方式二的三倍
-    function moneyByCall(address payable _to, uint256 amount) external payable{
-        (bool success, ) = _to.call{value: amount}("");
-        require(success, "Transfer failed.");
+    // call
+    function call_test3(address contractAddr) public {
+        (bool success, bytes memory _data) = contractAddr.call(abi.encodeWithSignature("test2(uint256)",33)); require(success);
+        data = _data;
     }
 } 
 
 contract Test2 {
    address public temp1;
    uint256 public temp2;    
-   function test1() public  {
+   function test1() payable public {
       temp1 = msg.sender;        
-      temp2 = 100;    
+      temp2 = 11;    
    }
-   function test2(uint age) public  {
+   function test2(uint _temp) payable public returns(address temp1,uint temp2){
       temp1 = msg.sender;        
-      temp2 = age;    
+      temp2 = _temp;    
    }
+
+   event Log(string func, address sender, uint value, bytes data);
+   // 当只发生以太币时会调用receive函数。
    receive() payable external {
-      temp1 = msg.sender;        
-      temp2 = 300;    
+      emit Log("MyLog receive", msg.sender, msg.value, '');
    }
-   fallback() external {
-      temp1 = msg.sender;        
-      temp2 = 200;  
+   // msg.data 不为空时会调用fallback函数。
+   fallback() payable external {
+      emit Log("MyLog fallback", msg.sender, msg.value, msg.data);
    }
 }
 ```
