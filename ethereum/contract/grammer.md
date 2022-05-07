@@ -516,14 +516,23 @@ contract Derived3 is Base1{
 3. 接口
 
 ## 合约间的调用
+- 合约间的调用
+    - 方式一：知道被调用合约的代码。将被调用的合约通过类型引用进自己的代码里，直接调用方法。
+    - 方式二：只知道被调用合约的地址、方法名、输入参数、输出参数。通过接口进行调用。
+    - 方式三：低级调用。
 
-1. 方式一 call
+### 低级调用
+1. 方式一 低级调用 call
     - 调用后内置变量 msg 的值会修改为调用者的值。
     - 调用后执行环境为被调用者的运行环境(合约的 storage)。
 
-2. 方式二 delegatecall
+2. 方式二 委托调用  delegatecall
     - 调用后内置变量 msg 的值任然是外部账户的值，不会被修改为调用者的值。
     - 调用后执行环境为调用者的运行环境(合约的 storage)。
+    - 机制
+        - 在EVM里，底层逻辑相当于将被调用合约拿进当前合约当库使用。
+        - 调用合约里的状态变量顺序一定要与被调用合约里的状态变量顺序一致，否则会导致状态变量赋值问题。
+        - 栈式虚拟机，直接进行内存拷贝，但没有进行类型检查。
 
 3. 方式三 callcode  ---- 即将被废弃的函数
     - 调用后内置变量 msg 的值会修改为调用者。
@@ -531,68 +540,15 @@ contract Derived3 is Base1{
 
 - 调用格式
     - 合约地址.call(abi.encodeWithSignature("合约函数名()",参数));
-- 返回值（0.6.8版本后）
-    - 第一个表示是delegatecall是否调用成功的布尔变量。
-    - 第二个表示是被调用函数的返回值。
+    - 第一个返回值bool表示是否调用成功。
+    - 第二个返回值bytes表示被调用函数的返回值。
 
 - fallback() external {} // 合约内定义此函数，则当函数未被找到时，默认执行此函数；否则 err="execution reverted"
-- receive() payable external {} // 合约内定义此函数，则当函数未被找到时，也能接收转账，否则 err="execution reverted"
+- receive() payable external {} // 合约内定义此函数，则不调用函数，也能接收转账，否则 err="execution reverted"
 
 
 
-```js
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0; 
-
-contract CallTestContract {
-    address public temp1; uint256 public temp2;
-    bytes public data;
-    // call
-    function call_test1(address contractAddr) public {
-        // 调用函数并发送100个Wei的以太坊过去
-        (bool success,) = contractAddr.call{value: 110}(abi.encodeWithSignature("test1()")); require(success);
-        // 当设置gas时，可能因为gas不足而导致调用失败
-        // (bool success,) = contractAddr.call{value: 11, gas: 50000}(abi.encodeWithSignature("test1()")); require(success);
-    }
-    // delegatecall
-    function delegatecall_test1(address contractAddr) public {
-        (bool success,) = contractAddr.delegatecall(abi.encodeWithSignature("test1()")); require(success);      
-    }
-    // call
-    function call_test2(address contractAddr) public {
-        // 对于被调用合约的方法test2(uint)，必须写uint256，不能写uint，否则找不到对应的函数而出发fallback函数
-        (bool success,) = contractAddr.call(abi.encodeWithSignature("test2(uint256)",22)); require(success);
-    }
-    // call
-    function call_test3(address contractAddr) public {
-        (bool success, bytes memory _data) = contractAddr.call(abi.encodeWithSignature("test2(uint256)",33)); require(success);
-        data = _data;
-    }
-} 
-
-contract Test2 {
-   address public temp1;
-   uint256 public temp2;    
-   function test1() payable public {
-      temp1 = msg.sender;        
-      temp2 = 11;    
-   }
-   function test2(uint _temp) payable public returns(address temp1,uint temp2){
-      temp1 = msg.sender;        
-      temp2 = _temp;    
-   }
-
-   event Log(string func, address sender, uint value, bytes data);
-   // 当只发生以太币时会调用receive函数。
-   receive() payable external {
-      emit Log("MyLog receive", msg.sender, msg.value, '');
-   }
-   // msg.data 不为空时会调用fallback函数。
-   fallback() payable external {
-      emit Log("MyLog fallback", msg.sender, msg.value, msg.data);
-   }
-}
-```
+- 低级调用 代码示例 https://github.com/garysdevil/mysolidity/blob/main/mytruffle/contracts/CallContract3.sol
 
 
 ## 设计模式
