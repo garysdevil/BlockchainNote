@@ -167,6 +167,7 @@ contract ArrayContract {
     uint256[] public array2 = [1,2,3,4,5];
     // 操作数组
     function operateArray() external{
+        // array2[10] = 1; // 直接赋值给一个动态数组，当数组里的元素为被初始化过时会被这个错误 Note: The called function should be payable if you send value and the value you send should be less than your current balance.
         delete array2[0]; // 删除指定下标的元素的值，数组长度未变
         array2[0] = 11; // 修改数组元素的值
         array2.push(2); // 在动态数组的末端添加一个元素

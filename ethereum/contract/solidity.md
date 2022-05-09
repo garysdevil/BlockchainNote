@@ -63,9 +63,12 @@ npm install -g remixd
 remix-ide
 
 # 方式二 通过源码安装 https://github.com/ethereum/remix-project
-# (未试过)找出代码里编译器的链接，更改为本地的链接
-grep -R  'solc-bin.ethereum.org' ./
+# (未试过)找出代码里编译器的链接，更改为本地的链接 grep -R  'solc-bin.ethereum.org' ./
 # (失败)更改IP端口 vim ./apps/remix-ide/bin/remix-ide
+# 编译运行
+npm run build:production
+npm run serve:production
+
 
 # 下载solidity所有版本的编译器进一个目录里
 # https://github.com/ethereum/solc-bin
