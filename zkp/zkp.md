@@ -1,19 +1,21 @@
-# ZKP
-
+## ZKP概述
 
 - 起源： “零知识”的概念最早由麻省理工学院的研究人员 Shafi Goldwasser, Silvio Micali和Charles Rackoff 在1989年提出，发表了论文GMR85。
     - https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.419.8132&rep=rep1&type=pdf
 
 - 定义： “零知识证明”指的是证明者能够在不向验证者提供任何有用的信息的情况下，使验证者相信某个论断是正确的。
 
+- 零知识证明和区块链的关系?
+    - 在区块链网络中，可以把每笔交易的转账双方地址、转账金额等信息隐藏起来，同时又能让矿工证明交易是合法的，这就是零知识证明在区块链中的应用。
+ 
+## 相关链接
 - 相关链接
     - Zero-Knowledge专题网站 https://zeroknowledge.fm/about/
     - zk-STARKs视频讲解 https://github.com/Whisker17/zkpThings/issues/13
+    - zk-STARKs讲解 https://www.daimajiaoliu.com/daima/4ed1d08d2900404
+    - zk-STARKs讲解 https://cloud.tencent.com/developer/article/1025773
     - 零知识证明的讲解 https://mirror.xyz/0x3167e3c376FcC051D4460c1B923212B66dC6f450/sDmccxN7lzGz3fZ34Log1YpaBwloy0lY5wfr9qVH-Ww
 
-- 零知识证明和区块链的关系?
-    - 在区块链网络中，可以把每笔交易的转账双方地址、转账金额等信息隐藏起来，同时又能让矿工 证明交易是合法的，这就是零知识证明在区块链中的应用。
- 
 
  ## zk- SNARK的历史
  1. 起源： GMR85
@@ -32,7 +34,7 @@
     - 通用的是指可信参数只需要生成一次。
     1. Sonic算法是第一个通用的zk-SNARKs算法。
 
-## 零知识证明
+## 零知识证明的实现方式
 - 实现零知识证明协议的一种方式
     1. 单向函数： 将A加密为B，验证者不能从B反推回A。实现隐藏信息的功能。
     2. 同态映射： f(a+b) = f(a) + f(b) 。实现证明我知道被隐藏的信息的功能。
@@ -40,24 +42,37 @@
     3. 证明NPC问题的多项式（并非唯一的方法）： 可以实现通用零知识证明。
     - 不同的零知识证明协议在这三点上的具体实现是不一样的，最主要的不同可能体现在第 3 点中，哪怕证明的是同一个 NPC 问题，也可以有截然不同的方法。因为不同的设计，零知识证明协议最常被提及的差异主要包括：不同的计算空间和计算时间。更小的空间和更短的时间是不断改进零知识证明协议的主要动力，也是比较不同零知识证明协议的主要指标。
 
-- zk-STARKs 零知识证明协议 
+- zk-STARKs
     - 理论理解：假设 P 有 9 个要证明的数，a1，a2，……，a9，那么把它们编码成 b1，b2，……，b9，每个bi中都含有a1，a2，……，a9 的部分信息。在做验证的时候，验证者对 b1，b2，……，b9 做抽样检查，从少量 bi 中就能分析出编码有没有错误，这样就可以大概率探测到 a1，a2，……，a9 是否属实。
     1. 没有使用单向函数，因为验证者并不能获取所有的b1,b2,b3...b9。
     2. 没有使用同态映射，它不是抽象代数（或密码学）中的同态概念，而是基于线性编码纠错理论进行抽样验证。
     3. 没有使用证明NPC问题的多项式，而是基于概率检查做验证的。
 
+- zh-SNARK
+    - zero-knowledge Succint Non-interactive ARguments of Knowledge 的缩写
+    - Zero knowledge：零知识。证明者不泄漏欲证明的隐私信息。
+    - succinct：简明的，证明的数据量比较小，方便验证。
+    - Non-interactivity：非交互的，证明者只要提供一个字符串，可放在链上公开验证。
+    - Arguments：证明过程是计算完好（computationally soundness）的，证明者无法在合理的时间内造出伪证（破解）。
+    - of knowledge：对于一个证明者来说，在不知晓特定证明 (witness) 的前提下，构建一个有效的零知识证据是不可能的。
+
+## 零知识证明的工作流程
+- 分为4步
+    1. 将欲证明的计算性问题，转换成电路 Circuit
+    2. 将电路 Circuit 转换成 R1CS
+    3. 将 R1CS 转变成 QAP 
+    4. 基于 QAP 实现 zkSNARK 的算法
 
 
-## 术语
-- Zero knowledge：零知识证明。
+- QAP问题可以在多项式时间内验证一个解是否正确，但在一个有限的时间内，使用有限的资源是很难在多项式时间内推出一个正确的解的。
 
-- Zero-Knowledge Proof（ZKP）：零知识证明。
+### 1. 将欲证明的计算性问题，转换成电路 Circuit
+- 首先，我们将计算性问题 “拍平(Flattening)”，使之变成一个个电路，例如 x3 + x + 5，我们可以将其拍平成 4 个电路
+1. sym1 = x * x
+2. y = sym1 * x
+3. sym2 = y + x
+4. out = sym2 + 5
+- 其中 sym1, sym2 以及 y，是整个计算过程中用的临时变量，而 out 则为计算过程的最终输出结果
 
-- succinct：简明的，证据信息较短，方便验证。
-
-- Non-interactivity：非交互的，证明者只要提供一个字符串，可放在链上公开验证。
-
-- Arguments：证明过程是计算完好（computationally soundness）的，证明者无法在合理的时间内造出伪证（破解）。
-
-- of knowledge：对于一个证明者来说，在不知晓特定证明 (witness) 的前提下，构建一个有效的零知识证据是不可能的。
+### 2. 将电路转换成 R1CS 形式
 
