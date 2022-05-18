@@ -53,3 +53,12 @@
     - 单位为 Gwei 的数量
     - 用户进行一次交易，想支付的费用，以太坊默认的Gas Price是1Gwei。
     - 是 Gwei 的数量，用户愿意花费于每个 Gas 单位的价钱。
+
+## 智能合约节约gas的方式
+- 参考 https://www.bilibili.com/video/BV1Pi4y1U7Cu/?spm_id_from=pageDriver
+1. 优先使用calldata
+2. 加载状态变量到内存变量
+3. 多个条件判断使用短路方式
+4. 在循环中使用++i，而不是i+=1,i++
+5. 数组长度缓存到内存
+6. 缓存多次使用的数组元素到内存

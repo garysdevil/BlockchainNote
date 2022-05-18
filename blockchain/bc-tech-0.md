@@ -24,13 +24,6 @@
     3. BLS：支持聚合签名，解决signer交互问题。（使用案例：ETH2、Filecoin）
 
 
-### 椭圆曲线
-- 定义
-    - 二维平面点的集合，上下对称。
-    - 加法操作，一根直线穿过椭圆曲线的3个点，P、Q、R，则 P+Q=-R。
-    - 乘法操作
-
-
 ## 区块链
 - 区块链是分布式数据存储、点对点传输、共识机制、加密算法等计算机技术的新型应用模式。
 ### 区块链项目的层级结构
@@ -92,7 +85,7 @@
 - keccak256
     - https://www.npmjs.com/package/keccak256
 
-## UTCXO和Account模型
+## UTXO和Account模型
 - UTXO 
     - 全称为 unspent transaction outputs（未使用的交易输出）。
 - UTXO模型：只要全网保留了所有未被花费的交易，链就能运行。
