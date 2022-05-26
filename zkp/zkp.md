@@ -9,9 +9,9 @@
 ## ZK相关链接
 - 相关文章
     - 零知识证明是什么 https://www.youtube.com/watch?v=FuKEpOhiVPg
-    - zk-STARK讲解 https://mirror.xyz/0x3167e3c376FcC051D4460c1B923212B66dC6f450/sDmccxN7lzGz3fZ34Log1YpaBwloy0lY5wfr9qVH-Ww
-    - zk-STARK讲解 https://medium.com/@ppio/zksnarks-zero-knowledge-proof-feb76bf49e1a （中文翻译https://www.daimajiaoliu.com/daima/4ed1d08d2900404）
-    - zk-STARK视频讲解 https://github.com/Whisker17/zkpThings/issues/13
+    - zk-SNARKs讲解 https://mirror.xyz/0x3167e3c376FcC051D4460c1B923212B66dC6f450/sDmccxN7lzGz3fZ34Log1YpaBwloy0lY5wfr9qVH-Ww
+    - zk-SNARKs讲解 https://medium.com/@ppio/zksnarks-zero-knowledge-proof-feb76bf49e1a （中文翻译https://www.daimajiaoliu.com/daima/4ed1d08d2900404）
+    - zk-SNARKs视频讲解 https://github.com/Whisker17/zkpThings/issues/13
 
 
 - 相关网站
@@ -38,7 +38,7 @@
     1. 2013
     2. https://eprint.iacr.org/2013/279.pdf
 
-5. zk-SNARK协议Groth16算法
+5. zk-SNARKs协议Groth16算法
     - 2016年
     - Groth 提出了 Groth16算法，证明计算量被大幅度减少，从此，零知识证明开始逐步被真正的商用化落地。
     - https://eprint.iacr.org/2016/260.pdf
@@ -47,34 +47,34 @@
     - 2017年
     - https://web.stanford.edu/~buenz/pubs/bulletproofs.pdf
 
-7. zk-SNARK协议
+7. zk-STARKs协议
     - 2018年
     - https://eprint.iacr.org/2018/046
 
-8. 通用的zk-SNARK协议
+8. 通用的zk-SNARKs协议
     - 2019年
-    - 通用的是指可信参数只需要生成一次，Sonic算法是第一个通用的zk-SNARK算法。
+    - 通用的是指可信参数只需要生成一次，Sonic算法是第一个通用的zk-SNARKs算法。
     - https://eprint.iacr.org/2019/099
 
 ## SNARK协议算法
 1. Groth16
-    - Groth16 是目前最快、数据量最小的 zk-SNARK，被用于 Zcash 等。Groth16 的 CRS （the Common Reference String）不是通用的，其设置需要绑定到一个特定的电路。由于其速度和证明的小数据量，因此常常被新的 zk-SNARK拿来比较性能。
+    - Groth16 是目前最快、数据量最小的 zk-SNARKs，被用于 Zcash 等。Groth16 的 CRS （the Common Reference String）不是通用的，其设置需要绑定到一个特定的电路。由于其速度和证明的小数据量，因此常常被新的 zk-SNARKs拿来比较性能。
     - https://eprint.iacr.org/2016/260
 
 2. Sonic
-    - Sonic 是一种早期的通用 zk-SNARK协议，支持通用、可升级的参考字符串，论文发表于 2019 年 1 月。Sonic 的证明大小固定，但是验证成本高，理论上可以将多个证明分批验证以获得更好的性能。许多新的 zk-SNARK算法都是基于 Sonic。
+    - Sonic 是一种早期的通用 zk-SNARKs协议，支持通用、可升级的参考字符串，论文发表于 2019 年 1 月。Sonic 的证明大小固定，但是验证成本高，理论上可以将多个证明分批验证以获得更好的性能。许多新的 zk-SNARKs算法都是基于 Sonic。
     - https://eprint.iacr.org/2019/099
 
 3. Fractal
-    - Fractal 是一种允许递归的 zk-SNARK。通过对电路的预处理实现了透明设置。证明最大 250KB，这比其他构建生成的证明都要大的多。
+    - Fractal 是一种允许递归的 zk-SNARKs。通过对电路的预处理实现了透明设置。证明最大 250KB，这比其他构建生成的证明都要大的多。
     - https://eprint.iacr.org/2019/099
 
 4. Halo
-    - Halo 支持递归证据组织，无需可信设置，与其他新的 zk-SNARK构建不同，Halo 的验证时间是线性的。
+    - Halo 支持递归证据组织，无需可信设置，与其他新的 zk-SNARKs构建不同，Halo 的验证时间是线性的。
     - https://eprint.iacr.org/2019/1021
 
 5. SuperSonic
-    - Sonic 的改进版，是第一个在验证时间和证明数据量方面实用化的透明 zk-SNARK。
+    - Sonic 的改进版，是第一个在验证时间和证明数据量方面实用化的透明 zk-SNARKs。
     - https://eprint.iacr.org/2019/1229
 
 6. Marlin
@@ -94,13 +94,13 @@
     3. 证明NPC问题的多项式（并非唯一的方法）： 可以实现通用零知识证明。
     - 不同的零知识证明协议在这三点上的具体实现是不一样的，最主要的不同可能体现在第 3 点中，哪怕证明的是同一个 NPC 问题，也可以有截然不同的方法。因为不同的设计，零知识证明协议最常被提及的差异主要包括：不同的计算空间和计算时间。更小的空间和更短的时间是不断改进零知识证明协议的主要动力，也是比较不同零知识证明协议的主要指标。
 
-- zk-SNARK
+- zk-STARKs
     - 理论理解：假设 P 有 9 个要证明的数，a1，a2，……，a9，那么把它们编码成 b1，b2，……，b9，每个bi中都含有a1，a2，……，a9 的部分信息。在做验证的时候，验证者对 b1，b2，……，b9 做抽样检查，从少量 bi 中就能分析出编码有没有错误，这样就可以大概率探测到 a1，a2，……，a9 是否属实。
     1. 没有使用单向函数，因为验证者并不能获取所有的b1,b2,b3...b9。
     2. 没有使用同态映射，它不是抽象代数（或密码学）中的同态概念，而是基于线性编码纠错理论进行抽样验证。
     3. 没有使用证明NPC问题的多项式，而是基于概率检查做验证的。
-
-- zk-SNARK
+    
+- zk-SNARKs
     - zero-knowledge Succint Non-interactive ARguments of Knowledge 的缩写
     - Zero knowledge：零知识。证明者不泄漏欲证明的隐私信息。
     - succinct：简明的，证明的数据量比较小，方便验证。
@@ -117,10 +117,10 @@
     4. 验证时间
     5. 是否可以变为非交互式的：证明者只要提供一个字符串，可放在链上公开验证。
 
-## zkSNARKs工作流程
+## zkSNARKs工作原理
 - 分为4步
     1. 将欲证明的计算性问题，转换成电路 Circuit
-    2. 将电路 Circuit 转换成 R1CS
+    2. 将电路 Circuit 转换成 R1CS电路
     3. 将 R1CS 转变成 QAP 
     4. 基于 QAP 实现 zkSNARK 的算法
 
