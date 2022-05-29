@@ -1,3 +1,4 @@
+[TOC]
 ## 智能合约语言
 - Solidity和java、golang的类比
     - 一个contract看成Java的一个Class类。
@@ -23,6 +24,39 @@ import * as BaseERC20 from "./ERC20.sol"; // 导入此模块并命名为BaseERC2
 contract Hello {
     string public hello = "hello world!";
 }
+```
+
+## 注释
+```js
+// 这是一个单行注释，可以理解为给自己或者别人看的笔记
+
+/*
+  这是多行注释
+*/
+```
+
+- Solidity 社区所使用的一个标准是使用一种被称作 natspec 的格式，以 /// 开头，如下所示
+    - natspec文档 https://docs.soliditylang.org/en/v0.8.13/natspec-format.html
+```js
+/// @title 标题。 例如： 一个简单的基础运算合约
+/// @author 作者。
+/// @notice 解释合约的主要功能。 例如： 提供乘法计算
+contract Math {
+  /// @notice 解释方法的主要功能。 例如： 两个非负数数相乘
+  /// @param 输入参数。 例如： x 第一个 uint
+  /// @param 输入参数。 例如： y  第二个 uint
+  /// @return 返回值。 例如： 返回 uint类型的值
+  /// @dev 向开发者解释更多的细节。 例如： 现在这个方法不检查溢出
+  function multiply(uint x, uint y) returns (uint z) {
+    // 这只是个普通的注释，不会被 natspec 解释
+    z = x * y;
+  }
+}
+```
+
+```bash
+# 根据natspec格式生成文档
+solc --userdoc --devdoc *.sol
 ```
 
 ## 内置API
@@ -102,7 +136,7 @@ function test() public {revert Unautorized(msg.sender);}
             - 不可以使用pop、push等方法，因为这些方法会更改数组的长度。
 
     2. 结构体 struct 
-    3. 映射 map
+    3. 映射 mapping
     4. 字符串 string
 
 - 引用类型变量之间的相互赋值

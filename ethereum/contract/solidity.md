@@ -26,6 +26,7 @@
     - remix在线编译器 https://remix.ethereum.org/
     - remix桌面版 https://github.com/ethereum/remix-desktop
     - remix网页版 https://github.com/ethereum/remix-project
+    - 所有的编译器版本 https://github.com/ethereum/solc-bin
 
 - 开源区块链游览器
     - https://github.com/blockscout/blockscout 2012年12月继续更新中，功能齐全版
@@ -55,25 +56,6 @@
     - https://infura.io/
 
 ## 编译部署智能合约
-### Remix 游览器IDE
-```bash
-# 方式一 通过npm进行安装
-npm install remix-ide -g
-npm install -g remixd
-remix-ide
-
-# 方式二 通过源码安装 https://github.com/ethereum/remix-project
-# (未试过)找出代码里编译器的链接，更改为本地的链接 grep -R  'solc-bin.ethereum.org' ./
-# (失败)更改IP端口 vim ./apps/remix-ide/bin/remix-ide
-# 编译运行
-npm run build:production
-npm run serve:production
-
-
-# 下载solidity所有版本的编译器进一个目录里
-# https://github.com/ethereum/solc-bin
-```
-
 
 ### 安装编译部署工具
 - solidity编译器
@@ -170,3 +152,32 @@ npx hardhat # 生成配置文件
 npx hardhat compile
 npx hardhat test
 ```
+
+## 开发工具
+### vsCode
+- 安装solidity插件
+- vscode-solidity插件编译器位置寻找顺序
+    1. 本地node_modules (需要更改配置Solidity: Default Compiler， 和在项目下执行指令 npm incall solc）
+    2. 本地文件寻找 solidity.compileUsingLocalVersion
+    3. 远程寻找 solidity.compileUsingRemoteVersion
+
+### Remix
+
+
+### Remix
+- 安装
+    ```bash
+    # 方式一 通过npm进行安装
+    npm install remix-ide -g
+    npm install -g remixd
+    remix-ide
+
+    # 方式二 通过源码安装 https://github.com/ethereum/remix-project
+    # (未试过)找出代码里编译器的链接，更改为本地的链接 grep -R  'solc-bin.ethereum.org' ./
+    # (失败)更改IP端口 vim ./apps/remix-ide/bin/remix-ide
+    # 编译运行
+    npm run build:production
+    npm run serve:production
+    ```
+
+- 当使用本地的编译器时，需要赋予 sol*.js 文件执行权限。
