@@ -6,13 +6,14 @@
 - 零知识证明和区块链的关系?
     - 在区块链网络中，可以把每笔交易的转账双方地址、转账金额等信息隐藏起来，同时又能让矿工证明交易是合法的，这就是零知识证明在区块链中的应用。
  
-## ZK相关链接
+## ZKP相关链接
 - 相关文章
     - 零知识证明是什么 https://www.youtube.com/watch?v=FuKEpOhiVPg
     - zk-SNARKs讲解 https://mirror.xyz/0x3167e3c376FcC051D4460c1B923212B66dC6f450/sDmccxN7lzGz3fZ34Log1YpaBwloy0lY5wfr9qVH-Ww
     - zk-SNARKs讲解 https://medium.com/@ppio/zksnarks-zero-knowledge-proof-feb76bf49e1a （中文翻译https://www.daimajiaoliu.com/daima/4ed1d08d2900404）
     - zk-SNARKs视频讲解 https://github.com/Whisker17/zkpThings/issues/13
-
+    - V神对zk-SNARK的讲解 https://medium.com/@VitalikButerin/quadratic-arithmetic-programs-from-zero-to-hero-f6d558cea649
+    - zCash对zk-SNARK的讲解 https://z.cash/technology/zksnarks/
 
 - 相关网站
     - Zero-Knowledge专题网站 https://zeroknowledge.fm/about/
@@ -89,8 +90,7 @@
 ## ZKP协议讲解
 - 实现零知识证明协议的一种方式
     1. 单向函数： 将A加密为B，验证者不能从B反推回A。实现隐藏信息的功能。
-    2. 同态映射： f(a+b) = f(a) + f(b) 。实现证明我知道被隐藏的信息的功能。
-        - 通俗理解：在条件X下，一个形状A被映射为影子B，把形状切割为n份物体；证明者能将这n份物体组装，在条件X下，映射为影子C。验证者比较B是否等于C。
+    2. 同态映射： f(a+b) = f(a) + f(b) 。实现证明我知道被隐藏的信息的功能。通俗理解为在条件X下，一个形状A被映射为影子B，把形状切割为n份物体；证明者能将这n份物体组装，在条件X下，映射为影子C。验证者比较B是否等于C。
     3. 证明NPC问题的多项式（并非唯一的方法）： 可以实现通用零知识证明。
     - 不同的零知识证明协议在这三点上的具体实现是不一样的，最主要的不同可能体现在第 3 点中，哪怕证明的是同一个 NPC 问题，也可以有截然不同的方法。因为不同的设计，零知识证明协议最常被提及的差异主要包括：不同的计算空间和计算时间。更小的空间和更短的时间是不断改进零知识证明协议的主要动力，也是比较不同零知识证明协议的主要指标。
 
@@ -107,6 +107,7 @@
     - Non-interactivity：非交互的，证明者只要提供一个字符串，可放在链上公开验证。
     - Arguments：证明过程是计算完好（computationally soundness）的，证明者无法在合理的时间内造出伪证（破解）。
     - of knowledge：对于一个证明者来说，在不知晓特定证明 (witness) 的前提下，构建一个有效的零知识证据是不可能的。
+    - 目前实现zkSNARK电路的框架有libsnark（C++），bellman (Rust)，ZoKrates（DSL），Circom（js）等等。
 
 - ZKP协议对比 ![](./zkp-protocol.png)
 
@@ -118,21 +119,38 @@
     5. 是否可以变为非交互式的：证明者只要提供一个字符串，可放在链上公开验证。
 
 ## zkSNARKs工作原理
-- 分为4步
-    1. 将欲证明的计算性问题，转换成电路 Circuit
-    2. 将电路 Circuit 转换成 R1CS电路
+
+- 工作原理分为4步
+    1. 将欲证明的计算性问题，转换成门电路 Circuit
+    2. 将门电路 Circuit 转换成 R1CS
     3. 将 R1CS 转变成 QAP 
     4. 基于 QAP 实现 zkSNARK 的算法
 
 
-- QAP问题可以在多项式时间内验证一个解是否正确，但在一个有限的时间内，使用有限的资源是很难在多项式时间内推出一个正确的解的。
 
-### 1. 将欲证明的计算性问题，转换成电路 Circuit
-- 首先，我们将计算性问题 “拍平(Flattening)”，使之变成一个个电路，例如 x3 + x + 5，我们可以将其拍平成 4 个电路
-1. sym1 = x * x
-2. y = sym1 * x
-3. sym2 = y + x
-4. out = sym2 + 5
-- 其中 sym1, sym2 以及 y，是整个计算过程中用的临时变量，而 out 则为计算过程的最终输出结果
+### 1. 将欲证明的计算性问题，转换成门电路 Circuit
+- 首先，我们将计算性问题 “拍平(Flattening)”，使之变成一个个门电路，例如 x3 + x + 5，我们可以将其拍平成 4 个门电路
+    1. sym1 = x * x
+    2. y = sym1 * x
+    3. sym2 = y + x
+    4. out = sym2 + 5
+- sym1、sym2、y 是整个计算过程中用的临时变量，而 out 则代表计算过程的最终输出结果。
+- 上面这4个表达式，称为4个约束条件。这四个约束条件，也可以被理解为4个门电路。
 
-### 2. 将电路转换成 R1CS 形式
+### 2. 将门电路转换成 R1CS 形式
+- R1CS 
+    - 是由三个向量(a, b, c)组成的序列。
+    - 向量 s 是 R1CS 的解。（解向量 s 就是 witness）。
+    - s 需要满足方程 s · a * s · b - s · c = 0。
+
+- '~one', 'x', '~out', 'sym_1', 'y', 'sym_2'
+
+### 3. 将 R1CS 转变成 QAP
+
+## R1CS
+- R1CS（Rank-1 constraint system）(一阶约束系统).
+- R1CS 是目前描述电路的一种语言。
+
+
+## 其它
+- FPGAs对zkp的加速 https://www.paradigm.xyz/2022/04/zk-hardware
