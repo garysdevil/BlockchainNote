@@ -1,10 +1,11 @@
-# IPFS
-- 下载 https://dist.ipfs.io/
-- https://www.jianshu.com/p/6d40c7330f72
-- 集成IPFS的第三方服务 https://app.pinata.cloud/ 
+- IPFS
 
+## 相关链接
+- 下载IPFS https://dist.ipfs.io/
+- 集成IPFS的第三方服务 https://app.pinata.cloud/ 
 - 第三方网关 https://gateway.pinata.cloud/ipfs/${cid}
 - 公共网关 https://ipfs.io/ipfs/${cid}
+  
 ## IPFS
 - IPFS 初始化
     ```bash
