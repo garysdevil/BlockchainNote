@@ -1,3 +1,5 @@
+[TOC]
+
 ## NFT交易平台
 1. opensea
     - 以太坊 公链
@@ -29,7 +31,7 @@
 - https://www.traitsniper.com/
 - https://opensea.io/rankings
 
-## 图片存储方式
+## NFT图片存储方式
 - 不存储
     -  CryptoPunks 只存储了一个图片的验证码
     - CryptoKitties 在元数据里存储猫咪的特征基因，前端获取元数据，并按照既定规则生成展示猫咪图片。
@@ -72,7 +74,7 @@
     - 查看元数据的具体信息 https://testnets-api.opensea.io/api/v1/asset/<contract_address>/<token_id>
     - 刷新缓存 https://testnets-api.opensea.io/api/v1/asset/<contract_address>/<token_id>/?force_update=true
 
-## 智能合约
+## NFT项目
 1. Loot
     - Github https://github.com/NFTLootBox/contracts
     - 部署位置 https://etherscan.io/address/0xff9c1b15b16263c61d017ee9f65c50e4ae0113d7
@@ -100,7 +102,7 @@
 6. LootCrate
     - https://stupendous-antique-90e.notion.site/Loot-Crate-as-an-ERC1155-ba9ae485f5784e498d85d488b54ec1e7
 
-## NFT拆分项目
+## NFT项目-碎片化
 1. ShardingDAO/SHD
     - NFT分解合成协议
     - https://github.com/ShardingDAOProject/ShardingDAOMining
@@ -121,12 +123,3 @@
 
 5. NFTX/NFTX
     -  将同等价值的 NFT 汇集成指数基金，vTOken
-
-
-
-
-## 学习资料
-3. cryptozombie 学习资料
-    - Github https://github.com/loomnetwork/cryptozombie-lessons
-    - 官网 https://cryptozombies.io/
-

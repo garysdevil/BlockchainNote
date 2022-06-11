@@ -1,5 +1,10 @@
 [TOC]
-## 智能合约语言
+
+## 一 智能合约语言
+- Solidity 是 Ethereum 的智能合约编程语言，其语法与 JavaScript 类似。
+
+- Solidity 是静态类型的，支持继承、库和用户自定义类型以及其他功能。可以用来创建投票、众筹、盲拍、多签名钱包等合同。
+
 - Solidity和java、golang的类比
     - 一个contract看成Java的一个Class类。
     - 一个contract的一个实例看成Java的一个对象。
@@ -8,7 +13,7 @@
 
 - Solidity、Vyper、Yul 、Yul+
 
-## 代码结构 Hello World
+## 二 Hello World
 ```js
 // SPDX-License-Identifier: GPL-3.0 //指定开源协议
 // SPDX-License-Identifier: MIT
@@ -26,7 +31,7 @@ contract Hello {
 }
 ```
 
-## 注释
+## 三 注释
 ```js
 // 这是一个单行注释，可以理解为给自己或者别人看的笔记
 
@@ -59,7 +64,7 @@ contract Math {
 solc --userdoc --devdoc *.sol
 ```
 
-## 内置API
+## 四 内置API
 ### 基本
 ```js
 blockhash(uint) returns (bytes32) // 返回给定区块号的哈希值，只支持最近256个区块，且不包含当前区块。
@@ -120,7 +125,7 @@ function test() public {revert Unautorized(msg.sender);}
 // 7. 捕捉错误 try/catch 
 ```
 
-## 数据/变量
+## 五 数据/变量
 ### 数据类型
 - 基本类型
     1. 布尔 bool
@@ -317,7 +322,7 @@ contract EnumTypeC {
 }
 ```
 
-## 控制符
+## 六 流程控制
 ```js
 // if条件
 if (true){
@@ -346,7 +351,7 @@ do {
 } while (表达式);
 
 ```
-## 函数
+## 七 函数
 - 注意
     - 只可以将以太币发送至拥有 payable 修饰符的函数，否则会抛出异常。
 
@@ -446,7 +451,7 @@ contract Ownable {
     - 这些函数的参数(参数类型或参数数量)必须不一样。
     - 仅仅是返回值不一样不被允许。
 
-## 合约
+## 七 合约
 ### 事件Event
 - 链下可以对事件进行持续的监听
 - 事件主要分为定义事件和触发事件两部分。
@@ -550,7 +555,7 @@ contract Derived3 is Base1{
     ```
 3. 接口
 
-## 合约间的调用
+## 八 合约间的调用
 - 合约间的调用
     - 方式一：知道被调用合约的代码。将被调用的合约通过类型引用进自己的代码里，直接调用方法。
     - 方式二：只知道被调用合约的地址、方法名、输入参数、输出参数。通过接口进行调用。
@@ -586,7 +591,7 @@ contract Derived3 is Base1{
 - 低级调用 代码示例 https://github.com/garysdevil/mysolidity/blob/main/mytruffle/contracts/CallContract3.sol
 
 
-## 设计模式
+## 九 设计模式
 1. 提款模式 Withdrawal
 2. 限制访问 restricted
 3. 合约的升级

@@ -1,25 +1,22 @@
-# 开源区块链游览器
+[TOC]
 
-- 参考 https://www.sohu.com/a/281104189_100078137
+## 开源区块链游览器
+1. https://github.com/blockscout/blockscout 可行。2012年12月继续更新中，功能齐全版。
+2. https://github.com/etherparty/explorer 可行。2017年停止更新，轻量版，nodev8.17.0运行成功 nodev16.9.1运行失败。
+3. https://github.com/metaspartan/explorer 不可行。2018年停止更新，轻量版，编译运行成功，没报错，但页面未查到任何内容。
+4. https://github.com/gobitfly/etherchain-light 不可行。2018年停止更新，轻量版，运行失败。
+5. https://github.com/ismaelbej/mini-eth-browser
+6. https://github.com/curvegrid/toy-block-explorer
+7. https://github.com/ethnamed/eth-explorer
+8. https://github.com/Magicking/Clixplorer
+9. https://github.com/ethereumproject/explorer
+10. http://ethscan.hubwiz.com/ 可行。轻量版，直接运行一个html文件即可。
 
-- 开源区块链游览器
-    - https://github.com/blockscout/blockscout 可行。2012年12月继续更新中，功能齐全版。
-    - https://github.com/etherparty/explorer 可行。2017年停止更新，轻量版，nodev8.17.0运行成功 nodev16.9.1运行失败。
-    - https://github.com/metaspartan/explorer 不可行。2018年停止更新，轻量版，编译运行成功，没报错，但页面未查到任何内容。
-    - https://github.com/gobitfly/etherchain-light 不可行。2018年停止更新，轻量版，运行失败。
-    - https://github.com/ismaelbej/mini-eth-browser
-    - https://github.com/curvegrid/toy-block-explorer
-    - https://github.com/ethnamed/eth-explorer
-    - https://github.com/Magicking/Clixplorer
-    - https://github.com/ethereumproject/explorer
-    - http://ethscan.hubwiz.com/ 可行。轻量版，直接运行一个html文件即可。
-
-### blockscout/blockscout
-- https://github.com/blockscout/blockscout
+## blockscout/blockscout
 - 由POA Network开源的一款以太坊区块链游览器，基于Erlang VM的Elixir语言开发。
 
 - 部署方式 https://hub.docker.com/repository/docker/garysdevil/blockscout/general
-#### 遇到的错误
+### 保存与解决办法
 1. yum install inotify-tools
     - https://github.com/inotify-tools/inotify-tools/wiki
     ```log
@@ -45,16 +42,15 @@
     State: %Indexer.Block.Realtime.Fetcher{block_fetcher: %Indexer.Block.Fetcher{broadcast: :realtime, callback_module: Indexer.Block.Realtime.Fetcher, json_rpc_named_arguments: [transport: EthereumJSONRPC.HTTP, transport_options: [http: EthereumJSONRPC.HTTP.HTTPoison, url: "http://localhost:8545", http_options: [recv_timeout: 60000, timeout: 60000, hackney: [pool: :ethereum_jsonrpc]]], variant: EthereumJSONRPC.Geth], receipts_batch_size: 250, receipts_concurrency: 10}, max_number_seen: nil, previous_number: nil, subscription: nil, timer: nil}
     ```
 
-### etherparty/explorer
-- https://github.com/etherparty/explorer
-
-```bash
-git clone https://github.com/etherparty/explorer 
-cd explorer 
-npm install -g bower -y 
-bower init
-bower install --allow-root
-bower install angular --save-dev  --allow-root
-npm start
-```
+## etherparty/explorer
+- 部署
+    ```bash
+    git clone https://github.com/etherparty/explorer 
+    cd explorer 
+    npm install -g bower -y 
+    bower init
+    bower install --allow-root
+    bower install angular --save-dev  --allow-root
+    npm start
+    ```
 

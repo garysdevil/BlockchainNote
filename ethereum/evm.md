@@ -1,9 +1,6 @@
 # EVM
 - 参考 https://ethereum.org/zh/developers/docs/
 
-
-预言机（Oracle）是将以太坊连接到链外、真实世界信息的数据源，以便您可以在智能合约中查询数据。
-
 ## 以太坊机制
 - 以太坊所状态存储结构采用MPT树。
 

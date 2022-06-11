@@ -1,3 +1,6 @@
+[TOC]
+
+## 日志错误
 - 参考 
     - https://medium.com/linum-labs/error-vm-exception-while-processing-transaction-revert-8cd856633793
 
@@ -15,7 +18,7 @@
     2. 可能是外部调用函数，函数返回数组
 
 3. err="authentication needed: password or unlock"
-    1. 可能是账户未解锁导致
+    1. 可能是钱包账户未解锁导致
 
 4. err="the method personal_unlockAccount does not exist/is not available"
     1. 节点启动时没有开启personal模块访问权限 --http.api eth,web3,personal,net,db

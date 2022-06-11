@@ -1,7 +1,6 @@
-- 参考 https://github.com/OpenZeppelin/openzeppelin-contracts
+[TOC]
 
-
-## 
+## 常用的自定义库
 1. 限制只有合约拥有者拥有访问权限。
 ```js
 pragma solidity ^0.8.0;

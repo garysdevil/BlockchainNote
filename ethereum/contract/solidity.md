@@ -1,9 +1,12 @@
 
-# Solidity
+[TOC]
+
+## 智能合约
 
 - 智能合约概念于1995年由Nick Szabo首次提出
 
 - ABI = Application Binary Interface
+
 ## 相关链接
 - Solidity
     - Solidity源码  https://github.com/ethereum/solidity
@@ -54,6 +57,14 @@
 
 - 提供区块链节点等服务
     - https://infura.io/
+
+- 学习资料
+  - cryptozombie 
+      - cryptozombie https://github.com/loomnetwork/cryptozombie-lessons
+      - 官网 https://cryptozombies.io/
+
+- 其它文章
+  - Gas优化 https://zhuanlan.zhihu.com/p/54662099
 
 ## 编译部署智能合约
 
