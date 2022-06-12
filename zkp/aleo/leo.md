@@ -1,3 +1,5 @@
+[TOC]
+
 ## 链接
 - 包管理中心 https://aleo.pm/
 - Leo文档 https://developer.aleo.org/developer/language/flying_tour
