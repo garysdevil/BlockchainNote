@@ -1,6 +1,4 @@
-
-## 密码学
-- 密码学中加法或乘法运算的含义不局限于我们熟悉的实数域上加法或乘法运算的含义。
+[TOC]
 
 ## 椭圆曲线
 - 参考
@@ -87,7 +85,11 @@
         - 如果一个密码学算法同时满足乘法同态和加法同态，我们就称其为全同态加密。
         - 英文称为FHE（Fully Homomorphic Encryption, FHE）。
 
-## 密码学的发展
+## 密码学
+### 术语
+1. 密码学中加法或乘法运算的含义不局限于我们熟悉的实数域上加法或乘法运算的含义。
+
+### 密码学的发展
 1. 古典密码学
     1. 维吉尼亚密码
 2. 近代密码学
@@ -99,3 +101,57 @@
     3. 1978年HE，同态加密。人物：Rivest、Adleman、Dertouzos。
     4. 1982年MPC，安全多方计算。人物：Yao。
     5. 1989年ZKP，零知识证明。人物：Goldwasser、Micali、Rackoff。
+
+
+### 哈希
+- 哈希（Hash）
+    - 定义：也称为散列、哈希。基本原理就是把任意长度的输入，通过Hash算法变成固定长度的输出。
+    - 特性：确定性、统一性、不可逆性
+    - 比特币里使用到的哈希函数， SHA256(内容)
+- 常见的哈希算法
+    1. MD5 被用于文件防篡改
+    2. SHA256 被用于比特币挖矿
+    3. Merkle root 被用于证明数据片段
+    4. SimHash 被用于文本去重
+
+### 数字签名
+- 签名 
+    - Sign(内容 + Private_Key) = Signature
+- 验证 
+    - Verify(内容 + Signature + Public_Key)
+
+- 在区块链网络中，进行交易时，私钥持有人需要进行一次签名。
+
+- 签名算法
+    1. ECDSA：最基础，不支持签名聚合，多签的时候必须依次验证。（使用案例：早期的Bitcoin公链）
+    2. Schnorr(Bitcoin Taproot)：支持聚合签名，但有一些不足，主要是signer要进行交互。（使用案例：Bitcoin公链）
+    3. BLS：支持聚合签名，解决signer交互问题。（使用案例：ETH2、Filecoin）
+
+
+## 数据结构-树
+- Trie树，又经常叫前缀树，字典树
+    - 性质
+        - 根节点不包含字符，除根节点外每个节点都只包含一个字符
+        - 从根节点到某一节点，路径上经过的字符连接起来，为该节点对应的字符串
+        - 每个节点的所有子节点包含的字符都不相同
+
+- Radix树，又经常叫基数树，压缩前缀树
+    - 它对Trie树进行了空间优化，只有一个子节点的中间节点将被压缩（即这个节点将包含多个字符）。
+
+- Patricia树，又经常叫Patricia trie，crit bit tree，压缩前缀树
+    - 它对Radix树进行了空间优化，对于Radix树的每个节点，如果该节点是唯一的儿子的话，就和父节点合并。
+
+- Merkle Tree
+    - 存储hash值的一棵树。Merkle树的叶子节点存储数据块，非叶节点是其对应子节点串联字符串的哈希值。
+
+- MPT（Merkle Patricia Tree），又经常叫梅克尔帕特里夏树
+    
+### 默克尔树
+- 默克尔树（Merkle tree，MT）是一种哈希二叉树，是存储数据的一种数据结构，1979年由Ralph Merkle发明。
+- 链下默克尔树的生成       https://github.com/miguelmota/merkletreejs
+- 链上默克尔树的验证/合约   https://github.com/miguelmota/merkletreejs-solidity
+- 链上默克尔树的验证/库     https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/utils/cryptography/MerkleProof.sol
+- 默克尔树在线工具          https://lab.miguelmota.com/merkletreejs/example/
+
+- keccak256
+    - https://www.npmjs.com/package/keccak256
