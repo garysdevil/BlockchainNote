@@ -19,3 +19,10 @@
 ```python
 出块时间(单位：秒) ≈ difficulty_当前 * 2^32 / 全网算力（单位：H/s）
 ```
+
+- coinbase transaction
+    - coinbase transaction 是矿工自己构建的，用于把出块奖励和手续费奖励给自己。
+    - 区块里的第一个交易就叫做 coinbase transaction。
+    - 每个交易都会包含一个 input 和一个 output 。
+    - coinbase transaction 的 input 就是 coinbase 。
+    - coinbase transaction 的 output 指向矿工的地址，总金额等于 coinbase 加上区块中全部交易的手续费。
