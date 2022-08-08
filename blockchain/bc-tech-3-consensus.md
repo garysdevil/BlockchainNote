@@ -51,18 +51,25 @@
 
 ## 拜占庭将军问题
 
-- 拜占庭将军问题是 Leslie Lamport （2013年的图灵讲得主）用来为描述分布式系统一致性问题（Distributed Consensus）时在[论文中](http://lamport.azurewebsites.net/pubs/byz.pdf) 抽象出来一个著名的例子。 
+- 拜占庭将军问题是 Leslie Lamport （2013年的图灵讲得主）在1982年用来为描述分布式系统一致性问题（Distributed Consensus）时在[论文中](http://lamport.azurewebsites.net/pubs/byz.pdf) 抽象出来一个著名的例子。 
 
 - 拜占庭容错 BFT (Byzantine Fault Tolerance) 
     - 是这解决拜占庭将军问题的所有算法的一个总称。
 
-- 实用拜占庭容错 PBFT（Practical Byzantine Fault Tolerance）
-    1. 算法要求总节点数N>3F+1（其中F代表作恶节点）
-    2. 系统的失效节点数量不得超过全网节点的1/3
-
 - 联邦拜占庭协议（FBA，Federated Byzantine Agreement）
 
 - 授权拜占庭容错算法（dBFT，Delegated Byzantine Fault Tolerance）
+
+### 实用拜占庭容错算法
+- 名称： 实用拜占庭容错算法 PBFT（Practical Byzantine Fault Tolerance）
+- 来源： Miguel Castro和Barbara Liskov在1999年发表的论文中首次提出PBFT算法。
+- 功能： 是一种在信道可靠的情况下解决拜占庭将军问题的实用方法。
+- 算法要求
+    1. 总节点数N > 3F+1（其中F代表作恶节点）
+    2. 系统的失效节点数量不得超过全网节点的1/3
+
+## Quorum机制
+- 为了保持数据冗余与一致性，需要对应的投票机制进行维持，这就是Quorum机制。
 
 
 ## DAG（Directed Acyclic Graph）有向无环图
