@@ -1,13 +1,17 @@
+- leo
+
 [TOC]
 
 ## 链接
-
-- Leo官网 https://leo-lang.org/
-- Leo文档 https://developer.aleo.org/developer/language/flying_tour
-- 包管理中心 https://aleo.pm/
+1. Leo官网 https://leo-lang.org/
+2. Leo文档 https://developer.aleo.org/developer/language/flying_tour
+3. 包管理中心 https://aleo.pm/
+4. ZK交易SDK https://github.com/AleoHQ/aleo
+5. 在线Aleo工具 https://aleohq.github.io/aleo/
 
 - 相关文章
-  - https://www.aleo.org/post/leo-programming-language
+    - https://www.aleo.org/post/leo-programming-language
+    - 开始教程 https://www.entropy1729.com/aleo-development-starter-pack/
 
 
 ## 概览
