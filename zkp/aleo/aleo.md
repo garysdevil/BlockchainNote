@@ -2,6 +2,12 @@
 
 [TOC]
 
+## 相关链接
+1. SDK https://github.com/garysdevil/myaleo
+1. 开始教程 https://www.entropy1729.com/aleo-development-starter-pack/
+2. 在线Aleo工具 https://aleohq.github.io/aleo/
+3. ZK交易SDK https://github.com/AleoHQ/aleo
+
 ## 代码示例
 ```rs
 // The 'myaleo.aleo' program.

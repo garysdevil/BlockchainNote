@@ -6,13 +6,9 @@
 1. Leo官网 https://leo-lang.org/
 2. Leo文档 https://developer.aleo.org/developer/language/flying_tour
 3. 包管理中心 https://aleo.pm/
-4. ZK交易SDK https://github.com/AleoHQ/aleo
-5. 在线Aleo工具 https://aleohq.github.io/aleo/
 
 - 相关文章
     - https://www.aleo.org/post/leo-programming-language
-    - 开始教程 https://www.entropy1729.com/aleo-development-starter-pack/
-
 
 ## 概览
 - Leo是Aleo网络的零知识编程语言，不同于传统计算机语言，Leo编写的程序会被编译成零知识证明的电路。
