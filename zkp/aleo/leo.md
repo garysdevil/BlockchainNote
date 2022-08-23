@@ -10,6 +10,9 @@
 - 相关文章
     - https://www.aleo.org/post/leo-programming-language
 
+- leo编程实例
+    1.  Bulls and Cows game  https://github.com/mlsmith/aleo-numbers
+
 ## 概览
 - Leo是Aleo网络的零知识编程语言，不同于传统计算机语言，Leo编写的程序会被编译成零知识证明的电路。
 - RFC 是Leo编程语言的提案。

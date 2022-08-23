@@ -4,9 +4,13 @@
 
 ## 相关链接
 1. SDK https://github.com/garysdevil/myaleo
-1. 开始教程 https://www.entropy1729.com/aleo-development-starter-pack/
-2. 在线Aleo工具 https://aleohq.github.io/aleo/
-3. ZK交易SDK https://github.com/AleoHQ/aleo
+2. entropy1729团队官网 https://www.entropy1729.com/
+3. 在线Aleo工具 https://aleohq.github.io/aleo/
+4. ZK交易SDK https://github.com/AleoHQ/aleo
+5. ARC
+   1. ARC20 https://github.com/Entropy1729/ARC20_leo
+6. 文章
+   1. https://www.entropy1729.com/aleo-development-starter-pack/
 
 ## 代码示例
 ```rs
