@@ -4,7 +4,7 @@
 
 ## 链接
 1. Leo官网 https://leo-lang.org/
-2. Leo文档 https://developer.aleo.org/developer/language/flying_tour
+2. leo 文档 https://developer.aleo.org/leo/additional_material/tooling/
 3. 包管理中心 https://aleo.pm/
 
 - 相关文章

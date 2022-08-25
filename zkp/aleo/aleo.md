@@ -3,14 +3,22 @@
 [TOC]
 
 ## 相关链接
-1. SDK https://github.com/garysdevil/myaleo
-2. entropy1729团队官网 https://www.entropy1729.com/
-3. 在线Aleo工具 https://aleohq.github.io/aleo/
-4. ZK交易SDK https://github.com/AleoHQ/aleo
+1. entropy1729团队官网 https://www.entropy1729.com/
+2. 在线Aleo工具 https://aleohq.github.io/aleo/
+3. ZK交易SDK https://github.com/AleoHQ/aleo
+4. ZK交易SDK教程 https://developer.aleo.org/aleo/tooling/
 5. ARC
    1. ARC20 https://github.com/Entropy1729/ARC20_leo
 6. 文章
    1. https://www.entropy1729.com/aleo-development-starter-pack/
+
+## Build
+
+- build 生成的文件
+    1. .avm - 虚拟机运行的字节码
+    2. .prover - 函数的证明者
+    3. .verifier - 函数的验证者
+
 
 ## 代码示例
 ```rs
