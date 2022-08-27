@@ -124,6 +124,24 @@
     - https://eprint.iacr.org/2019/953
     - 代表项目 zkSync
 
+## 新zkSNARK协议算法
+1. Poseidon Hash 波塞冬
+    - 论文 https://eprint.iacr.org/2019/458.pdf
+
+2. Plookup
+    - 不需要可信设置
+    - Plonkup的发展
+        1. Halo，采用的Sonic算法里提到的polynomial IOP方案，在此方案的基础上实现了recursive proof composition without a trusted setup。
+        2. Halo2 https://zcash.github.io/halo2/design/proving-system/lookup.html
+        3. Plonkup由Gabizon发表于2020年，利用lookup查找表提升减少计算，可以提升证明者效率。Plonkup可以实现递归证明而无需椭圆曲线对（如Halo等需要椭圆曲线对）
+
+
+## 多项式承诺协议
+1. bulletproof
+2. KZG
+3. FRI
+
+
 
 ## 其它
 - FPGAs对zkp的加速 https://www.paradigm.xyz/2022/04/zk-hardware
