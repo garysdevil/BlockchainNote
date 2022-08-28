@@ -1,7 +1,7 @@
 - aleo sdk
 
 [TOC]
-
+# aleo
 ## 相关链接
 1. entropy1729团队官网 https://www.entropy1729.com/
 2. 在线Aleo工具 https://aleohq.github.io/aleo/
@@ -12,24 +12,99 @@
 6. 文章
    1. https://www.entropy1729.com/aleo-development-starter-pack/
 
-## Build
+## 安装
+```bash
+# 下载源码
+git clone https://github.com/AleoHQ/aleo.git
 
-- build 生成的文件
-    1. .avm - 虚拟机运行的字节码
-    2. .prover - 函数的证明者
-    3. .verifier - 函数的验证者
+# 进入源码目录
+cd aleo
+
+# 安装aleo程序
+cargo install --path .
+```
+
+## 指令
+```bash
+# 创建一个包
+aleo new package名字
+
+# 编译和验证程序
+aleo build
+
+# 通过线下模式编译程序
+aleo build --offline
+
+# 编译并且指定一个终端运行程序
+# aleo build --endpoint {$ENDPOINT}
+
+# 运行程序
+aleo run {$FUNCTION} {$INPUTS}
+
+# 运行一个开发节点，并且部署程序
+aleo node start
+# 运行一个开发节点
+aleo node start --nodeploy
+
+# 清除build结果
+aleo clean
+```
+
+## build 生成的文件
+1. .avm - 虚拟机运行的字节码
+2. .prover - 每一个函数都会生成一个证明者
+3. .verifier - 每一个函数都会生成一个验证者
 
 
-## 代码示例
+# 语法
+## aleo程序
+1. ProgramID
+2. Imports
+3. Functions
+4. Closures
+5. Interfaces
+6. Records
+7. Mappings
+8. Finalize
+
 ```rs
-// The 'myaleo.aleo' program.
-program myaleo.aleo; // 声明一个程序
+// 示例代码
 
-function hello: // 定义一个函数
+// import foo.aleo; // 导入 foo.aleo 程序进当前作用域内
+
+// The 'myaleo.aleo' program.
+program myaleo.aleo; // 声明一个 ProgramID，链上全局唯一。
+
+function hello: // 通过 function 关键字定义一个函数
     input r0 as u32.public; // 定义一个输入参数r0，类型为u32，可见性为public
     input r1 as u32.private;
     add r0 r1 into r2; // 调用sdk的函数add
     output r2 as u32.private; // 定义一个输出参数r2，类型为u32，可见性为private
+
+closure foo: // 通过 closure 关键字声明一个闭包，闭包函数不能直接执行必须被其它函数调用
+    input r0 as field;
+    input r1 as field;
+    add r0 r1 into r2;
+    output r2 as field;
+
+interface array3: // 通过 interface 关键字定义一个数据结构
+    a0 as u32;
+    a1 as u32;
+    a2 as u32;
+
+record token: // 通过 record 关键字定义一个record，必须包含 owner 和 gates 字段
+    // The token owner.
+    owner as address.private;
+    // The Aleo balance (in gates).
+    gates as u64.private;
+    // The token amount.
+    amount as u64.private;
+
+mapping account: // 通过 mapping 关键字定义一个KV健值对
+    // The token owner.
+    key owner as address.public;
+    // The token amount.
+    value amount as u64.public;
 ```
 
 ## Types
