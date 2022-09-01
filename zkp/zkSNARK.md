@@ -234,3 +234,24 @@ def equation(x):
 - 拉格朗日差值公式的作用是构造一个穿过指定点的多项式。
 
 - ![拉格朗日插值公式](./zkp-LagrangeInterpolation.png)
+
+## CRS
+- 参考 https://zkproof.org/2021/06/30/setup-ceremonies/
+### 什么是CRS
+- zkSNARKs 依赖于一个 common reference string (CRS) 作为proving和verifying的公共参数。
+- 这个CRS必须提前被一个可信任的第三方生成。 
+- 用来创建CRS的信息被称之为‘toxic waste’。
+- 攻击者可以使用‘toxic waste’来伪造欺诈证明，因此这些信息在CRS创建成功后需要被立即销毁。
+### 如何安全的生成CRS
+- 在zkSNARKs中，生成公共参数CRS的过程被称为“setup ceremony”。
+- 目前安全地生成CRS首选方案是 multi-party computation (MPC)。
+- 在通过MPC方案生成CRS后，各个参与方需要立即删除‘toxic waste’，否则了解这些输入的恶意方可能会利用 CRS 的底层数学结构来创建不可靠的证明。
+
+### BGM17 MMORPG协议
+- 在2017年， Bowe et al. 介绍了第二类 MPC 协议族 [BGM17](https://eprint.iacr.org/2017/1050.pdf)，解决第一类 MPC 的一些缺陷，专门用于 Groth16 等基于配对的 zk-SNARK。
+
+- 生成CRS分为两阶段
+    1. 该阶段称之为 Powers of Tau，生成公共参数。
+    2. 将 Powers of Tau phase 转为一个 NP-relation-specific CRS. 
+
+-  Filecoin, Ethereum (Semaphore), 和 Zcash Sapling 项目都使用了Powers of Tau来生成CRS。

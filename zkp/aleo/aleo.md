@@ -4,12 +4,13 @@
 # aleo
 ## 相关链接
 1. entropy1729团队官网 https://www.entropy1729.com/
-2. 在线Aleo工具 https://aleohq.github.io/aleo/
-3. ZK交易SDK https://github.com/AleoHQ/aleo
-4. ZK交易SDK教程 https://developer.aleo.org/aleo/tooling/
-5. ARC
+2. entropy1729团队GIthub https://github.com/Entropy1729
+3. 在线Aleo工具 https://aleohq.github.io/aleo/
+4. ZK交易SDK https://github.com/AleoHQ/aleo
+5. ZK交易SDK教程 https://developer.aleo.org/aleo/tooling/
+6. ARC20
    1. ARC20 https://github.com/Entropy1729/ARC20_leo
-6. 文章
+7. 文章
    1. https://www.entropy1729.com/aleo-development-starter-pack/
 
 ## 安装
@@ -157,4 +158,30 @@ function sum_one_to_array3:
 record token: // 定义一个 record
     owner as address.private // record的拥有者地址
     gates as u64.private // record需要花费的aleo积分
+```
+
+#
+```bash
+# 运行本地开发者节点
+aleo node start
+
+# 查看最新的块高
+curl http://localhost:4180/testnet3/latest/block/height
+
+# 通过块高高度查看账本
+curl http://localhost:4180/testnet3/block/{height}
+
+# 查看最后一个块高的哈希
+curl http://localhost:4180/testnet3/latest/block/hash
+
+# 通过ViewKey查看records
+# curl --location --request GET 'localhost:4180/testnet3/records/all' -H 'Content-Type: application/json' -d '"ViewKey"'
+curl --location --request GET 'localhost:4180/testnet3/records/all' -H 'Content-Type: application/json' -d '"AViewKey1hU73JxupzRh7uEnynsXgUQL3neSJcJZ2dMBkCPh97zoZ"' | jq
+curl --location --request GET 'localhost:4180/testnet3/records/all' -H 'Content-Type: application/json' -d '"AViewKey1eZqsm6igutMTUbnwWw8vPQG5ceJruyYQs8XwTmNQdMJf"' | jq
+
+# This endpoint retrieves only the spent records belonging to a given ViewKey
+curl --location --request GET 'localhost:4180/testnet3/records/spent' -H 'Content-Type: application/json' -d '"AViewKey1hU73JxupzRh7uEnynsXgUQL3neSJcJZ2dMBkCPh97zoZ"' | jq
+
+# This endpoint retrieves only the unspent records belonging to a given ViewKey.
+curl --location --request GET 'localhost:4180/testnet3/records/unspent' -H 'Content-Type: application/json' -d '"AViewKey1hU73JxupzRh7uEnynsXgUQL3neSJcJZ2dMBkCPh97zoZ"' | jq
 ```
