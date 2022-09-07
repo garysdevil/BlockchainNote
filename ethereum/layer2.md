@@ -45,7 +45,7 @@
         - Loopring
         - StarkEx
 
-## ZK Rollup 和 StarkEx
+## ZK Rollup 对比 StarkEx
 - 参考
     - https://newsletter.banklesshq.com/p/the-best-comparison-on-zkrollups?s=r
 
@@ -53,3 +53,17 @@
     - StarkEx has introduced a new system termed validium to offer a cheaper option to apps and users.
     - Validium’s mechanism is very similar to a zkRollup, the only difference being that data-availability in a zkRollup is on-chain, while Validium keeps it off-chain. This permits Validium to achieve considerably higher throughput
 
+## ZK Rollup
+- 主流的 ZK Rollup 如StarkWare等，主要包含两大核心角色
+    1. Sequencer 排序器
+        1. 负责执行 Layer2 网络内的交易，将这些交易事件排序，打包成Batch（交易批次）。
+        2. 定期将 Batch 发布到Layer1上的指定智能合约（App State Smart Contract）.
+        3. 耗时短，一台家用电脑，每秒可以生成4000笔交易。
+    2.  Prover（Aggregator） 证明者
+        1. 自动读取 Batch ，为其生成一个 ZK Proof，发布到Layer1上的指定智能合约进行验证（Varifier Smart Contract）。
+        2. 耗时长，一台家用电脑，生成一个 Proof 需要1.5～2s。
+
+## 其它
+1. Scroll提出了名为PipeZK的ZK加速解决方案，该方案可以在普通消费级硬件上将ZK Proof的生成过程提高接近200倍。如果未来再结合FPGA和ASIC等专用硬件，加速效果或将进一步提升。
+
+2. Polygon的Hermez项目组提出了一个新的构想，Proof Of Efficiency（POE），主要思想为允许多个Prover无需许可的参与到ZK Proof生成过程，并让这些Prover节点展开竞争，最终的Proof奖励只会分配给第一个成功的节点。
