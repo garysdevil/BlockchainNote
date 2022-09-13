@@ -18,3 +18,13 @@
     2. 通过助记词生成512位的种子
     3. 通过种子生成主私钥、主公钥、子链码
     4. 生成公钥私钥
+
+## Metamask
+- 官网 https://token.im/
+- 开源 是 https://github.com/consenlabs 界面UI代码不开源
+
+- MetaMask Snaps
+    - 2022年4月15日，推出可安全扩展MetaMask功能的系统“MetaMask Snap”。
+    - https://github.com/MetaMask/SIPs
+    - 是一个允许任何人安全地扩展MetaMask功能的系统。
+    - 它于独立的环境中执行，可使用户自定义钱包体验。
