@@ -59,9 +59,14 @@
         1. 负责执行 Layer2 网络内的交易，将这些交易事件排序，打包成Batch（交易批次）。
         2. 定期将 Batch 发布到Layer1上的指定智能合约（App State Smart Contract）.
         3. 耗时短，一台家用电脑，每秒可以生成4000笔交易。
-    2.  Prover（Aggregator） 证明者
-        1. 自动读取 Batch ，为其生成一个 ZK Proof，发布到Layer1上的指定智能合约进行验证（Varifier Smart Contract）。
+    2. Prover（Aggregator） 证明者
+        1. 监听读取 Batch ，为其生成一个 ZK Proof，发布到Layer1上的指定智能合约进行验证（Varifier Smart Contract）。
         2. 耗时长，一台家用电脑，生成一个 Proof 需要1.5～2s。
+
+- 安全： 链下的每一次交易都需要提供零知识证明。
+    1. Sequencer 每次将很多个交易打包成一个 Batch ，存储进 App State Smart Contract 。
+    2. Prover 读取 Batch ，生成一个 ZK Proof ， 给予 Varifier Smart Contract 进行验证。
+    3. 验证通过，链下的交易执行成功。
 
 ## 其它
 1. Scroll提出了名为PipeZK的ZK加速解决方案，该方案可以在普通消费级硬件上将ZK Proof的生成过程提高接近200倍。如果未来再结合FPGA和ASIC等专用硬件，加速效果或将进一步提升。
