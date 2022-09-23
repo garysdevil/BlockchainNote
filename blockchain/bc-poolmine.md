@@ -33,14 +33,26 @@
 
 ## Stratum 协议
 - https://braiins.com/stratum-v1/docs#/
-- https://docs.google.com/document/d/17zHy1SUlhgtCMbypO8cHgpWH73V5iUQKk_0rWvMqSNs/edit?usp=sharing
-- stratum协议是目前最常用的矿机和矿池之间的TCP通讯协议。2012年被引入来解决比特币行业的挖矿问题。
+- stratum协议于2012年被引入来解决比特币行业的挖矿问题，是目前最常用的挖矿程序和矿池之间的TCP通讯协议。
+- 改进
+    1. vs getwork协议
+        - Stratum协议将 miner程序 轮训 pool程序 获取挖矿任务改为 pool程序 广播挖矿任务给 miner程序。
+    2. vs 其它协议
+        - 之前 miner程序 只能更改区块头的 nonce and ntime，Stratum协议引入 extranonce 字段，让 miner程序 也能创建区块头。
+    3. 使用json载体传递数据
+- 缺点： 不使用getblocktemplate协议的一个重要缺点是，stratum协议中矿工失去了构建自己 block templates 的能力（即选择哪些交易在他们开采的区块中）。
+
 - 流程
     1. 任务订阅
     2. 登入验证
     3. 任务分配
     4. 提交挖矿结果
     5. 难道调整
+
+- Coinbas e= Coinb1 + Extranonce1 + Extranonce2 + Coinb2
+    - Extranonce2 由矿工生成。
+    - 其它 矿池生成。
+
 ### 任务订阅
 1. miner程序 通过 mining.subscribe 方法连接 pool程序，用来订阅工作。
     ```json 
@@ -56,7 +68,7 @@
 2. pool程序 通过 mining.notify 方法返回订阅ID、ExtraNonce1和ExtraNonce2_size给 miner程序 。
     ```json
     // subscription_id 订阅ID： ae6812eb4cd7735a302a8a9dd95cf71f
-    // ExtraNonce1 用于coibase交易序列化： 08000002
+    // ExtraNonce1 用于构造coinbase交易： 08000002
     // Extranonce2_size miner程序生成ExtraNonce2时的期待长度： 4 字节
     {
         "id":1,
@@ -103,8 +115,8 @@
     ```json
     // job_id 任务ID： bf
     // prevhash 上一个区块哈希值： 4d16b6f85af6e2198f44ae2a6de67f78487ae5611b77c6c0440b921e00000000
-    // Coinb1 coinbase交易初始化部分： 010000000100000000000000000000000000000000000000000000000000000000000000 00ffffffff20020862062f503253482f04b8864e5008
-    // Coinb2 coinbase交易最后的部分： 072f736c7573682f000000000100f2052a010000001976a914d23fcdf86f7e756a64a7a9688ef9903327048ed988ac00000000
+    // Coinb1 coinbase交易初始化部分，包含区块高度： 010000000100000000000000000000000000000000000000000000000000000000000000 00ffffffff20020862062f503253482f04b8864e5008
+    // Coinb2 coinbase交易最后的部分，包含矿工的收益地址和收益额等信息： 072f736c7573682f000000000100f2052a010000001976a914d23fcdf86f7e756a64a7a9688ef9903327048ed988ac00000000
     // merkle_branch 部分交易ID哈希列表： ["c5bd77249e27c2d3a3602dd35c3364a7983900b64a34644d03b930bfdb19c0e5", "049b4e78e2d0b24f7c6a2856aa7b41811ed961ee52ae75527df9e80043fd2f12"]
     // version 区块版本号： 00000002
     // nBit 编码后的网络难度： 1c2ac4af
@@ -134,9 +146,9 @@
 1. miner程序 找到符合难度的结果时，通过 mining.submit 方法向 pool程序 提交share。
     ```json
     // 用户名：username_1
-    // 任务号：bf
-    // ExtraNonce2： 00000001
-    // 当前时间： 504e86ed
+    // job_id 任务号：bf
+    // ExtraNonce2 交易计数器，包含的交易数量，coinbase交易： 00000001
+    // nTime 当前时间： 504e86ed
     // nonce： b2957c02
     {"params":["username_1","bf","00000001","504e86ed","b2957c02"],"id":4,"method":"mining.submit"}
     ```
