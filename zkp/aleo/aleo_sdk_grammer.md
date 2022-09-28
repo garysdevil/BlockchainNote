@@ -28,14 +28,16 @@
     mkdir imports
     vim imports/myfun.aleo # 输入下面的 代码片段一
     vim main.aleo # 输入下面的 代码片段二
-    aleo run add_fun 2021u32 1u32 # 执行add_fun相加函数，传入2021和1两个数字
+
+    aleo build
+    # imports目录下的函数，默认不会被编译，只有当main.aleo文件使用到imports目录下的函数时，才会被编译。
+
     aleo account new # 创建一个账户
     
     # 函数的执行方式 aleo run main文件内的函数名 参数...
 
     # 运行mint_public函数，创建20个Token给地址为aleo14cxpdt6ga4v4aflnd0xkr26leatmhfws0h7pquw8jafg9hu2nsxqky55ua的账户
     aleo run  mint_public  aleo14cxpdt6ga4v4aflnd0xkr26leatmhfws0h7pquw8jafg9hu2nsxqky55ua 20u64 
-
     # 运行call_sub函数，传入两个类型为u32的参数，执行减法操作
     aleo run  call_sub  10u32 1u32
 
@@ -93,7 +95,7 @@
     program myaleo.aleo;
 
     // 定义一个函数，传入两个u32类型的参数执行减法操作 
-    // 运行方式 aleo run fun_sub 10u32 1u32
+    // 运行方式 aleo run call_sub 10u32 1u32
     function call_sub:
         input r0 as u32.public;
         input r1 as u32.private;

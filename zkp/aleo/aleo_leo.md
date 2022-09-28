@@ -4,15 +4,16 @@
 
 ## 链接
 1. Leo官网 https://leo-lang.org/
-2. leo 文档 https://developer.aleo.org/leo/additional_material/tooling/
+2. Leo文档 https://developer.aleo.org/leo/getting_started/overview
 3. 包管理中心 https://aleo.pm/
 
 - 相关文章
     - https://www.aleo.org/post/leo-programming-language
 
-- leo编程实例
+- leo编程案例
     1. ARC20 https://github.com/Entropy1729/ARC20_leo
     2. Bulls and Cows game  https://github.com/mlsmith/aleo-numbers
+
 ## 概览
 - Leo是Aleo网络的零知识编程语言，不同于传统计算机语言，Leo编写的程序会被编译成零知识证明的电路。
 - RFC 是Leo编程语言的提案。
@@ -46,7 +47,7 @@ cd ${project_name}
 leo run
 
 # 引入一个包
-leo add 
+leo add ${包名}
 
 # 登入
 leo login -u ${username} -p ${password}
