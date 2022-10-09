@@ -118,6 +118,16 @@
         // 数量作为Value
         value amount as u64.public;
 
+    // 创建指定数量的token给指定的账户地址
+    function mint_public:
+        // 输入token的接收者
+        input r0 as address.public;
+        // 输入创建token的数量
+        input r1 as u64.public;
+        // Mint the tokens publicly.
+        // 终局化到链上
+        finalize r0 r1;
+
     // 终局化mint_public函数的操作，增加account[address]的代币数量
     finalize mint_public:
         // Input the token receiver.
@@ -125,6 +135,7 @@
         // Input the token amount.
         input r1 as u64.public;
 
+        // 终局化操作里必须包含一个increment或decrement操作
         // 执行增加操作 `account[r0]` + `r1`.
         // 如果 `account[r0]` 不存在，则被自动创建
         // 如果 `account[r0] + r1` 益处, `mint_public` 函数被重置

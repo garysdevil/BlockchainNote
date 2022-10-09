@@ -13,6 +13,9 @@
 - leo编程案例
     1. ARC20 https://github.com/Entropy1729/ARC20_leo
     2. Bulls and Cows game  https://github.com/mlsmith/aleo-numbers
+    3. https://github.com/demox-labs/zk-battleship
+    4. https://github.com/demox-labs/aleo-nft
+    5. 
 
 ## 概览
 - Leo是Aleo网络的零知识编程语言，不同于传统计算机语言，Leo编写的程序会被编译成零知识证明的电路。

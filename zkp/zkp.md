@@ -21,6 +21,7 @@
 
 - 学习 
     - https://github.com/matter-labs/awesome-zero-knowledge-proofs
+    - https://a16zcrypto.com/zero-knowledge-canon/#/
 
 ## ZKP发展历史
 1. 起源
@@ -62,6 +63,8 @@
     - https://eprint.iacr.org/2019/099
 
 ## ZKP协议
+- 零知识证明目前有多种实现方式，每种方式在证明大小、证明者时间以及验证时间上都有自己的优缺点。
+
 - 实现零知识证明协议的一种方式
     1. 单向函数： 将A加密为B，验证者不能从B反推回A。实现隐藏信息的功能。
     2. 同态映射： f(a+b) = f(a) + f(b) 。实现证明我知道被隐藏的信息的功能。通俗理解为在条件X下，一个形状A被映射为影子B，把形状切割为n份物体；证明者能将这n份物体组装，在条件X下，映射为影子C。验证者比较B是否等于C。
@@ -117,6 +120,7 @@
 6. Marlin
     - Sonic 的改进版，证明时间缩短 10 倍，验证时间缩短 4 倍。universal trusted setup。
     - https://eprint.iacr.org/2019/1047
+    - https://github.com/arkworks-rs/marlin 基于Rust语言的学术实现
     - 代表项目 Aleo
 
 7. Plonk
@@ -142,6 +146,17 @@
 3. FRI
 
 
+## zk应用编程语言
+- Circom
+    - 是一种用于编写零知识证明的算术电路的语言，Circom简化了创建zk-snark电路的复杂度。Circom有个template关键字，template类似于java面向对象语言中的class，与class一样定义好的模板可以在不同的电路或其他的项目中重用。
 
 ## 其它
 - FPGAs对zkp的加速 https://www.paradigm.xyz/2022/04/zk-hardware
+
+
+- https://www.youtube.com/watch?v=55t-UANj7k4#/
+- Proof Systems
+    - zkSNARKs
+        - R1CS
+            1. Groh16
+            2. Marlin
