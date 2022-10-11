@@ -1,18 +1,8 @@
 
 [TOC]
 
-## 以太坊代币
-- 以太坊代币单位
-    - 1ETH = 1000Finney
-    - 1Finney = 1000Szabo
-    - 1Szabo = 1000Gwei
-    - 1Gwei = 1000Mwei
-    - 1Mwei = 1000Kwei
-    - 1Kwei = 1000Wei
-    - 一个ETH 等于一千 Finney，一百万 Szabo，十亿Gwei，万亿Mwei，千万亿 Kwei，百万万亿 Wei
-    - 1 ETH = 1000000000000000000 Wei = 1000000000 Gwei
-
-## 矿工费
+## Gas
+### 矿工费
 
 - 矿工费 =  交易消耗的Gas数量 * Gas的价格
 
@@ -33,7 +23,46 @@
     - 用户进行一次交易，想支付的费用，以太坊默认的Gas Price是1Gwei。
     - 是 Gwei 的数量，用户愿意花费于每个 Gas 单位的价钱。
 
-## Gas开销
+### 以太坊代币单位
+- 1ETH = 1000Finney
+- 1Finney = 1000Szabo
+- 1Szabo = 1000Gwei
+- 1Gwei = 1000Mwei
+- 1Mwei = 1000Kwei
+- 1Kwei = 1000Wei
+- 一个ETH 等于一千 Finney，一百万 Szabo，十亿Gwei，万亿Mwei，千万亿 Kwei，百万万亿 Wei
+- 1 ETH = 1000000000000000000 Wei = 1000000000 Gwei
+- 1 Gwei == 0.000000001 ETH
+
+## Gas查询网站
+### 查询Gas Price的网站 
+1. https://etherscan.io/ 
+   1. 时时gas价格
+3. https://ethgas.watch/  推荐
+   1. https://ethgas.watch/stats   https://www.useweb3.xyz/gas?source=ethgas.watch&referrer=ethgas.watch
+   2. 时时gas价格 
+   3. 历史趋势图 
+   4. 邮件通知gas费用
+4. https://ethereumprice.org/gas/
+   1. 时时gas价格 
+   2. 历史趋势图 
+5. https://ycharts.com/indicators/ethereum_average_gas_price
+   1. 历史趋势图
+6. https://blockchair.com/ethereum/charts/median-gas-price  
+   1. 历史趋势图
+
+### 查询Gas燃烧额度的网站
+1. https://ethburned.info/
+   1. 过去1小时燃烧额度
+   2. 历史总额度
+
+2. https://ultrasound.money/#burn
+   1. 过去一定时间内的燃烧额度
+   2. 过去一定时间内每分钟燃烧的额度
+
+# 深入Gas
+
+### Gas开销
 
 - storage
     - 存储由一个个存储槽组成，一个存储槽=32字节=256位。
@@ -56,7 +85,7 @@
 7. 插入一个map(状态变量)元素        消耗：两万多gas push一个uint[]变长数组(状态变量)元素   消耗：四万多gas
 
 
-## Gas优化
+### Gas优化
 - 参考 
   - https://www.bilibili.com/video/BV1Pi4y1U7Cu/?spm_id_from=pageDriver
 

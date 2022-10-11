@@ -118,7 +118,7 @@
 # --abi 生成abi文件
 # --optimize 进行优化编译
 # -o ./ 输出结果到当前文件夹内
-solc --bin --abi --optimize -o ./  代码文件 
+solc --bin --abi --optimize -o ./  代码文件
 ```
 
 ### 通过truffle编译和ganache-cli部署
