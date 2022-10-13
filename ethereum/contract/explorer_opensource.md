@@ -16,7 +16,8 @@
 - 由POA Network开源的一款以太坊区块链游览器，基于Erlang VM的Elixir语言开发。
 
 - 部署方式 https://hub.docker.com/repository/docker/garysdevil/blockscout/general
-### 保存与解决办法
+
+### 报错与解决办法
 1. yum install inotify-tools
     - https://github.com/inotify-tools/inotify-tools/wiki
     ```log

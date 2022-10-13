@@ -12,7 +12,8 @@
     - 零知识证明是什么 https://www.youtube.com/watch?v=FuKEpOhiVPg
     - zk-SNARKs讲解 https://mirror.xyz/0x3167e3c376FcC051D4460c1B923212B66dC6f450/sDmccxN7lzGz3fZ34Log1YpaBwloy0lY5wfr9qVH-Ww
     - zk-SNARKs讲解 https://medium.com/@ppio/zksnarks-zero-knowledge-proof-feb76bf49e1a （中文翻译https://www.daimajiaoliu.com/daima/4ed1d08d2900404）
-    - zk-SNARKs视频讲解 https://github.com/Whisker17/zkpThings/issues/13
+    - zk-SNARKs视频讲解1 https://github.com/Whisker17/zkpThings/issues/13
+    - zk-SNARKs视频讲解2 https://www.youtube.com/watch?v=55t-UANj7k4#/
     - V神对zk-SNARK的讲解 https://medium.com/@VitalikButerin/quadratic-arithmetic-programs-from-zero-to-hero-f6d558cea649
     - zCash对zk-SNARK的讲解 https://z.cash/technology/zksnarks/
 

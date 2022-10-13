@@ -31,13 +31,6 @@
     - remix网页版 https://github.com/ethereum/remix-project
     - 所有的编译器版本 https://github.com/ethereum/solc-bin
 
-- 开源区块链游览器
-    - https://github.com/blockscout/blockscout 2012年12月继续更新中，功能齐全版
-    - https://github.com/etherparty/explorer 2017年停止更新，轻量版，nodev8.17.0运行成功 nodev16.9.1运行失败
-    - https://github.com/EthVM/EthVM 只开源了前端代码
-    - https://github.com/metaspartan/explorer 2018年停止更新，轻量版，可能不兼容最新的以太坊接口，运行失败
-    - http://ethscan.hubwiz.com/
-
 - 区块链游览器 https://etherscan.io/
     - 以太坊网络拥堵情况 https://etherscan.io/chart/pendingtx
 
@@ -55,8 +48,9 @@
     - https://juejin.cn/post/6844903599407890445
     - https://ethfans.org/posts/flexible-upgradability-for-smart-contracts
 
-- 提供区块链节点等服务
+- 区块链节点服务商
     - https://infura.io/
+    - https://www.alchemy.com/
 
 - 学习资料
   - cryptozombie 
