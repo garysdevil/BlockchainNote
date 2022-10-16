@@ -14,15 +14,14 @@
 
 - Gas limit
     - 用户设置Gas Limit
-        - 用户愿意为执行某个操作或确认交易支付的最大Gas数量。交易过程中，如果实际消耗的Gas used > Gas Limit，这个交易就无法执行完成，就回滚到执行之前的状态，这个时候矿工会收取Gas Price*Gas Limit的费用。（Gas最小为21,000）
+        - 用户愿意为执行某个操作或确认交易支付的最大Gas数量。交易过程中，如果实际消耗的Gas used > Gas Limit，这个交易就无法执行完成，就回滚到执行之前的状态，这个时候矿工会收取Gas Price*Gas Limit的费用。（Gas最小为21000，最大为8000000）
     - 矿工设置的Gas Limit
         - 区块中有一个Gas上限，收纳的交易会出现不同的用户指定的Gas Limit。那么矿工就会根据区块限制的Gas Limit来选择，“合理”选择打包交易。
     - 21000 是以太坊交易中使用的最小燃料数量。
 
 - Gas Price
-    - 单位为 Gwei 的数量
-    - 用户进行一次交易，想支付的费用，以太坊默认的Gas Price是1Gwei。
-    - 是 Gwei 的数量，用户愿意花费于每个 Gas 单位的价钱。
+    - 用户愿意花费于每个 Gas 单位的价格
+    - 用户进行一次交易，想大概支付的gas价格，以太坊默认的Gas Price是1Gwei。
 
 ### 以太坊代币单位
 - 1ETH = 1000Finney
@@ -33,24 +32,27 @@
 - 1Kwei = 1000Wei
 - 一个ETH 等于一千 Finney，一百万 Szabo，十亿Gwei，万亿Mwei，千万亿 Kwei，百万万亿 Wei
 - 1 ETH = 1000000000000000000 Wei = 1000000000 Gwei
-- 1 Gwei == 0.000000001 ETH
+- 1 Gwei = 0.000000001 ETH
+- 1 Gwei = 1000000000 wei (10亿个wei)
 
 ## Gas查询网站
 ### 查询Gas Price的网站 
 1. https://etherscan.io/ 
    1. 时时gas价格
-3. https://ethgas.watch/  推荐
+2. https://ethgas.watch/  推荐
    1. https://ethgas.watch/stats   https://www.useweb3.xyz/gas?source=ethgas.watch&referrer=ethgas.watch
    2. 时时gas价格 
    3. 历史趋势图 
    4. 邮件通知gas费用
-4. https://ethereumprice.org/gas/
+3. https://ethereumprice.org/gas/
    1. 时时gas价格 
    2. 历史趋势图 
-5. https://ycharts.com/indicators/ethereum_average_gas_price
-   1. 历史趋势图
-6. https://blockchair.com/ethereum/charts/median-gas-price  
-   1. 历史趋势图
+4. https://mycointool.com/en/GasNow 推荐
+   1. 时时gas价格 
+   2. 历史趋势图 
+5. 历史趋势图
+   1. https://ycharts.com/indicators/ethereum_average_gas_price
+   2. https://blockchair.com/ethereum/charts/median-gas-price
 
 ### 查询Gas燃烧额度的网站
 1. https://ethburned.info/
@@ -61,7 +63,42 @@
    1. 过去一定时间内的燃烧额度
    2. 过去一定时间内每分钟燃烧的额度
 
+- POS
+    1. 一年释放大约 58.4 万枚 ETH 作为质押奖励。
+    2. 每天大约释放 1600 枚。
+
+
 # 深入Gas
+
+### Gas交易费用
+
+| Transaction                                | Gwei    |
+| :----------------------------------------- | :------ |
+| ETH Transfer                               | 21,000  |
+| ERC20 Approval                             | 45,000  |
+| ERC20 Token Transfer                       | 65,000  |
+| ERC721 NFT Transfer                        | 85,000  |
+| Uniswap V2 Swap                            | 150,000 |
+| Uniswap V3 Swap                            | 185,000 |
+| OpenSea Sale                               | 205,000 |
+| Uniswap V3 Liquidity                       | 215,000 |
+| L2 Deposits (Arbitrum, zkSync, Polygon,..) | 250,000 |
+| ENS Registration                           | 265,000 |
+
+
+```python
+# 计算某个时刻某种交易需要花费的以太坊代币或USDT
+tx_gas_price = 16
+tx_gas = 65000
+fee_gwei = tx_gas * tx_gas_price
+fee_eth = fee_gwei / 1000000000
+
+eth_price = 1300
+fee_usdt = fee_eth * 1300
+
+print(fee_eth, "ETH")
+print(fee_usdt, "USDT")
+```
 
 ### Gas开销
 

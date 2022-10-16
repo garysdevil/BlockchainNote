@@ -17,11 +17,13 @@
     - 以太坊标准合约/常用库的实现 https://github.com/OpenZeppelin/openzeppelin-contracts 
         - OpenZeppelin代码库包含了经过社区审查的ERC代币标准、安全协议以及很多的辅助工具库，这些代码可以帮助开发者专注业务逻辑的，而无需重新发明轮子。
 
-- web3.js
-    - web3.js官方文档 https://web3js.readthedocs.io/en/v1.5.2/
+- 调用智能合约的库
+    - web3.js官方文档 https://web3js.readthedocs.io/en/v1.8.0/web3.html
     - web3.js中文文档 https://web3.tryblockchain.org/   旧版本/仅参考
     - web3.js中文文档 http://cw.hubwiz.com/card/c/web3.js-1.0/  旧版本/仅参考
     - web3.js中文文档 https://learnblockchain.cn/docs/web3.js/index.html    旧版本/仅参考
+    - ethers.js官方文档 https://docs.ethers.io/v5/
+    - EthereumJS  https://github.com/ethereumjs/ethereumjs-monorepo
 
 - 开发工具
     - 开发框架truffle https://github.com/trufflesuite/truffle
