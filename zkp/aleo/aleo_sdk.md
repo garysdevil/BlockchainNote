@@ -8,8 +8,11 @@
 5. Aleo SDK基本概念 https://www.entropy1729.com/aleo-introduction
 6. Aleo SDK基本语法 https://www.entropy1729.com/aleo-development-starter-pack/
 
+- 编程案例
+    - https://github.com/zkprivacy/aleo-vote
+
 ## Aleo SDK 安装
-- 通过宝箱仓库安装
+- 通过Rust宝箱仓库安装
     ```bash
     # 官方代码在快速迭代中，更加推荐通过源码进行安装
     cargo install aleo

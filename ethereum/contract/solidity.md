@@ -18,12 +18,15 @@
         - OpenZeppelin代码库包含了经过社区审查的ERC代币标准、安全协议以及很多的辅助工具库，这些代码可以帮助开发者专注业务逻辑的，而无需重新发明轮子。
 
 - 调用智能合约的库
-    - web3.js官方文档 https://web3js.readthedocs.io/en/v1.8.0/web3.html
-    - web3.js中文文档 https://web3.tryblockchain.org/   旧版本/仅参考
-    - web3.js中文文档 http://cw.hubwiz.com/card/c/web3.js-1.0/  旧版本/仅参考
-    - web3.js中文文档 https://learnblockchain.cn/docs/web3.js/index.html    旧版本/仅参考
-    - ethers.js官方文档 https://docs.ethers.io/v5/
-    - EthereumJS  https://github.com/ethereumjs/ethereumjs-monorepo
+    - web3.js 
+        - Github  https://github.com/web3/web3.js
+        - 文档  https://web3js.readthedocs.io/en/v1.8.0/web3.html
+        - v4版本文档  https://docs.web3js.org/api
+    - ethers.js 
+        - Github  https://github.com/ethers-io/ethers.js/
+        - 文档  https://docs.ethers.io/v5/
+    - EthereumJS  
+        - Github  https://github.com/ethereumjs/ethereumjs-monorepo
 
 - 开发工具
     - 开发框架truffle https://github.com/trufflesuite/truffle
@@ -169,9 +172,6 @@ npx hardhat test
     3. 远程寻找 solidity.compileUsingRemoteVersion
 
 ### Remix
-
-
-### Remix
 - 安装
     ```bash
     # 方式一 通过npm进行安装
@@ -188,3 +188,27 @@ npx hardhat test
     ```
 
 - 当使用本地的编译器时，需要赋予 sol*.js 文件执行权限。
+
+## nodejs
+### ethers.js
+Providers，Signers，Contract Interaction，Utilities
+
+
+- API类型
+    1. Providers  匿名连接以太坊网络，查看状态，发送交易。
+    2. Signers  以太坊账户的抽象，对交易进行签名。
+        - 在Signer中比较常用的方法为Wallet，只有Wallet可以使用私钥对交易和信息进行签名。
+        - 示范
+            ```js
+            // new ethers.Wallet(privateKey[, provider])
+            const alice = new ethers.Wallet(privateKeyAlice, provider);
+            const bob = new ethers.Wallet(privateKeyBob, provider);
+
+            const txReceipt = await alice.sendTransaction({
+                to: bob.address,
+                value: ethers.utils.parseEther('1.0')
+            });
+            await txReceipt.wait();
+            ```
+    3. Contract Interaction 部署合约与生成合约实例
+    4. Utilities 相关工具
