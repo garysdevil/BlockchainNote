@@ -1,16 +1,26 @@
 
 [TOC]
 
-## Gas
-### 矿工费
-
-- 矿工费 =  交易消耗的Gas数量 * Gas的价格
+## 交易费用
 
 - Gas
     - 是以太坊上的一种操作复杂度成本衡量单位。
-    - 以太坊为所有的操作都规定了Gas的消耗数量；即每一笔交易，消耗的Gas数量都是固定的。
-    - 进行一次转账需要花费8000个Gas。
+    - 以太坊为所有的操作都规定了Gas的消耗数量；即每种类的交易，消耗的Gas数量都是固定的。
     - Gas等于诺干个以太坊代币，根据以太坊链上交易状况拥挤情况，动态变化。
+
+- EIP-1559
+    - https://notes.ethereum.org/@vbuterin/eip-1559-faq
+    - https://eips.ethereum.org/EIPS/eip-1559#specification
+    - https://timroughgarden.org/papers/eip1559.pdf
+    - 大大地减弱了矿工操纵交易费用的动机，维护了以太坊交易费用的稳定性。
+
+### EIP-1559升级前交易费用
+1. 交易费用 = GasPrice * GasUsed
+    - GasUsed（gas）：交易消耗的总 gas 数量。
+    - GasPrice（gwei）：即对单位 gas 的定价，1 gwei= 10^(-9) eth。
+2. 采用竞价机制，GasPrice 设置越高，交易处理速度越快。
+3. 交易由矿工处理，矿工费完全由矿工收取。
+
 
 - Gas limit
     - 用户设置Gas Limit
@@ -22,6 +32,24 @@
 - Gas Price
     - 用户愿意花费于每个 Gas 单位的价格
     - 用户进行一次交易，想大概支付的gas价格，以太坊默认的Gas Price是1Gwei。
+
+
+### EIP-1559升级后交易费用
+- 交易费用 = （baseFee + PriorityFee）* GasUsed
+
+-  baseFee  系统内部机制调整，完成交易的最低费用，将被完全销毁。
+-  PriorityFee  用户定义，表示给矿工的小费，延续了竞价设计。
+-  maxPriorityFee  用户定义，表示给矿工的小费的最高值。
+-  maxFee 用户定义，表示用户愿意对某笔交易可支付的最高交易费用。
+
+- baseFee 的初始价格为 ``INITIAL_BASE_FEE = 1Gwei``
+- 按照 baseFee 计算公式，相邻区块间的 baseFee 变化幅度在 ±12.5% 之间
+    - 区块gas目标值 = 12.5M gas
+    - 最大区块空间大小范围 12.5M gas ～ 25M gas
+    - 当前区块baseFee计算公式 ``baseFee = 区块gas目标值 *  (1 + 0.125 * ( 上一个区块gas实际值 - 区块gas目标值 ) / 区块gas目标值 )``
+    - 如果上一个区块空间的大小是gas是目标值的2倍，则当前区块 baseFee 将自动提升 12.5%。
+    - 如果上一个区块空间的大小是0，则当前区块 baseFee 将自动下降 12.5%。
+
 
 ### 以太坊代币单位
 - 1ETH = 1000Finney
@@ -68,7 +96,7 @@
     2. 每天大约释放 1600 枚。
 
 
-# 深入Gas
+## 深入Gas
 
 ### Gas交易费用
 
@@ -133,3 +161,4 @@ print(fee_usdt, "USDT")
 4. 在循环中使用++i，而不是i+=1,i++
 5. 数组长度缓存到内存
 6. 缓存多次使用的数组元素到内存
+
