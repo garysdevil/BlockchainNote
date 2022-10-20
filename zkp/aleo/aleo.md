@@ -11,3 +11,5 @@
 - Aleo谷歌插件钱包 还未开源
     - https://discord.com/channels/700454073459015690/700465638937722951/1029814875976892456
     - 适配器 https://github.com/demox-labs/aleo-wallet-adapter
+
+- 大使计划 https://www.aleo.org/post/aleo-ambassador-program-update
