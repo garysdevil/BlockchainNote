@@ -14,6 +14,18 @@
     - https://timroughgarden.org/papers/eip1559.pdf
     - 大大地减弱了矿工操纵交易费用的动机，维护了以太坊交易费用的稳定性。
 
+### 以太坊代币单位
+- 1ETH = 1000Finney
+- 1Finney = 1000Szabo
+- 1Szabo = 1000Gwei
+- 1Gwei = 1000Mwei
+- 1Mwei = 1000Kwei
+- 1Kwei = 1000Wei
+- 一个ETH 等于一千 Finney，一百万 Szabo，十亿Gwei，万亿Mwei，千万亿 Kwei，百万万亿 Wei
+- 1 ETH = 1000000000000000000 Wei = 1000000000 Gwei
+- 1 Gwei = 0.000000001 ETH
+- 1 Gwei = 1000000000 wei (10亿个wei)
+
 ### EIP-1559升级前交易费用
 1. 交易费用 = GasPrice * GasUsed
     - GasUsed（gas）：交易消耗的总 gas 数量。
@@ -33,7 +45,6 @@
     - 用户愿意花费于每个 Gas 单位的价格
     - 用户进行一次交易，想大概支付的gas价格，以太坊默认的Gas Price是1Gwei。
 
-
 ### EIP-1559升级后交易费用
 - 交易费用 = （baseFee + PriorityFee）* GasUsed
 
@@ -44,24 +55,25 @@
 
 - baseFee 的初始价格为 ``INITIAL_BASE_FEE = 1Gwei``
 - 按照 baseFee 计算公式，相邻区块间的 baseFee 变化幅度在 ±12.5% 之间
-    - 区块gas目标值 = 12.5M gas
+    - 区块gas目标值 = 12.5M gas = 12500000 gas
     - 最大区块空间大小范围 12.5M gas ～ 25M gas
     - 当前区块baseFee计算公式 ``baseFee = 区块gas目标值 *  (1 + 0.125 * ( 上一个区块gas实际值 - 区块gas目标值 ) / 区块gas目标值 )``
     - 如果上一个区块空间的大小是gas是目标值的2倍，则当前区块 baseFee 将自动提升 12.5%。
     - 如果上一个区块空间的大小是0，则当前区块 baseFee 将自动下降 12.5%。
 
+```python
+gas_target = 15000000 # 每个区块目标gas
+gas_max = 30000000 # 每个区块最大gas
+baseFee = 14
+burn_ether_target = gas_target * baseFee * 0.000000001
+burn_ether_max = gas_max * baseFee * 0.000000001
+print(burn_ether_target)
+print(burn_ether_max)
+```
 
-### 以太坊代币单位
-- 1ETH = 1000Finney
-- 1Finney = 1000Szabo
-- 1Szabo = 1000Gwei
-- 1Gwei = 1000Mwei
-- 1Mwei = 1000Kwei
-- 1Kwei = 1000Wei
-- 一个ETH 等于一千 Finney，一百万 Szabo，十亿Gwei，万亿Mwei，千万亿 Kwei，百万万亿 Wei
-- 1 ETH = 1000000000000000000 Wei = 1000000000 Gwei
-- 1 Gwei = 0.000000001 ETH
-- 1 Gwei = 1000000000 wei (10亿个wei)
+### ETH2.0
+- 12s/block
+- 经济模型 https://docs.ethhub.io/ethereum-roadmap/ethereum-2.0/eth-2.0-economics/
 
 ## Gas查询网站
 ### 查询Gas Price的网站 

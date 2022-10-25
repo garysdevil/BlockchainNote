@@ -56,6 +56,7 @@
 - 区块链节点服务商
     - https://infura.io/
     - https://www.alchemy.com/
+    - Infura 免费层每天允许 100,000 个请求，而 Alchemy 允许 3 亿个请求。
 
 - 学习资料
   - cryptozombie 

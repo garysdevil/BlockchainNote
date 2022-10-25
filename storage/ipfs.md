@@ -1,11 +1,16 @@
 - IPFS
 
 ## 相关链接
+
+- Github https://github.com/ipfs/ipfs-desktop
 - 下载IPFS https://dist.ipfs.io/
 - 集成IPFS的第三方服务 https://app.pinata.cloud/ 
-- 第三方网关 https://gateway.pinata.cloud/ipfs/${cid}
-- 公共网关 https://ipfs.io/ipfs/${cid}
-  
+- 网关 
+    1. https://ipfs.io/ipfs/${cid}
+    2. https://gateway.pinata.cloud/ipfs/${cid}
+    3. https://ipfs-search.com/
+- IPFS游览器 https://explore.ipld.io/
+
 ## IPFS
 - IPFS 初始化
     ```bash
