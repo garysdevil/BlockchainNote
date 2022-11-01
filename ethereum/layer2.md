@@ -12,7 +12,7 @@
 ## 相关链接
 - 锁仓量排名 https://l2beat.com/
 
-## Layer2
+## Layer2发展
 - 状态通道(State Channel)
     - 状态通道是先将一定量的资金存入智能合约里；链外进行签名；需要结算时进行链上的广播。
     - 相关项目：Rainden、Celer。（闪电网络 利用的技术就是 状态通道）
@@ -33,8 +33,19 @@
     - 优点：有验证、交易数据完整性、数据压缩性。返回给Layer1的有交易结果和交易的信息，这些数据被压缩后返回给Layer1。
     - 缺点：提款到链上需要等待一定的周期。
     - 相关项目
-        - Optimism（OVM虚拟机）
-        - Arbitrum
+        1. Arbitrum
+        2. Optimism
+           1. 代币 OP
+           2. 与以太坊虚拟机（EVM）等效的Optimism虚拟机（OVM）.
+           3. 2021年12月，Optimism主网正式上线。
+        3. Metis Andromeda
+           1. 分叉自Optimism
+        4. Metis Andromeda
+           1. 分叉自Optimism
+        5. Boba Network
+           1. 分叉自Optimism，支持快速提款
+           2. 2021年9月，Boba主网公开上线。
+           3. Boba的特点是，借由一部分用户通过质押代币提供的流动性池，允许用户快速提款，而不必等待7天左右的反欺诈期结束。相应地，选择快速提款的用户需要向提供流动性的用户缴纳一定的费用
 
 - ZK Rollup
     - Zero—Knowledge Proof，零知识证明

@@ -11,6 +11,9 @@
     3. https://ipfs-search.com/
 - IPFS游览器 https://explore.ipld.io/
 
+- 资源
+    - 某个Ape类型NFT的图片地址 https://ipfs.io/ipfs/QmeSjSinHpPnmXmspMjwiXyN6zS4E9zccariGR3jxcaWtq/
+
 ## IPFS
 - IPFS 初始化
     ```bash

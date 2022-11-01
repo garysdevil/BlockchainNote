@@ -11,6 +11,7 @@
 6. Aleo链上的Leo程序 https://www.aleo.network/programs
 7. Leo编程语言的语法格式  https://github.com/AleoHQ/grammars
 8. Leo编程介绍  https://www.entropy1729.com/leo-development-starter-pack/
+9. Leo的ARC提案 https://github.com/AleoHQ/ARCs
 
 - Leo编程案例
     1. ARC20 https://github.com/Entropy1729/ARC20_leo
