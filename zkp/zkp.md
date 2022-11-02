@@ -97,6 +97,12 @@
     4. 验证时间
     5. 是否可以变为非交互式的：证明者只要提供一个字符串，可放在链上公开验证。
 
+- SNARK vs STARK
+    - 参考 https://newsletter.banklesshq.com/p/the-best-comparison-on-zkrollups?s=r
+    - SNARK（zkSync）：零知识简洁非交互式知识论证 | Succinct Non-interactive Argument of Knowledge。2012 年首次提出，不久后便开始采用实施，具备技术先发优势；生成的证明足够小，因此验证时间也短；需要受信任的初始设置，有可能产生“有毒垃圾”。是由Matter Labs打造的zkRollup二层网络。
+    - STARK（StarkNet）：零知识可扩展的透明知识论证 | Scalable Transparent Argument of Knowledge。由 StarkWare 团队于 2018 年推出的、相对较新的技术；生成的证明相对较大；算法运算公开透明，无需要受信任的初始设置，因此不存在“有毒垃圾”；可扩展。
+
+
 ## zkSNARK协议算法
 1. Groth16
     - Groth16 是目前最快、数据量最小的 zk-SNARKs，被用于 Zcash 等。Groth16 的 CRS （the Common Reference String）不是通用的，其设置需要绑定到一个特定的电路。由于其速度和证明的小数据量，因此常常被新的 zk-SNARKs拿来比较性能。
