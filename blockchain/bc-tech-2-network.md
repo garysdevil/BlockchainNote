@@ -32,9 +32,16 @@
         - 方式二：改变消息的终点，消息进入加密池后才广播给其它节点。（例如Nym公链网络）
         - 方式三：改变消息通道。
 
+## 加密协议
+### Noise protocol 
+1. 官网 https://noiseprotocol.org/
+2. Rust版本的实现 https://github.com/mcginty/snow
+3. 中文介绍 https://zhuanlan.zhihu.com/p/96944134
+
 ## 节点间的通信
 - 区块链网络中两个节点建立连接，发送握手信息
     1. 区块高度
     2. 创世hash
     3. 最新区块Hash
     4. 网络ID
+
