@@ -1,17 +1,6 @@
 
 [TOC]
 
-## ETH2.0
-- 经济模型 https://docs.ethhub.io/ethereum-roadmap/ethereum-2.0/eth-2.0-economics/
-
-- 爆块时间 12s/block
-
-- POS
-    1. 一年释放大约 58.4 万枚 ETH 作为质押奖励。
-    2. 每天大约释放 1600 枚ETH。
-    3. 没小时大约释放 66.66 枚ETH。
-    4. 每分钟大约释放 1.111 枚ETH。
-
 ## 交易费用
 
 - Gas
