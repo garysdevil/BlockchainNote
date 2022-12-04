@@ -213,7 +213,9 @@ docker run --name chainlink_postgres -p 127.0.0.1:5432:5432 -e POSTGRES_PASSWORD
 
 - 官方产品
     1. Market And Data Feeds https://data.chain.link/
-    2. VRF 随机数
+    2. VRF 随机数 https://vrf.chain.link/
+    3. Keeper 自动化执行合约函数 https://keepers.chain.link
+    4. 
 
 - chainlink节点中心化服务商 https://naas.link/
 
