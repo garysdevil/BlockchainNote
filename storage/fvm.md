@@ -5,6 +5,7 @@
 - 文档 https://github.com/filecoin-project/fvm-docs
 - 提案 https://github.com/filecoin-project/FIPs/blob/master/FIPS/fip-0032.md
 - 规格 https://spec.filecoin.io/#section-systems.filecoin_vm
+- FVM虚拟机 https://github.com/filecoin-project/ref-fvm
 - 主网正式推出FVM前的竞赛 https://spacewarp.fvm.dev/
 - 路线图 https://timeline.fvm.dev/
 
@@ -24,6 +25,7 @@
 - 使用 Wallaby 测试网
     1. 小狐狸添加Filecoin的Wallaby测试网 https://chainlist.org/chain/31415
     2. 小狐狸领取Filecoin的Wallaby测试网测试币 https://wallaby.network/#faucet
+    3. 部署EVM智能合约进Wallaby测试网。
 
 
 - 兼容FVM的测试网络的API服务
