@@ -1,4 +1,8 @@
 [TOC]
+- 参考
+    - 以太坊状态树 https://www.bcskill.com/index.php/archives/1253.html
+    - 以太坊状态树 https://blog.csdn.net/shn111/article/details/122558968
+    - 以太坊系统架构 https://www.graduate.nu.ac.th/wp-content/uploads/2019/05/4_Ethereum_Archiecture.pdf
 
 ## 区块链
 - 区块链技术是由分布式数据存储、点对点传输、共识机制、加密算法等计算机技术组成的新型应用模式。
@@ -74,6 +78,11 @@
     - 太坊系统就像一个状态机，它接受一个又一个的 Transaction 并不停改变自己的状态。
     - 只要全网保留了最新的状态，以太坊链就能运行。
 
+- 太坊系统为什么不像比特币系统一样直接使用哈希表存储数据，然后将哈希表组织成一棵Merkle tree用来证明交易的合法性？
+    - 比特币系统中没有账户概念，交易由区块管理，而区块包含上限为4000个交易左右，每次发布一个区块对应一棵新的Merkle tree，一旦发布是不会改变的，所以Merkle Tree不是无限增大的。
+    - 以太坊系统中，Merkle Tree用来组织账户信息，是要把所有的以太坊账户一起构建一个Merkle tree，这个数目比Bitcoin中的Merkle tree会大好几个数量级。
+    - 以太坊系统中，实际上发生变化的仅仅为很少一部分数据，我们每次重新构建Merkle Tree代价很大。
+
 - 以太坊账户的数据结构
     - nonce （通过这个关键字防止双花）
     - ether_balance
@@ -86,6 +95,24 @@
     - to
     - input
     - value
+
+- addr：账户地址，以太坊中用的账户地址是160位，也就是20个字节，一般表示成40个十六进制的数（0～f）。
+- state：外部账户和合约账户的状态，包括余额、交易次数、合约账户还包括代码、存储。
+
+
+- 以太坊中采用什么数据结构来管理所有账户地址对应的状态的呢？ 
+    - 采用的是MPT（Merkle Patricia Trie）树，即默克尔前缀树。
+    - MPT是由 Merkle Tree、Patricia Tree(Trie) 和一些改进发明的
+- Patricia Trie 是一种升级版的 Trie，不同之处在于：
+    - 非根节点可以存储字符串，而不是只能存储字符。
+    - 因此当一个非根节点仅有一个子节点，则将其子节点与该节点合并，也就是路径压缩了的 Trie。
+    - 节省了在内存空间的开销。
+    - 增加了存储空间的开销。
+- 以太坊账户余额这样的数据并不直接保存在以太坊区块链的区块中。区块中只保存三种树的根节点哈希值。
+    - 交易树 Transaction Trie
+    - 世界状态树 World State Trie， 世界状态树是地址和帐户状态之间的映射。账户存储树（account storage contents trie）在世界状态树中构造叶节点。
+    - 收据树 Receipt Trie
+
 
 ## 区块链系统的分叉问题
 1. 分叉的原因：

@@ -62,8 +62,8 @@
     - 如果上一个区块空间的大小是0，则当前区块 baseFee 将自动下降 12.5%。
 
 ```python
-gas_target = 15000000 # 每个区块目标gas
-gas_max = 30000000 # 每个区块最大gas
+gas_target = 12500000 # 每个区块目标gas
+gas_max = 25000000 # 每个区块最大gas
 baseFee = 14
 burn_ether_target = gas_target * baseFee * 0.000000001
 burn_ether_max = gas_max * baseFee * 0.000000001
