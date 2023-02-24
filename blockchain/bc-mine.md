@@ -31,12 +31,12 @@
 
 ## 算力的单位
 - 1H/s=每秒1次哈希碰撞
-- 1KH/s=1000H/s
-- 1MH/s=1000KH/s
-- 1GH/s=1000MH/s
-- 1TH/s=1000GH/s
-- 1PH/s=1000TH/s
-- 1EH/s=1000PH/s
+- 1KH/s=1024H/s
+- 1MH/s=1024KH/s
+- 1GH/s=1024MH/s
+- 1TH/s=1024GH/s
+- 1PH/s=1024TH/s
+- 1EH/s=1024PH/s
 
 ## 区块整体结构
 
