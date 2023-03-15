@@ -9,6 +9,8 @@
 - 主网正式推出FVM前的竞赛 https://spacewarp.fvm.dev/
 - 路线图 https://timeline.fvm.dev/
 - FVM生态 https://ecosystem.filecoin.io/
+- 测试网领水 https://hyperspace.yoga/#faucet
+- 测试网区块链游览起 https://explorer.glif.io/?network=hyperspace
 
 ## 测试环境
 | Name                                                         | Type                    | Reset frequency                            | Faucet                                                       |
