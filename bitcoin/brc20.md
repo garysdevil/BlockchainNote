@@ -1,16 +1,3 @@
-## 链接
-- 项目汇总、市场观测 https://brc-20.io/
-- BRC20钱包 https://unisat.io/download
-- Ordinals 原生钱包 https://ordinalswallet.com/wallet
-- 交易市场 https://unisat.io/market
-- 交易市场 https://ordswap.io/
-- 游览器 https://ordiscan.com/
-- 参考
-    - BRC20交易市场注意细节 https://baijiahao.baidu.com/s?id=1764142446910727433&wfr=spider&for=pc&searchword=%E5%A6%82%E4%BD%95%E8%B4%AD%E4%B9%B0brc20
-    - Ordinals协议 https://www.defidaonews.com/media/6810516
-    - BRC20和unisat讲解 https://twitter.com/CG_BRC20/status/1653803094545932288
-    - 讲解 https://twitter.com/BiteyeCN/status/1651821269019668480
-
 ## Ordinals协议
 - 比特币上面的Ordinals是一种可以在比特币的最小单位（即sats或satoshis）上刻入数据的协议。
 - Ordinals 让用户能够将图像、文本、视频和音频等数据写入sats(聪)，利用了比特币网络上隔离见证（SegWit）和 Taproot3 的技术特性，实现了在比特币链上直接铸造、转移和销毁 NFT 。
