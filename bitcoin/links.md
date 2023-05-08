@@ -22,6 +22,8 @@
 - 项目汇总、市场观测 https://brc-20.io/
 - 交易市场 https://unisat.io/market
 - 交易市场 https://ordswap.io/
+- 查看钱包持仓市值 https://ordspace.org/brc20
+
 
 ## 参考
 - Ordinals协议 https://www.defidaonews.com/media/6810516
