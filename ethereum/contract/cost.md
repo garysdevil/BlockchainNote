@@ -99,6 +99,8 @@ print(burn_ether_max)
    1. 过去一定时间内的燃烧额度
    2. 过去一定时间内每分钟燃烧的额度
 
+3. https://mct.xyz/gasnow
+
 ## 深入Gas
 
 ### Gas交易费用
