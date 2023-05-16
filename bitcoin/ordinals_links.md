@@ -14,10 +14,6 @@
     - 时时 https://mempool.space/
     - 趋势($单位) https://ycharts.com/indicators/bitcoin_average_transaction_fee
 
-- 市场
-    - https://ordswap.io/   NFT
-    - https://ordinals.market/  NFT
-
 ## 钱包
 - 各个钱包生成的地址可能会不同
 
@@ -43,7 +39,8 @@
 
 
 ## BRC20
-- 项目汇总、市场观测 https://brc-20.io/
+- brc20生态和行情 https://brc-20.io/
+- brc20生态和行情 https://chaineye.tools/ord
 - 交易市场 https://unisat.io/market
 - 交易市场 https://ordswap.io/
 - 查看钱包持仓市值 https://ordspace.org/brc20
