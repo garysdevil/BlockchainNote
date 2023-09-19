@@ -1,7 +1,7 @@
 [TOC]
 
 ## 以太坊标准
-1. ERC20 
+1. ERC20  Token Standard  https://eips.ethereum.org/EIPS/eip-1155
     - 同质化代币标准
     - token是一个uint256类型的数字
     - Vitalik Buterin于2015年6月提
@@ -12,17 +12,18 @@
 3. ERC223
     - 兼容ERC20，保护投资者以防意外的合约转账
 
-4. ERC721 
+4. ERC721  Non-Fungible Token Standard
     - 非同质化代币标准（Non-Fungible Tokens，简写为NFT），可以作为产权进行交易
 
-5. ERC1155
+5. ERC1155  Multi Token Standard
     - 介于同质化代币与非同质化代币之间可以相互切换的代币标准
 
 6. ERC4626‌
    1. 货币化资金库标准。
    2. ERC-4626 标准的实施，可以有效减少 DeFi 协议之间的摩擦，并增加可组合性 
 
-7. ERC6551
+7. ERC6551  Non-fungible Token Bound Accounts
+    1.  
 
 ## ERC165
 - 兼容 ERC-165的合约应该实现以下接口
@@ -174,6 +175,7 @@
     - 燃烧指定用户指定类型的指定数量的Token
 4. _burnBatch
     - 燃烧指定用户多个指定类型的指定数量的Token
-
 5. _setURL
     - 设置指定类型的Token的元数据地址，通过id区别不同的类型Token
+
+## ERC
