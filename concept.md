@@ -14,4 +14,4 @@
 
 ## 账户
 1. Externally Owned Accounts (EOA) 外部账户
-2. 
+2. Account Abstraction (AA)
