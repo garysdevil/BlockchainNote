@@ -4,11 +4,8 @@
     2. 官方博客 https://www.aleo.org/blog
     3. Twitter  https://twitter.com/AleoHQ
     4. Discord  https://discord.gg/QHmyeHCMQn
-
-- Aleo隐私智能合约平台
-    1. Github   https://github.com/AleoHQ
-    2. 去中心化操作系统snarkOS https://github.com/AleoHQ/snarkOS
-    3. 区块链游览器 https://www.aleo.network/
+    5. Github   https://github.com/AleoHQ
+    6. 区块链游览器 https://www.aleo.network/
 
 
 - Aleo隐私智能合约平台 SDK
