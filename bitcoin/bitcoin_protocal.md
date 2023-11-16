@@ -22,6 +22,7 @@
     - Realms
 
 
+## Runes
 - Casey 提出了一种专门用于发行 NFT 的铭文实现方式即 Rune。
     - Rune 的设计可能也受到了 ARC20 的影响，选择直接在 UTXO 的脚本中写入 Token 数据，这包含了 Token 的 ID、输出与数量。
     - Rune 的实现与 ARC20 非常相似，将 token 转账直接交给 BTC 主网处理。区别在于， Rune 在脚本数据中写入了 Token 数量，这让他比 ARC20 具备更高的精度。
