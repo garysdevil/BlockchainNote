@@ -1,7 +1,7 @@
 ## 比特币地址类型 四种
 - 参考 https://richpool.pro/blog/21/
 
-1. 旧地址（P2PKH） Legacy
+1. Legacy 旧地址（P2PKH） 
     1. 旧地址是以数字 1 开头的地址。
     2. 示例：15e15hWo6CShMgbAfo8c2Ykj4C6BLq6Not
     3. 旧地址只是公钥和私钥的散列。早在 2009 年比特币推出时，这是创建地址的唯一方法。今天，这在交易中使用最多的空间，因此交易时gas费很贵。
