@@ -44,26 +44,7 @@
 
 
 ## 代打平台
-- 27000$/BTC， 21 sat/vB 时转账费用 3266 sats ~$0.88
-
-- idclub.io 代打brc20价格
-    - 一张
-        - 铭文预留： 1 × 546 sats ~$0.15
-        - 网络费用： ~6825 sats ~$1.84
-        - 服务费用： ~1000 sats ~$0.27
-        - Total： ~8371 sats
-    - 十张
-        - 铭文预留： 10 × 546 sats ~$1.47
-        - 网络费用： ~46578 sats ~$12.57
-        - 服务费用： ~3000 sats ~$0.81
-        - Total： ~55038 sats
-
-- unisat.io 代打brc20价格
-    - 十张
-        - 铭文预留： 10×546 sats ~$1.48
-        - 网络费用： ~39585 sats ~$10.73
-        - 基本服务费： ~19990 sats ~$5.42
-        - 附加服务费： ~1976 sats ~$0.54
-        - 服务费折扣： -0.05*(19990+1976)
-        - Total： ~65912 sats ~$17.56 
-        - Total： ~65000 sats ~$17.56 （Any amount less than 1000 in the total sum is rounded down to zero.）
+- idclub.io
+- unisat.io
+- https://ordichef.xyz/inscribe
+- https://runealpha.xyz/

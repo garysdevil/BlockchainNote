@@ -73,7 +73,7 @@ print(burn_ether_max)
 
 ## Gas查询网站
 ### 查询Gas Price的网站 
-1. https://etherscan.io/ 
+1. https://cn.etherscan.com/gastracker
    1. 时时gas价格
 2. https://ethgas.watch/  推荐
    1. https://ethgas.watch/stats   https://www.useweb3.xyz/gas?source=ethgas.watch&referrer=ethgas.watch
