@@ -23,3 +23,24 @@
     1. 示例：bc1pmzfrwwndsqmk5yh69yjr5lfgfg4ev8c0tsc06e
     2. 未使用主根地址。今年 11 月，比特币网络将进行主根软分叉。这将为比特币地址启用许多新的智能合约功能，并提高花费此类交易的隐私性。
     3. 常规的主根交易比原生 segwit 略大，但比传统地址小。这是因为它们与公钥而不是公钥散列相关联。对于涉及多重签名脚本等复杂交易，主根地址节省了大量空间，成本更低。
+
+## 钱包的生成过程
+- 这套标准最初是由比特币的3个提案生成的
+    1. BIP-39 定义如何使用助记词生成seed
+        - https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki
+        - 
+    2. BIP-32 定义 HD Wallet（Hierarchical Deterministic Wallet）的规则
+        - https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki
+        - 如何从一个seed生成多层的私钥
+        - 没有私钥的情况下，私钥之间互相不能推导
+        
+    3. BIP-44 
+        - https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki
+        1. 定义HD Wallet中生成子私钥的规范
+        2. 不同链的生成子私钥规范约定 https://github.com/satoshilabs/slips/blob/master/slip-0044.md
+
+- 生成过程
+    1. 随机生成助记词
+    2. 通过助记词生成512位的种子
+    3. 通过种子生成主私钥、主公钥、子链码
+    4. 生成公钥私钥
