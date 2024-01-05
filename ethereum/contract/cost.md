@@ -90,6 +90,8 @@ print(burn_ether_max)
    1. https://ycharts.com/indicators/ethereum_average_gas_price
    2. https://blockchair.com/ethereum/charts/median-gas-price
 
+- Layer2手续费 https://l2fees.info/
+
 ### 查询Gas燃烧额度的网站
 1. https://ethburned.info/
    1. 过去1小时燃烧额度
