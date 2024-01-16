@@ -1,3 +1,18 @@
+## windows 编译环境
+
+```powershell
+# 安装 wls （Windows Subsystem for Linux）参考 https://learn.microsoft.com/en-us/windows/wsl/basic-commands#install
+# wsl --list --onlin
+# wsl --list 
+# wsl --status
+# 安装子系统 # 默认安装Ubuntu子系统
+wsl --install
+# -d 指定使用的子系统  -u 指定用户
+wsl -d Ubuntu -u garysdevil
+```
+
+## bitcoin-cli
+
 ```bash
 # 生成一个钱包
 bitcoin-cli createwallet $wallet_name
