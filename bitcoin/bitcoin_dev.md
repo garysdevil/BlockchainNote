@@ -1,4 +1,5 @@
-## windows 编译环境
+## bitcoin
+### windows 编译环境
 
 ```powershell
 # 安装 wls （Windows Subsystem for Linux）参考 https://learn.microsoft.com/en-us/windows/wsl/basic-commands#install
@@ -10,8 +11,47 @@ wsl --install
 # -d 指定使用的子系统  -u 指定用户
 wsl -d Ubuntu -u garysdevil
 ```
+### 编译
+```bash
+## 配置
+```bash
+./autogen.sh
+# No Wallet or GUI
+./configure --without-wallet --with-gui=no
 
-## bitcoin-cli
+# 编译
+make        # use "-j N" here for N parallel jobs
+# 运行测试程序
+make check  # Run tests if Python 3 is available
+```
+
+```bash
+# 编译到指定目录
+make install DESTDIR=/mnt/c/workspace/bitcoin
+make deploy
+```
+
+### bitcoin 编译报错
+```bash
+# Windows 环境编译报错 We could not detect the boost libraries (version 1.73.0 or higher)
+# 可能是因为在Windows Subsystem for Linux (WSL)中未安装或未正确配置Boost库的版本
+# 解决办法
+# 安装Boost
+sudo apt install libboost-all-dev
+# 查看已安装的Boost版本
+dpkg -l | grep libboost
+```
+
+## bitcoin-cli 环境
+### Linux
+```bash
+mkdir -p ~/.bitcoin
+echo "rpcconnect=${IP}" >> ~/.bitcoin/bitcoin.conf
+echo "rpcuser=${username}" >> ~/.bitcoin/bitcoin.conf
+echo "rpcpassword=${password}" >> ~/.bitcoin/bitcoin.conf
+```
+
+## bitcoin-cli 指令
 
 ```bash
 # 生成一个钱包
@@ -49,6 +89,7 @@ bitcoin-cli verifymessage "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX" "signature" "my m
 
 ```bash
 # 使用4个公钥创建一个1-of-4 P2SH多签地址
+
 required_signatures=1 # 设置所需的签名数量
 bitcoin-cli createmultisig $required_signatures  '[ "'$pubkey1'", "'$pubkey2'", "'$pubkey3'", "'$pubkey4'" ]'
 ```
