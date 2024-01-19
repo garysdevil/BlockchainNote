@@ -52,7 +52,7 @@ echo "rpcpassword=${password}" >> ~/.bitcoin/bitcoin.conf
 ```
 
 ## bitcoin-cli 指令
-
+### 基本指令
 ```bash
 # 生成一个钱包
 bitcoin-cli createwallet $wallet_name
@@ -63,19 +63,27 @@ bitcoin-cli getblockhash ${block_height}
 # 获取区块的详细信息
 bitcoin-cli getblock ${block_hash}
 
-# 获取原始交易数据（十六进制格式） 
-# true 获取详细的交易信息（JSON 格式）
+# 获取原始交易数据（十六进制格式） # true 获取详细的交易信息（JSON 格式）
 bitcoin-cli getrawtransaction ${tx} true
 
 # 验证一条签名信息是否来自于指定的签名地址
 bitcoin-cli verifymessage $address $signature $message
 
-# 获取有关钱包中的特定输出脚本描述符的信息
+# 使用4个公钥创建一个 1-of-4 P2SH多签地址
+required_signatures=1 # 设置所需的签名数量
+bitcoin-cli createmultisig $required_signatures  '[ "'$pubkey1'", "'$pubkey2'", "'$pubkey3'", "'$pubkey4'" ]'
+
+# 通过扩展公钥（Extended Public Key），获取钱包中的特定输出脚本描述符的信息
 bitcoin-cli getdescriptorinfo "wpkh(xpub6DJ2dNUysrn5Vt36jH2KLBT2i1auw1tTSSomg8PhqNiUtx8QX2SvC9nrHu81fT41fvDUnhMjEzQgXnQjKEu3oaqMSzhSrHMxyyoEAmUHQbY)"
 
+# 通过扩展公钥（Extended Public Key）生成3个派生地址
+# [d34db33f/84h/0h/0h]: 这是表示派生地址路径的一部分，指定了从根地址到目标地址的路径。d34db33f可能是一个硬件钱包或其他系统的标识符，84h表示目标地址的路径中使用的币种是Bitcoin（BTC），0h/0h表示BIP32路径的深度。
 bitcoin-cli deriveaddresses "wpkh([d34db33f/84h/0h/0h]xpub6DJ2dNUysrn5Vt36jH2KLBT2i1auw1tTSSomg8PhqNiUtx8QX2SvC9nrHu81fT41fvDUnhMjEzQgXnQjKEu3oaqMSzhSrHMxyyoEAmUHQbY/0/*)#cjjspncu" "[0,2]"
+
+
 ```
 
+### 用例
 ```bash
 # 签名与验证签名
 
@@ -87,9 +95,57 @@ bitcoin-cli signmessage "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX" "my message"
 bitcoin-cli verifymessage "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX" "signature" "my message"
 ```
 
-```bash
-# 使用4个公钥创建一个1-of-4 P2SH多签地址
 
-required_signatures=1 # 设置所需的签名数量
-bitcoin-cli createmultisig $required_signatures  '[ "'$pubkey1'", "'$pubkey2'", "'$pubkey3'", "'$pubkey4'" ]'
+```bash
+# 指定区块，输出未被开销的UTXO所在的钱包地址
+
+block_height=123321
+block_hash=$(bitcoin-cli getblockhash $block_height)
+block=$(bitcoin-cli getblock $block_hash)
+txids=$(echo "${block}" | jq -r '.tx[]')
+
+for txid in $(echo $block | jq -r ".tx[]"); do
+    tx_details=$(bitcoin-cli getrawtransaction $txid true)
+    vout_len=$(echo $tx_details | jq ".vout | length")
+    for ((index=0; index<$vout_len; index++)); do
+        utxo=$(bitcoin-cli gettxout $txid $index)
+        if [ "$utxo" != "" ]; then
+            echo $tx_details | jq ".vout[$index].scriptPubKey.address"
+            exit
+        fi
+    done
+done
 ```
+
+```bash
+# Which tx in block 257,343 spends the coinbase output of block 256,128?
+
+# get the coinbase output txid of block 256,128
+block_256128hash=$(bitcoin-cli getblockhash 256128)
+block_256128=$(bitcoin-cli getblock $block_256128hash)
+coinbase_txid=$(echo "${block_256128}" | jq -r ".tx[0]")
+
+# get the details of block 257,343 
+block_257343hash=$(bitcoin-cli getblockhash 257343)
+block_257343=$(bitcoin-cli getblock $block_257343hash)
+
+
+for txid in $(echo $block_257343 | jq -r ".tx[]"); do
+    tx_details=$(bitcoin-cli getrawtransaction "${txid}" true)
+    for vin_txid in $(echo $tx_details | jq -r ".vin[] | .txid"); do
+        if [ $vin_txid == $coinbase_txid ]; then
+            echo "Transaction $txid in block 257,343 spends the Coinbase output of block 256,128."
+            exit
+        fi
+    done
+done
+```
+
+## 术语
+- 描述符（descriptors）
+    - 是一种用于描述如何从密钥派生地址的格式。
+    - 描述符可以涵盖多种类型的地址，包括传统的支付到公钥哈希（P2PKH）地址、支付到脚本哈希（P2SH）地址，以及隔离见证（SegWit）地址。
+    - 基本形式 `wpkh(<xpub>/0/*)`
+    - wpkh 是一个函数，表示要生成一个支付到公钥哈希的隔离见证类型（witness public key hash，简称wpkh）的地址。
+        - sh（表示P2SH地址）、wsh（表示隔离见证脚本哈希地址）、multi（表示多签名地址）等。
+    - /0/*: 这部分指定了要派生的子地址的索引，/0表示索引为0，/*表示可以生成更多的子地址。
