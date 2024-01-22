@@ -46,16 +46,36 @@ dpkg -l | grep libboost
 ### Linux
 ```bash
 mkdir -p ~/.bitcoin
-echo "rpcconnect=${IP}" >> ~/.bitcoin/bitcoin.conf
-echo "rpcuser=${username}" >> ~/.bitcoin/bitcoin.conf
-echo "rpcpassword=${password}" >> ~/.bitcoin/bitcoin.conf
+cd ~/.bitcoin
+echo "rpcconnect=${IP}" >> bitcoin.conf
+echo "rpcuser=${username}" >> bitcoin.conf
+echo "rpcpassword=${password}" >> bitcoin.conf
 ```
+
+### Mac
+```bash
+# bitcoin/src/bitcoin-cli
+mv bitcoin-cli /usr/local/bin/
+mkdir -p "~/Library/Application Support/Bitcoin"
+cd "~/Library/Application Support/Bitcoin"
+echo "rpcconnect=${IP}" >> bitcoin.conf
+echo "rpcuser=${username}" >> bitcoin.conf
+echo "rpcpassword=${password}" >> bitcoin.conf
+```
+
 
 ## bitcoin-cli 指令
 ### 基本指令
 ```bash
 # 生成一个钱包
 bitcoin-cli createwallet $wallet_name
+
+# 列出所有的钱包
+bitcoin-cli listwallets
+
+# 生成一个新的地址
+bitcoin-cli -rpcwallet=$wallet_name getnewaddress
+
 
 # 获取区块的哈希
 bitcoin-cli getblockhash ${block_height}
@@ -73,7 +93,7 @@ bitcoin-cli verifymessage $address $signature $message
 required_signatures=1 # 设置所需的签名数量
 bitcoin-cli createmultisig $required_signatures  '[ "'$pubkey1'", "'$pubkey2'", "'$pubkey3'", "'$pubkey4'" ]'
 
-# 通过扩展公钥（Extended Public Key），获取钱包中的特定输出脚本描述符的信息
+# 通过扩展公钥（Extended Public Key），获取钱包中的特定输出脚本描述符信息 descriptor
 bitcoin-cli getdescriptorinfo "wpkh(xpub6DJ2dNUysrn5Vt36jH2KLBT2i1auw1tTSSomg8PhqNiUtx8QX2SvC9nrHu81fT41fvDUnhMjEzQgXnQjKEu3oaqMSzhSrHMxyyoEAmUHQbY)"
 
 # 通过扩展公钥（Extended Public Key）生成3个派生地址
@@ -144,8 +164,9 @@ done
 ## 术语
 - 描述符（descriptors）
     - 是一种用于描述如何从密钥派生地址的格式。
-    - 描述符可以涵盖多种类型的地址，包括传统的支付到公钥哈希（P2PKH）地址、支付到脚本哈希（P2SH）地址，以及隔离见证（SegWit）地址。
     - 基本形式 `wpkh(<xpub>/0/*)`
     - wpkh 是一个函数，表示要生成一个支付到公钥哈希的隔离见证类型（witness public key hash，简称wpkh）的地址。
-        - sh（表示P2SH地址）、wsh（表示隔离见证脚本哈希地址）、multi（表示多签名地址）等。
+        - sh（表示统的支付到公钥哈希（P2PKH）地址）
+        - wsh（表示隔离见证脚本哈希地址）
+        - multi（表示多签名地址）
     - /0/*: 这部分指定了要派生的子地址的索引，/0表示索引为0，/*表示可以生成更多的子地址。
