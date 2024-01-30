@@ -30,12 +30,12 @@
 - bolts协议规格的三种实现客户端
     - Lightning Network Daemon (LND)  
         - 官方 Lightning Labs
-        - 语言 C
+        - 语言 Golang
         - https://github.com/lightningnetwork/lnd
         - 市场占用率 91.17%
     - Core Lightning (CLN)
         - 官方 Blockstream
-        - 语言 Golang
+        - 语言 C
         - 市场占用率 7.01%
         - 利用插件系统提供了更强的模块化
     - Eclair
@@ -45,11 +45,10 @@
 
 ## LND
 - 部署参考教程 
-    - https://www.itwordsweb.com/archives/LND
     - Windows https://mirror.xyz/cyberscavenger.eth/5Z-v2tBGT1UYaDChOcVUy8tlcgbamLZb7Uhc-_p7hZI
     - Ubuntu https://www.jianshu.com/p/da3d215ec57d
 
-### 部署
+### lnd部署
 ```bash
 wget https://github.com/lightningnetwork/lnd/releases/download/v0.17.3-beta/lnd-linux-amd64-v0.17.3-beta.tar.gz
 tar xzvf lnd-linux-amd64-v0.17.3-beta.tar.gz
@@ -66,14 +65,16 @@ service lnd start
 tail -n200 -f lnd_data/logs/bitcoin/mainnet/lnd.log
 ```
 
+### lncli
 ```bash
 lncli create
 lncli unlock
 
-lncli --macaroonpath /data2/lnd/lnd_data/chain/bitcoin/mainnet/admin.macaroon getinfo 
+lncli  getinfo 
+# --macaroonpath /data2/lnd/lnd_data/chain/bitcoin/mainnet/admin.macaroon
 ```
 
-### 配置
+### lnd配置
 ```conf
 # https://github.com/lightningnetwork/lnd/blob/master/sample-lnd.conf
 # LND Mainnet: lnd configuration
@@ -113,14 +114,14 @@ bitcoind.zmqpubrawtx=tcp://127.0.0.1:28333
 bitcoind.rpcuser=username
 bitcoind.rpcpass=password
 
-#自动驾驶模式 开启之后可以自动连接节点 打开channel
+#自动化channel管理
 [autopilot]
 autopilot.active=1
 autopilot.maxchannels=5
 autopilot.allocation=0.1
 ```
 
-### 服务化
+### lnd服务化
 ```conf
 [Unit]
 Description=LND Lightning Daemon
@@ -207,10 +208,10 @@ rpcauth=username:auth
 
 # 闪电网络需要下面两行配置的支持
 # [zeromq]
-# Enable publishing of transaction hashes to <address>.
-zmqpubhashtx=tcp://127.0.0.1:28333
 # Enable publishing of raw block hex to <address>.
 zmqpubrawblock=tcp://127.0.0.1:28332
+# Enable publishing of raw transaction hex to <address>.
+zmqpubrawtx=tcp://127.0.0.1:28333
 
 # Options only for mainnet
 [main]
@@ -232,7 +233,6 @@ Group=root
 Type=forking
 PIDFile=/root/.bitcoin/bitcoind.pid
 ExecStart=bitcoind -daemon -conf=/root/.bitcoin/bitcoin.conf -pid=/root/.bitcoin/bitcoind.pid
-ExecReload=kill -SIGHUP $MAINPID
 ExecStop=bitcoin-cli -conf=/root/.bitcoin/bitcoin.conf stop
 Restart=on-failure
 KillMode=process
