@@ -26,6 +26,10 @@
 - bolts协议规格  https://github.com/lightning/bolts
 - LNURL  https://github.com/lnurl/luds
 - BOLT 12  无需 web 服务器就可以实现 LNURL 提供的部分核心功能。
+- 闪电网络区块链浏览器 https://1ml.com/
+    - https://1ml.com/testnet
+- 闪电网络通道互助 https://lightningnetwork.plus/
+- 视频教程 https://www.youtube.com/watch?v=MFwdzZI5HJg
 
 - bolts协议规格的三种实现客户端
     - Lightning Network Daemon (LND)  
@@ -47,13 +51,15 @@
 - 部署参考教程 
     - Windows https://mirror.xyz/cyberscavenger.eth/5Z-v2tBGT1UYaDChOcVUy8tlcgbamLZb7Uhc-_p7hZI
     - Ubuntu https://www.jianshu.com/p/da3d215ec57d
-
+- 配置文件 https://github.com/lightningnetwork/lnd/blob/master/sample-lnd.conf
 ### lnd部署
 ```bash
 wget https://github.com/lightningnetwork/lnd/releases/download/v0.17.3-beta/lnd-linux-amd64-v0.17.3-beta.tar.gz
 tar xzvf lnd-linux-amd64-v0.17.3-beta.tar.gz
 
-ln -fs /data2/lnd/lnd-linux-amd64-v0.17.3-beta/lncli /usr/local/bin/lncli
+parentpath=/data2/lnd/
+
+ln -fs ${parentpath}lnd-linux-amd64-v0.17.3-beta/lncli /usr/local/bin/lncli
 
 mkdir /root/.lnd
 vi /root/.lnd/lnd.conf
@@ -62,30 +68,22 @@ vi /etc/systemd/system/lnd.service
 systemctl enable lnd.service
 service lnd start
 
-tail -n200 -f lnd_data/logs/bitcoin/mainnet/lnd.log
-```
-
-### lncli
-```bash
 lncli create
 lncli unlock
 
-lncli  getinfo 
-# --macaroonpath /data2/lnd/lnd_data/chain/bitcoin/mainnet/admin.macaroon
+tail -n200 -f lnd_data/logs/bitcoin/mainnet/lnd.log
+tail -n200 -f lnd_data/logs/bitcoin/testnet/lnd.log
 ```
 
 ### lnd配置
+- 默认路径 /root/.lnd/lnd.conf
 ```conf
-# https://github.com/lightningnetwork/lnd/blob/master/sample-lnd.conf
-# LND Mainnet: lnd configuration
-# /root/.lnd/lnd.conf
-
 [Application Options]
 # 闪电网络的数据存储目录 如果不指定这个的话 默认在 /root/.lnd 路径下
-datadir=/data2/lnd/lnd_data
+datadir=${parentpath}/lnd_data
 # 日志输出目录
-logdir=/data2/lnd/lnd_data/logs
-; adminmacaroonpath=/data2/lnd/lnd_data/chain/bitcoin/mainnet/admin.macaroon # 默认目录 /root/.lnd/data/chain/bitcoin/mainnet/admin.macaroon
+logdir=${parentpath}/lnd_data/logs
+; adminmacaroonpath=${parentpath}/lnd_data/chain/bitcoin/mainnet/admin.macaroon # 默认目录 /root/.lnd/data/chain/bitcoin/mainnet/admin.macaroon
 
 debuglevel=info
 maxpendingchannels=20
@@ -132,7 +130,8 @@ User=root
 Group=root
 Type=simple
 PIDFile=/root/.lnd/lnd.pid
-ExecStart=/data2/lnd/lnd-linux-amd64-v0.17.3-beta/lnd --configfile=~/.lnd/lnd.conf 
+ExecStart=${parentpath}lnd-linux-amd64-v0.17.3-beta/lnd --configfile=~/.lnd/lnd.conf
+ExecStop=lncli stop
 restart=on-failure
 KillMode=process
 TimeoutSec=180
@@ -142,51 +141,105 @@ RestartSec=60
 WantedBy=multi-user.target
 ```
 
+### lncli客户端
+```bash
+# --macaroonpath /data2/lnd/lnd_data/chain/bitcoin/mainnet/admin.macaroon
+# --macaroonpath /opt/lnd/lnd_data/chain/bitcoin/testnet/admin.macaroon
+# -network testnet
+
+lncli create
+lncli unlock
+lncli getinfo # 获取lnd节点的基本信息
+lncli newaddress np2wkh # 创建一个np2wkh类型的钱包地址
+lncli walletbalance # 查看钱包余额
+
+# 链上发送比特币
+lncli.exe sendcoins --addr 接收地址 --amt 数量聪 --sat_per_vbyte GAS单价聪
+
+# 连接一个通道 https://1ml.com/
+channel=03864ef025fde8fb587d989186ce6a4a186895ee44a926bfc370e2c366597a3f8f
+ipport=3.33.236.230:9735
+lncli connect ${channel}@${ipport}
+
+# 打开一个容量为 20000 sats 的 channel，钱包里面需要有足够的余额
+lncli openchannel ${channel} 20000
+
+# 生成一张 15 sat 的 invoice
+lncli addinvoice --amt 15
+
+# 查看其它的闪电网络钱包向节点生成的 invoice 付款的状态
+lncli listinvoices
+
+# 解析一张 invoice ，查看需要付款的金额
+lncli decodepayreq $invoice
+
+# 向 invoice 付款
+lncli payinvoice $invoice
+```
+
 ## Bitcoin全节点
+- 配置文件  https://github.com/bitcoin/bitcoin/blob/master/doc/bitcoin-conf.md
+- 自动配置网站 https://jlopp.github.io/bitcoin-core-config-generator/
+- 区块链游览器 https://blockstream.info/testnet/
+
 ### bitcoind部署
 ```bash
 # 安装 bitcoind
 # https://bitcoincore.org/bin/bitcoin-core-26.0/
 wget https://bitcoincore.org/bin/bitcoin-core-26.0/bitcoin-26.0-x86_64-linux-gnu.tar.gz
 tar xzvf bitcoin-26.0-x86_64-linux-gnu.tar.gz
-ln -fs /data2/lnd/bitcoin-26.0/bin/bitcoin-cli /usr/local/bin/bitcoin-cli
-ln -sf /data2/lnd/bitcoin-26.0/bin/bitcoind /usr/local/bin/bitcoind
+
+parentpath=/data2/lnd/
+ln -fs ${parentpath}bitcoin-26.0/bin/bitcoin-cli /usr/local/bin/bitcoin-cli
+ln -sf ${parentpath}bitcoin-26.0/bin/bitcoind /usr/local/bin/bitcoind
 
 # 创建比特币的数据存储目录
-mkdir /data2/lnd/bitcoin_datadir/
+mkdir ${parentpath}bitcoin_data/
 # 比特币配置存储目录
 mkdir ~/.bitcoin
 # 比特币配置文件
 vi ~/.bitcoin/bitcoin.conf
 
-# 配置比特币服务
+# 比特币服务化
 vi /etc/systemd/system/bitcoind.service
 systemctl enable bitcoind.service
 service bitcoind start
 
 tail -n200 -f ~/.bitcoin/debug.log
+tail -n200 -f ~/.bitcoin/testnet3/debug.log
 ```
 
 ### bitcoind默认配置
 ```conf
 # 默认配置
 
+# 默认启动主网节点
+; # [chain]
+; # Test Network.
+; chain=test
+; # Run this node on the Bitcoin Test Network. Equivalent to -chain=test
+; testnet=1
+
 # Reduce storage requirements by only storing most recent N MiB of block. This mode is incompatible with -txindex and -coinstatsindex. WARNING: Reverting this setting requires re-downloading the entire blockchain. (default: 0 = disable pruning blocks, 1 = allow manual pruning via RPC, greater than 550 = automatically prune blocks to stay under target size in MiB).
 prune=0
 
 # [debug]
 # Location of the debug log
-debuglogfile=~/.bitcoin/debug.log
+debuglogfile=~/.bitcoin/debug.log # 测试网 ~/.bitcoin/testnet3/debug.log
+
+# Options only for mainnet
+[main]
+# Options only for testnet
+[test]
+# Options only for regtest
+[regtest]
 ```
 
 ### bitcoind配置
 ```conf
-# https://github.com/bitcoin/bitcoin/blob/master/doc/bitcoin-conf.md
-# Generated by https://jlopp.github.io/bitcoin-core-config-generator/
-
 # [core]
 # Specify a non-default location to store blockchain data.
-blocksdir=/data2/lnd/bitcoin_datadir/
+blocksdir=${parentpath}/bitcoin_data/
 # Run in the background as a daemon and accept commands.
 daemon=1
 # Set database cache size in megabytes; machines sync faster with a larger cache. Recommend setting as high as possible based upon machine's available RAM.
@@ -204,7 +257,7 @@ server=1
 # Accept public REST requests.
 rest=1
 # Username and hashed password for JSON-RPC connections. The field <userpw> comes in the format: <USERNAME>:<SALT>$<HASH>. RPC clients connect using rpcuser=<USERNAME>/rpcpassword=<PASSWORD> arguments. You can generate this value at https://jlopp.github.io/bitcoin-core-rpc-auth-generator/. This option can be specified multiple times.
-rpcauth=username:auth
+rpcauth=$username:$auth
 
 # 闪电网络需要下面两行配置的支持
 # [zeromq]
@@ -212,13 +265,6 @@ rpcauth=username:auth
 zmqpubrawblock=tcp://127.0.0.1:28332
 # Enable publishing of raw transaction hex to <address>.
 zmqpubrawtx=tcp://127.0.0.1:28333
-
-# Options only for mainnet
-[main]
-# Options only for testnet
-[test]
-# Options only for regtest
-[regtest]
 ```
 
 ### bitcoind服务化
@@ -244,7 +290,7 @@ RestartSec=30
 WantedBy=multi-user.target
 ```
 
-### bitcoin-cli
+### bitcoin-cli客户端
 ```bash
 bitcoin-cli getblockchaininfo
 ```
