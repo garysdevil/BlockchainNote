@@ -30,22 +30,32 @@
     - https://1ml.com/testnet
 - 闪电网络通道互助 https://lightningnetwork.plus/
 - 视频教程 https://www.youtube.com/watch?v=MFwdzZI5HJg
+- 参考 https://hackmd.io/@lnbook-cn/r1I1FkC0s?utm_source=preview-mode&utm_medium=rec#Ch05-%E8%BF%90%E8%A1%8C%E4%B8%80%E4%B8%AA%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%E8%8A%82%E7%82%B9%EF%BC%88%E8%AF%91%E8%80%85%E5%AE%8C%E6%88%90%EF%BC%89
 
 - bolts协议规格的三种实现客户端
-    - Lightning Network Daemon (LND)  
+    1. Lightning Network Daemon (LND)  
         - 官方 Lightning Labs
         - 语言 Golang
         - https://github.com/lightningnetwork/lnd
-        - 市场占用率 91.17%
-    - Core Lightning (CLN)
+        - 市场占有率 91.17%
+    2. Core Lightning (CLN)
         - 官方 Blockstream
         - 语言 C
-        - 市场占用率 7.01%
+        - 市场占有率 7.01%
         - 利用插件系统提供了更强的模块化
-    - Eclair
+    3. Eclair
         - 官方 ACINQ
         - 语言 Scala
-        - 市场占用率 1.82%
+        - 市场占有率 1.82%
+    4. Rust Lightning
+        - 官方 Square Crypto
+        - 语言 Rust
+
+## 注意
+- 闪电钱包也使用 BIP-39 助记词备份，但仅对链上资金有用。但是，因为通道的构造方式，助记词 不足以 复原出一个闪电节点。必须要有额外的备份方法，叫做 “静态通道备份（SCB）”。没有 SCB ，如果一个闪电节点的运营者弄丢了 TA 的闪电节点数据，TA 可能丢失 所有 放在通道中的资金。
+
+- 为了从一份 SCB 中恢复，你需要跟你的通道对手交互，祈祷他们不会尝试欺诈你，不论是给你一份旧的承诺交易，还是愚弄你的节点、让它广播已经过时的交易从而没收你的余额。虽然 SCB 有这些缺点，它也是有用的，你还是应该这么做。如果你不形成备份，又弄丢了你的节点数据，你会永远损失通道中的资金。无可挽回！但是，如果你 真的 做了 SCB，再弄丢你的节点数据时，你有不小的机率会遇上诚实的对等节点，然后从中恢复一些通道资金。
+
 
 ## LND
 - 部署参考教程 
@@ -112,11 +122,25 @@ bitcoind.zmqpubrawtx=tcp://127.0.0.1:28333
 bitcoind.rpcuser=username
 bitcoind.rpcpass=password
 
-#自动化channel管理
+# 自动化channel管理，会根据一些启发式规则自动开启通道。
 [autopilot]
 autopilot.active=1
 autopilot.maxchannels=5
-autopilot.allocation=0.1
+autopilot.allocation=0.1 # 支付通道中的资金，所占钱包所有资金的比重小于 10%
+; autopilot.minchansize=20000 # 通道的最小容量（聪）
+; autopilot.maxchansize=16777215
+
+#  “瞭望塔（Watchtowers）” 是一种机制，将监控和惩罚违反协议的行为外包出去。
+# LND 软件既包含了瞭望塔服务端，也包含了瞭望塔客户端。通过在配置文件中写入下列信息来激活瞭望塔服务端：
+[watchtower]
+watchtower.active=1
+watchtower.towerdir=${parentpath}/lnd_data/watchtower_data
+# 通过在配置文件中写入下列信息来激活瞭望塔客户端：
+[wtclient]
+; Activate Watchtower Client. To get more information or configure watchtowers
+; run `lncli wtclient -h`.
+wtclient.active=1
+
 ```
 
 ### lnd服务化
@@ -152,35 +176,44 @@ lncli unlock
 lncli getinfo # 获取lnd节点的基本信息
 lncli newaddress np2wkh # 创建一个np2wkh类型的钱包地址
 lncli walletbalance # 查看钱包余额
+lncli listunspent # 查看未使用的UTXO
+lncli listchaintxns # 列出钱包中的链上交易
 
 # 链上发送比特币
-lncli.exe sendcoins --addr 接收地址 --amt 数量聪 --sat_per_vbyte GAS单价聪
+lncli sendcoins --addr 接收地址 --amt 数量聪 --sat_per_vbyte GAS单价聪
 
-# 连接一个通道 https://1ml.com/
+# 连接一个通道，在 https://1ml.com/ 网站上寻找通道
 channel=03864ef025fde8fb587d989186ce6a4a186895ee44a926bfc370e2c366597a3f8f
 ipport=3.33.236.230:9735
 lncli connect ${channel}@${ipport}
 
+lncli listpeers
+lncli listchannels
+
 # 打开一个容量为 20000 sats 的 channel，钱包里面需要有足够的余额
 lncli openchannel ${channel} 20000
+lncli pendingchannels
 
-# 生成一张 15 sat 的 invoice
-lncli addinvoice --amt 15
+# 生成一张 1000 sat 的 invoice
+lncli addinvoice --amt 1000
 
-# 查看其它的闪电网络钱包向节点生成的 invoice 付款的状态
+# 查看生成的invoice
 lncli listinvoices
 
 # 解析一张 invoice ，查看需要付款的金额
-lncli decodepayreq $invoice
+lncli decodepayreq ${invoice.payment_request}
 
 # 向 invoice 付款
 lncli payinvoice $invoice
 ```
 
 ## Bitcoin全节点
-- 配置文件  https://github.com/bitcoin/bitcoin/blob/master/doc/bitcoin-conf.md
-- 自动配置网站 https://jlopp.github.io/bitcoin-core-config-generator/
-- 区块链游览器 https://blockstream.info/testnet/
+- 配置文件
+    - 配置文件  https://github.com/bitcoin/bitcoin/blob/master/doc/bitcoin-conf.md
+    - 自动配置网站 https://jlopp.github.io/bitcoin-core-config-generator/
+- 区块链游览器 
+    - https://blockstream.info/testnet/
+    - https://blockchair.com/bitcoin/testnet 可以查看手续费
 
 ### bitcoind部署
 ```bash
