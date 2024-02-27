@@ -1,4 +1,23 @@
-## 部署Ethereum私有网
+## ETH节点客户端介绍
+- 执行客户端
+  | 客户端     | 语言    | 操作系统：            | 网络                                                         | 同步策略   | 状态缓冲        |
+  | ---------- | ------- | --------------------- | ------------------------------------------------------------ | ---------- | --------------- |
+  | Geth       | Go      | Linux, Windows, macOS | #M, Sepolia, Görli, Ropsten, Rinkeby                         | 快照、完全 | Archive, Pruned |
+  | Nethermind | C#. NET | Linux, Windows, macOS | 主网、Sepolia、Gorli、Ropsten、Rinkeby 快照（不提供服务）、快速、完 等 | 全         | Archive, Pruned |
+  | Besu       | Java    | Linux, Windows, macOS | #, Sepolia, Görli, Ropsten, Rinkeby 等                       | 快速、完全 | Archive, Pruned |
+  | Erigon     | Go      | Linux, Windows, macOS | 主网、 Sepolia, Görli, Rinkeby, Ropsten 等                   | 完全       | Archive, Pruned |
+
+- 共识客户端
+  | 客户端     | 语言       | 操作系统：            | 网络                                                |
+  | ---------- | ---------- | --------------------- | --------------------------------------------------- |
+  | Lighthouse | Rust       | Linux, Windows, macOS | 信标链、Goerli、Pyrmont、Sepolia、Ropsten 等        |
+  | Lodestar   | TypeScript | Linux, Windows, macOS | 信标链、Goerli、Sepolia、Ropsten 等                 |
+  | Nimbus     | Nim        | Linux, Windows, macos | 信标链、Goerli、Sepolia、Ropsten 等                 |
+  | Prysm      | Go         | Linux, Windows, macOS | 151TtE, Gnosis, Goerli, Pyrmont, Sepolia, Ropsten # |
+  | Teku       | Java       | Linux, Windows, macOS | 信标链、 Gnosis, Goerli, Sepolia, Ropsten #         |
+
+
+## 部署Ethereum私有网(pow版本)
 
 - 参考文档 
     - https://geth.ethereum.org/docs/interface/private-network
@@ -84,6 +103,14 @@ geth attach ./ethereumData/geth.ipc
 geth attach http://127.0.0.1:8545
 geth attach ws://127.0.0.1:8544
 ```
+
+## 部署sepolia节点
+- 文档 https://docs.blastapi.io/running-a-node/supported-chains/ethereum/sepolia-testnet
+```bash
+metrics_addr=10.1.7.81
+/usr/local/bin/geth --sepolia --syncmode full --override.terminaltotaldifficulty 17000000000000000 --metrics --metrics.addr=<metrics_port> --http --http.api net,eth,personal,web3,engine,admin --authrpc.vhosts=localhost --authrpc.jwtsecret=/path/to/jwt.hex --http.addr 0.0.0.0 --http.port 8545 --http.vhosts * --http.corsdomain * --ws --ws.addr 0.0.0.0 --ws.port 8546 --ws.api net,eth,personal,web3 --ws.origins * --datadir /path/to/database --authrpc.jwtsecret=/path/to/jwt.hex
+```
+
 
 ## Ethereum控制台指令
 
