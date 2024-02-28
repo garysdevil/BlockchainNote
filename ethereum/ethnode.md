@@ -1,3 +1,9 @@
+## 链接
+- 部署文档 
+  - https://docs.blastapi.io/running-a-node/supported-chains/ethereum/sepolia-testnet
+  - https://docs.prylabs.network/docs/execution-node/authentication
+- 区块链浏览器 https://sepolia.etherscan.io/
+
 ## ETH节点客户端介绍
 - 执行客户端
   | 客户端     | 语言    | 操作系统：            | 网络                                                         | 同步策略   | 状态缓冲        |
@@ -16,103 +22,57 @@
   | Prysm      | Go         | Linux, Windows, macOS | 151TtE, Gnosis, Goerli, Pyrmont, Sepolia, Ropsten # |
   | Teku       | Java       | Linux, Windows, macOS | 信标链、 Gnosis, Goerli, Sepolia, Ropsten #         |
 
-
-## 部署Ethereum私有网(pow版本)
-
-- 参考文档 
-    - https://geth.ethereum.org/docs/interface/private-network
-    
-### 下载
+## 部署节点 sepolia网络
 ```bash
-# 1. 从官网 https://geth.ethereum.org/downloads/ 下载geth，解压即可得到可执行指令
-# 2. 
-mv geth /usr/local/bin/
+mkdir ethereum
+cd ethereum
+mkdir consensus
+mkdir execution
+openssl rand -hex 32 | tr -d "\n" > "jwt.hex"
 ```
-
-### 初始化创始区块
-- 创始区块信息文件 genesis.json (官方模版)
-```conf
-{
-  "config": {
-    "chainId": 1337,
-    "homesteadBlock": 0,
-    "eip150Block": 0,
-    "eip155Block": 0,
-    "eip158Block": 0,
-    "byzantiumBlock": 0,
-    "constantinopleBlock": 0,
-    "petersburgBlock": 0,
-    "ethash": {},
-    "coinbase":"0xfeda2DCb016567DEb02C3b59724cf09Dbc41A64D"
-  },
-  "difficulty": "1",
-  "gasLimit": "8000000",
-  "alloc": {
-    "0xfeda2DCb016567DEb02C3b59724cf09Dbc41A64D": { "balance": "80000000000000000000000" }
-  }
-}
-```
-
-- 参数
-    - NetworkId 是用来标识区块链网络的。主要在节点之间握手并相互检验的时候使用。
-    - ChainId 
-        - 链标识符，是在EIP155改进方案中实现，用于防止重放攻击。
-        - 防止交易在不同的以太坊同构网络进行交易重放的。主要在交易签名和验证的时候使用。
-        - 已经被占用的ChainId https://chainlist.org/
-        - 默认为 1337
-    - difficulty 挖矿难度  6291450 = 1分钟2个左右
-    - alloc 创始区块分配给特定地址的余额
-
-- 初始化
 ```bash
-# 创建创始区块
-geth --datadir ./ethereumData init genesis.json
-
+curl https://raw.githubusercontent.com/prysmaticlabs/prysm/master/prysm.sh --output prysm.sh && chmod +x prysm.sh
 ```
-
-### 启动
 ```bash
-# 启动以太坊私有网络
-./geth --dev --miner.threads 1 --gcmode archive --datadir=./ethereumData/ --networkid 1337 --nodiscover --http --http.addr 127.0.0.1 --http.port  8545 --ws --ws.addr 127.0.0.1 --ws.port 8544 --port 30303 --allow-insecure-unlock --http.corsdomain "*" --http.api "admin debug web3 eth txpool personal miner net" --rpc.txfeecap 0 --rpc.gascap 0 console
+metrics_addr=127.0.0.1
+datadir=/data4/ethereum/data
+jwtpath=/opt/ethereum/execution/jwt.hex
+nohup /opt/ethereum/execution/geth --sepolia --syncmode full --metrics --metrics.addr=${metrics_addr} --http --http.api net,eth,personal,web3,engine,admin --authrpc.vhosts=localhost --authrpc.jwtsecret=/path/to/jwt.hex --http.addr 0.0.0.0 --http.port 8545 --http.vhosts * --http.corsdomain * --ws --ws.addr 0.0.0.0 --ws.port 8546 --ws.api net,eth,personal,web3 --ws.origins * --datadir ${datadir} --authrpc.jwtsecret=${jwtpath} >> /opt/ethereum/logs/geth.log 2>&1 &
+tail -f /opt/ethereum/logs/geth.log
 
-# --mine
-# --miner.threads 1 # 启动N个CPU线程进行挖矿，默认为0
-
-# --dev # 开发者模式。
-# --dev.period 0 # 0 或者 1 # 开发者模式下，0: 默认为被动挖矿模式，即当进行交易时，系统才会挖矿打包。 1: 开发者模式主动挖矿。
-# --verbosity 3
-
-# --identity ${name} 给节点自定义名字
-# --gcmode archive # 区块的垃圾回收模式 full 和 archive ，默认是 full # archive模式将保留智能合约中的所有值状态以及帐户余额的完整历史记录
-# --syncmode full # 同步模式 "light", "fast", "full"
-
-# --http
-# --http.api "" # available="[admin,debug,web3,eth,txpool,personal,ethash,miner,net]" # 允许通过http方式访问相关的模块
-# --http.corsdomain "*"  # 跨域访问
-
-# --ws 
-# --ws.addr 127.0.0.1 --ws.port 8544
-# --ws.api ""
-# --ws.origins '*'
-
-# console 进入控制台
-
-# 进入以太坊控制台
-geth --datadir=./ethereumData/ attach
-geth attach ./ethereumData/geth.ipc
-geth attach http://127.0.0.1:8545
-geth attach ws://127.0.0.1:8544
+jwtpath=/opt/ethereum/execution/jwt.hex
+nohup /opt/ethereum/consensus/beacon-chain --execution-endpoint=http://localhost:8551 --sepolia --jwt-secret=${jwtpath}  --checkpoint-sync-url=https://sepolia.beaconstate.info --genesis-beacon-api-url=https://sepolia.beaconstate.info >> /opt/ethereum/logs/beacon.log 2>&1 &
+tail -f /opt/ethereum/logs/beacon.log
 ```
 
-## 部署sepolia节点
-- 文档 https://docs.blastapi.io/running-a-node/supported-chains/ethereum/sepolia-testnet
+## 运维节点
+### 端口
+1. 默认端口
+	1. p2p：30303
+	2. rpc: 8545
+	3. ws: 8546
+
+### API
 ```bash
-metrics_addr=10.1.7.81
-/usr/local/bin/geth --sepolia --syncmode full --override.terminaltotaldifficulty 17000000000000000 --metrics --metrics.addr=<metrics_port> --http --http.api net,eth,personal,web3,engine,admin --authrpc.vhosts=localhost --authrpc.jwtsecret=/path/to/jwt.hex --http.addr 0.0.0.0 --http.port 8545 --http.vhosts * --http.corsdomain * --ws --ws.addr 0.0.0.0 --ws.port 8546 --ws.api net,eth,personal,web3 --ws.origins * --datadir /path/to/database --authrpc.jwtsecret=/path/to/jwt.hex
+curl -H "Content-Type: application/json" -d '{"id":1, "jsonrpc":"2.0", "method": "eth_syncing","params": []}' 127.0.0.1:8545 | jq
+
+# 获取块高的API
+curl -H "Content-Type: application/json" -d '{"id":1, "jsonrpc":"2.0", "method": "eth_blockNumber","params": []}' 127.0.0.1:8545 | jq
+printf %d `curl -sS  127.0.0.1:8545 -H "Content-Type:application/json" -X POST -d '{"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":1}' |  grep -Po 'result[" :]+\K[^"]+'`
+
+# 查看交易信息
+curl -sS  127.0.0.1:8545 -H "Content-Type:application/json" -X POST  -d '{"jsonrpc":"2.0","method":"eth_getTransactionByHash","params":["0xe82ada99b9c9ab2daffe208035d6f2fba78fea60df6ea9b41c2e99a3054bbe34"],"id":1}' 
+
+# 查看账户余额
+curl 127.0.0.1:8545 \
+-X POST \
+-H "Content-Type: application/json" \
+-d '{"jsonrpc":"2.0","method":"eth_getBalance","params": ["以太坊账户地址","latest"],"id":1}'
+
+wscat --connect ws://localhost:8546
 ```
 
-
-## Ethereum控制台指令
+### geth控制台指令
 
 - 基本指令
 ```js
