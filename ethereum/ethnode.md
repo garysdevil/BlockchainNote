@@ -31,6 +31,10 @@ mkdir execution
 openssl rand -hex 32 | tr -d "\n" > "jwt.hex"
 ```
 ```bash
+# 下载执行客户端
+# https://geth.ethereum.org/downloads 或 https://geth.ethereum.org/docs/getting-started/installing-geth
+
+# 下载共识客户端
 curl https://raw.githubusercontent.com/prysmaticlabs/prysm/master/prysm.sh --output prysm.sh && chmod +x prysm.sh
 ```
 ```bash
