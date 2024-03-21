@@ -1,12 +1,12 @@
 
-- 参考 https://mirror.xyz/cyberscavenger.eth/rayhn9RT1VMUMo4Iios3g0A6G6AtZ-EXfQ8F_kj8HhQ
+- 链接
+    - Atomicals-JS部署及私有节点搭建 https://mirror.xyz/cyberscavenger.eth/rayhn9RT1VMUMo4Iios3g0A6G6AtZ-EXfQ8F_kj8HhQ
 
-
-## atomicals-js
-- https://github.com/atomicals/atomicals-js
-
-
+## 本地打铭文
+### atomicals-js 打铭文
 ```bash
+# https://github.com/atomicals/atomicals-js
+
 # --satsbyte gas。设置的gas，与实际上链的gas是1.8~2倍的关系，比如这里设置30，实际上链gas是54~60sats/vB。
 satsbyte=30
 # --bitworkc 算力难度。每个FT币 的难度都可能不同
@@ -33,9 +33,9 @@ yarn run cli balances
 
 ```
 
-## 网页版
+## 网页在线打铭文
 - https://atomicalmarket.com/inscribe?ticker=electron
 - https://satsx.io/inscribe/atomicals
 
-## 部署Atomicals节点
-https://github.com/Next-DAO/atomicals-electrumx-docker#atomicals-electrumx-docker
+## 资料
+1. ARC20 代币总览 https://www.coinglass.com/zh/arc20
