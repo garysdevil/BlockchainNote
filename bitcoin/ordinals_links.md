@@ -1,3 +1,11 @@
+
+## 参考
+- Ordinals协议机制 https://mirror.xyz/quentangle.eth/zRV-TCg62FGhee89fTgAYUqywcc6x9wpTG6gVdMrEp0
+- Ordinals Inscription铸造过程解析 https://mirror.xyz/quentangle.eth/2NYOJN4G-S7LV_HJqUPQE_YHc692Gcy9Y4ZeOIKf-w8
+- BRC20和unisat讲解 https://twitter.com/CG_BRC20/status/1653803094545932288
+- BRC20讲解与交易 https://twitter.com/BiteyeCN/status/1651821269019668480
+- 24个比特币生态项目和工具全盘点 https://foresightnews.pro/article/detail/32533
+
 ## Ordinals协议
 - 白皮书
     1. https://bitcoin.org/bitcoin.pdf
@@ -44,22 +52,21 @@
 - 交易市场 https://unisat.io/market
 - 交易市场 https://ordswap.io/
 - 查看钱包持仓市值 https://ordspace.org/brc20
+- 代打平台
+    1. https://unisat.io/inscribe   最佳工具
+    2. https://idclub.xyz/index     中文
+    3. https://ordinalsbot.com/     历史记录检索有误
+    4. https://bitpunks.io/Punk/Insbot      历史记录检索有误
+    5. https://ordinalsbot.com/     历史记录检索有误
+    6. https://looksordinal.com/   操作界面复杂  
+    7. https://ordichef.xyz/inscribe
+    8. https://runealpha.xyz/
 
-## 代打工具
-1. https://unisat.io/inscribe   最佳工具
-2. https://idclub.xyz/index     中文
-3. https://ordinalsbot.com/     历史记录检索有误
-4. https://bitpunks.io/Punk/Insbot      历史记录检索有误
-5. https://ordinalsbot.com/     历史记录检索有误
-6. https://looksordinal.com/   操作界面复杂  
-
-
-## 参考
-- Ordinals协议机制 https://mirror.xyz/quentangle.eth/zRV-TCg62FGhee89fTgAYUqywcc6x9wpTG6gVdMrEp0
-- Ordinals Inscription铸造过程解析 https://mirror.xyz/quentangle.eth/2NYOJN4G-S7LV_HJqUPQE_YHc692Gcy9Y4ZeOIKf-w8
-- BRC20和unisat讲解 https://twitter.com/CG_BRC20/status/1653803094545932288
-- BRC20讲解与交易 https://twitter.com/BiteyeCN/status/1651821269019668480
-- 24个比特币生态项目和工具全盘点 https://foresightnews.pro/article/detail/32533
+## ARC20
+1. ARC20 代币总览 https://www.coinglass.com/zh/arc20
+2. 代打平台
+    - https://atomicalmarket.com/inscribe?ticker=electron
+    - https://satsx.io/inscribe/atomicals
 
 ## LRC20
 - LTC钱包

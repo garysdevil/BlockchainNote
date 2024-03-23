@@ -32,10 +32,3 @@ yarn cli mint-nft "E:\Crypto\NFT\CryptoPunks\punk0000.png" --satsbyte ${satsbyte
 yarn run cli balances
 
 ```
-
-## 网页在线打铭文
-- https://atomicalmarket.com/inscribe?ticker=electron
-- https://satsx.io/inscribe/atomicals
-
-## 资料
-1. ARC20 代币总览 https://www.coinglass.com/zh/arc20
