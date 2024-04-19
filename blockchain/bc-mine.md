@@ -47,5 +47,6 @@
 | 1-9  | 交易计数器 | 该区块包含的交易数量，包含coinbase交易                       |
 | 不定 | 交易       | 记录在区块里的交易信息，使用原生的交易信息格式，并且交易在数据流中的位置必须与Merkle树的叶子节点顺序一致 |
 
-## 芯片与算力
-- https://hashrate.no/GPUcalculator?
+## 链接
+- 芯片与算力 https://hashrate.no/GPUcalculator?
+- 矿池列表 https://miningpoolstats.stream/
