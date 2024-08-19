@@ -22,9 +22,6 @@
 - 优点： 提高了吞吐量。
 - 缺点： 永远无法达到 BTC 主网的安全性。
 
-# 比特币网络智能合约方案
-1. BiHelix 是一个比特币的应用框架层，基于闪电网络和RGB 协议，提供具备无限扩展性的图灵完备智能合约生态系统网络。 BiHelix 旨在为开发者创造更便捷的平台，以扩展比特币的应用场景，并解决比特币区块链面临的可扩展性和图灵不完备性挑战。
-
 # 闪电网络
 - bolts协议规格  https://github.com/lightning/bolts
 - LNURL  https://github.com/lnurl/luds
