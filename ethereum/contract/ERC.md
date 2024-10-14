@@ -1,30 +1,40 @@
 [TOC]
 
-## 以太坊标准
-1. ERC20    
-    - Token Standard 同质化代币标准 https://eips.ethereum.org/EIPS/eip-20
+- EIP （Ethereum Improvement Proposal）
+    -  EIP 是以太坊改进提案，主要用于描述以太坊平台的技术规范和潜在变化。
+- ERC （Ethereum Request for Comments）
+    - ERC 是以太坊请求评论，实际上是 EIP 的一个子集，主要用于对以太坊应用层面的标准进行定义，特别是智能合约的标准。
+
+## 以太坊提案
+- 提案 https://eips.ethereum.org/EIPS/eip-20
+
+1. eip-20    
+    - Token Standard 同质化代币标准
     - Vitalik Buterin于2015年6月提
 
-2. ERC165 
+2. eip-165 
     - 标准接口检测协议；创建一个标准方法以发布和检测智能合约实现了哪些接口
 
-3. ERC223
-    - 兼容ERC20，保护投资者以防意外的合约转账
+3. eip-223
+    - 兼容EIP20，保护投资者以防意外的合约转账
 
-4. ERC721
+4. eip-721
     - Non-Fungible Token Standard 非同质化代币标准 简写为NFT
     - 可以作为产权进行交易
 
-5. ERC1155  Multi Token Standard
+5. eip-1155  Multi Token Standard
     - 介于同质化代币与非同质化代币之间可以相互切换的代币标准
-    - 并不是某一种代币标准，而是操作多个ERC20，ERC721合约的标准(实现同时查询多种Token余额, 同时转账多种Token)
+    - 并不是某一种代币标准，而是操作多个erc20，erc721合约的标准(实现同时查询多种Token余额, 同时转账多种Token)
 
-6. ERC4626‌
+6. eip-4626‌
    1. 货币化资金库标准
-   2. ERC-4626 标准的实施，可以有效减少 DeFi 协议之间的摩擦，并增加可组合性 
+   2. EIP-4626 标准的实施，可以有效减少 DeFi 协议之间的摩擦，并增加可组合性 
 
-7. ERC6551  Non-fungible Token Bound Accounts
-    1.  
+7. eip-6551  Non-fungible Token Bound Accounts
+    1.  -
+
+8. eip-2612
+    1. 通过链下签名授权实现更少 Gas 的 ERC20标准代币
 
 ## ERC165
 - 兼容 ERC-165的合约应该实现以下接口
@@ -178,5 +188,3 @@
     - 燃烧指定用户多个指定类型的指定数量的Token
 5. _setURL
     - 设置指定类型的Token的元数据地址，通过id区别不同的类型Token
-
-## ERC
