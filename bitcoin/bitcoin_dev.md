@@ -2,7 +2,7 @@
 ### windows 编译环境
 
 ```powershell
-# 安装 wls （Windows Subsystem for Linux）参考 https://learn.microsoft.com/en-us/windows/wsl/basic-commands#install
+# 安装Windows 子系统 wls （Windows Subsystem for Linux）参考 https://learn.microsoft.com/en-us/windows/wsl/basic-commands#install
 # wsl --list --onlin
 # wsl --list 
 # wsl --status
