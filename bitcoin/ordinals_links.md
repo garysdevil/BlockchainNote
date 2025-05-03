@@ -1,3 +1,9 @@
+---
+created_date: 2023-05-15
+---
+
+[TOC]
+
 
 ## 参考
 - Ordinals协议机制 https://mirror.xyz/quentangle.eth/zRV-TCg62FGhee89fTgAYUqywcc6x9wpTG6gVdMrEp0

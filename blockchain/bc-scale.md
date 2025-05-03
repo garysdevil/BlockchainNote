@@ -1,3 +1,10 @@
+---
+title: 区块链的扩容
+created_date: 2023-11-01
+---
+
+[TOC]
+
 ## 链接
 - 参考 https://www.8btc.com/article/6790168
 

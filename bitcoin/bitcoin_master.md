@@ -1,3 +1,9 @@
+---
+created_date: 2024-01-25
+---
+
+[TOC]
+
 - four key innovations
     1. A decentralized peer-to-peer network (the Bitcoin protocol)
     2. A public transaction journal (the blockchain)

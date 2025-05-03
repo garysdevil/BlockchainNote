@@ -1,3 +1,9 @@
+---
+created_date: 2023-05-15
+---
+
+[TOC]
+
 ## Ordinals协议
 - Ordinals 协议是一种可以在比特币的最小单位（即sats或satoshis）上刻入数据的协议。
 - Ordinals 协议本质上就是将这一段代码序列化到见证脚本里面。

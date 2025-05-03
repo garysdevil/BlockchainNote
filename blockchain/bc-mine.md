@@ -1,3 +1,8 @@
+---
+title: 区块链的挖矿
+created_date: 2022-03-20
+---
+
 [TOC]
 
 ## POW

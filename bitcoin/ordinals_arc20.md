@@ -1,3 +1,9 @@
+---
+created_date: 2024-03-21
+---
+
+[TOC]
+
 
 - 链接
     - Atomicals-JS部署及私有节点搭建 https://mirror.xyz/cyberscavenger.eth/rayhn9RT1VMUMo4Iios3g0A6G6AtZ-EXfQ8F_kj8HhQ
