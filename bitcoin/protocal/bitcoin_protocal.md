@@ -1,15 +1,14 @@
 ---
+title: 协议扩展（Protocol Extensions）
 created_date: 2023-11-10
 ---
 
 [TOC]
 
-## 协议
-1. Ordinals -- 比特币NFT协议    https://domo-2.gitbook.io/brc-20-experiment/
-2. Stack -- 比特币L2协议
-3. 闪电网络 https://lightning.network/lightning-network-paper.pdf
+## Ordinals 
+- Ordinals 是一种比特币协议，通过为每个聪（Satoshi）分配唯一编号并附加铭文（Inscriptions），实现类似 NFT 的功能。铭文可存储文本、图片等数据，基于 SegWit 和 Taproot 升级。
+- https://domo-2.gitbook.io/brc-20-experiment/
 
-## Ordinals
 - 应用
     1. BRC 20 ![](./ordinals_brc20.md)
     2. BRC721 https://twitter.com/poyo_eth
@@ -33,13 +32,3 @@ created_date: 2023-11-10
     - Rune 的设计可能也受到了 ARC20 的影响，选择直接在 UTXO 的脚本中写入 Token 数据，这包含了 Token 的 ID、输出与数量。
     - Rune 的实现与 ARC20 非常相似，将 token 转账直接交给 BTC 主网处理。区别在于， Rune 在脚本数据中写入了 Token 数量，这让他比 ARC20 具备更高的精度。
     - #Trac 的创始人基于此构想编写了第一个可用协议，并发行了 $pipe
-
-
-## Taproot Assets (Taro)
-- 闪电网络一直在尝试扩展其用例，BRC20 的火热促使了 Lightning Labs 发布了 Taproot Assets，这着也是一个 BTC 上发行 Token 的协议。
-- 与 Brc20 等都不相同，Taproot Assets 仅仅在 BTC 主网的 UTXO 输出脚本中写入了 Token 的信息，没有存储这个 Token 的转账、mint 等功能代码。
-- Taproot Assets 仅将 BTC 主网看作 Token 的注册表，并不是完全依赖 BTC 主网运行，因此这些资产必须被存入闪电网络中才能进行交易。
-- 因此  Taproot Assets 的 Token 必须依赖第三方的存储索引器，离开了存储索引器这些 Token 即将永远地丢失。
-- 因此用户要么自己运行一个 BTC 的全节点和 Taproot Assets 客户端，要么完全依赖一个中心化的服务器交易 Taproot Assets Token，这可能是目前 BTC Token 协议中最中心化的方案。
-
-- aproot Assets 的打新方式也：用户不能直接在 BTC 主网中发送交易自助地铸造 Token，而是有一个项目方地址一次性发行 ( 或者叫注册 ) 所有的 Token，然后再由项目方转入闪电网络进行分发。

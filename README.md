@@ -1,3 +1,8 @@
+---
+title: "区块链技术层面笔记"
+created_date: 2025-05-04
+---
+
 ## 章节
 1. [区块链](./blockchain)
 1. [比特币网络](./bitcoin)

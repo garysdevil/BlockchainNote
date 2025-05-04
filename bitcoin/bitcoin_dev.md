@@ -5,13 +5,13 @@ created_date: 2022-03-20
 
 [TOC]
 
-## 比特币模拟工具
+## 模拟工具
 - 区块链模拟工具
-    ```bash
-    nvm use v8.17.0
-    npm install blockchain-cli
-    blockchain help
-    ```
+```bash
+nvm use v8.17.0
+npm install blockchain-cli
+blockchain help
+```
 
 ## 测试网
 - 比特币测试网钱包生成器 https://www.bitaddress.org/

@@ -1,102 +1,76 @@
 ---
-created_date: 2024-01-30
+title: "比特币闪电网络"
+created_date: 2025-05-04
 ---
 
-[TOC]
-
-# 比特币网络扩容方案
-
-## RGB 协议
-- 内容： RGB 是一个建立在比特币网络上的二层协议，其核心交易数据储存在 BTC 主网上。RGB 利用比特币的安全模型，支持在比特币网络上创建具有定制属性和智能合约功能的代币。
-- 时间线
-    - 2016 年，RGB 协议最初由 Peter Todd 提出。
-    - 2023 年，在比特币上智能合约生态的开发热潮中，RGB 协议再次得到关注。
-
-## 增大区块
-- 内容： 2017 年 8 月，比特币实施隔离见证（SegWit）升级。
-- 优点： 通过交易信息与签名信息的分离，将有效区块大小从 1M 提升到了 4M，一定程度缓解了拥堵问题。
-- 缺点： 由于比特币区块本身大小的限制，无法对一个区块的存储信息无限扩容，因而通过对区块存储信息扩容提高效率的方式便到此为止。
+# 闪电网络
+## 相关链接
+- **区块链浏览器**：
+  - 主网：[1ml.com](https://1ml.com/)  
+  - 测试网：[1ml.com/testnet](https://1ml.com/testnet)  
+- **通道互助**：[lightningnetwork.plus](https://lightningnetwork.plus/)  
+- **视频教程**：[YouTube](https://www.youtube.com/watch?v=MFwdzZI5HJg)  
+- **参考资料**：
+  - 运行闪电网络节点：[HackMD](https://hackmd.io/@lnbook-cn/r1I1FkC0s?utm_source=preview-mode&utm_medium=rec#Ch05-%E8%BF%90%E8%A1%8C%E4%B8%80%E4%B8%AA%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%E8%8A%82%E7%82%B9%EF%BC%88%E8%AF%91%E8%80%85%E5%AE%8C%E6%88%90%EF%BC%89)  
+  - 容错与自动化：[HackMD](https://hackmd.io/@lnbook-cn/r1I1FkC0s?utm_source=preview-mode&utm_medium=rec#%E5%AE%B9%E9%94%99%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96)  
+  - 闪电网络 DeFi 研究：[Zhihu](https://zhuanlan.zhihu.com/p/572666181)  
+  - 闪电网络历史：[BTCStudy](https://www.btcstudy.org/2020/09/03/history-lightning-brainstorm-beta/)  
+  - 闪电钱包推荐：[Twitter](https://twitter.com/AurtrianAjian/status/1629039315748806657)
 
 ## 闪电网络
-- 内容： 闪电网络是基于比特币的二层扩容方案，允许在不访问区块链的情况进行下交易。
-- 优点： 极大提高了吞吐量。
-- 缺点： 较大的中心化风险。
-- 现有的闪电网络解决方案有 OmniBOLT，Stacks 等。
-
-## 侧链技术
-- 内容： 侧链技术是在比特币网络之外搭建一条侧链，侧链上的资产按 1:1 与 BTC 锚定。
-- 优点： 提高了吞吐量。
-- 缺点： 永远无法达到 BTC 主网的安全性。
-
-# 闪电网络
-- bolts协议规格  https://github.com/lightning/bolts
-- LNURL  https://github.com/lnurl/luds
-- BOLT 12  无需 web 服务器就可以实现 LNURL 提供的部分核心功能。
-- 闪电网络区块链浏览器 
-    - https://1ml.com/
-    - https://1ml.com/testnet
-- 闪电网络通道互助 https://lightningnetwork.plus/
-- 视频教程 https://www.youtube.com/watch?v=MFwdzZI5HJg
-- 参考 
-    - https://hackmd.io/@lnbook-cn/r1I1FkC0s?utm_source=preview-mode&utm_medium=rec#Ch05-%E8%BF%90%E8%A1%8C%E4%B8%80%E4%B8%AA%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%E8%8A%82%E7%82%B9%EF%BC%88%E8%AF%91%E8%80%85%E5%AE%8C%E6%88%90%EF%BC%89
-    - https://hackmd.io/@lnbook-cn/r1I1FkC0s?utm_source=preview-mode&utm_medium=rec#%E5%AE%B9%E9%94%99%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96
-    - 比特币闪电网络上的DeFi研究 https://zhuanlan.zhihu.com/p/572666181
-    - https://www.btcstudy.org/2020/09/03/history-lightning-brainstorm-beta/
-    - 闪电钱包 https://twitter.com/AurtrianAjian/status/1629039315748806657
-
+- 闪电网络（Lightning Network）是比特币的第二层扩展解决方案，旨在实现快速、低成本的交易，同时保持去中心化和安全性。其核心通过链下支付通道处理交易，仅在必要时与比特币主链交互。
 
 - 核心原理
-    - RSMC（Revocable Sequence Maturity Contract），序列到期可撤销合约；
-    - HTLC（Hashed Timelock Contract），哈希时间锁定合约。
-
-
-- bolts协议规格的三种实现客户端
-    1. Lightning Network Daemon (LND)  
-        - 官方 Lightning Labs
-        - 语言 Golang
-        - https://github.com/lightningnetwork/lnd
-        - 市场占有率 91.17%
-    2. Core Lightning (CLN)
-        - 官方 Blockstream
-        - 语言 C
-        - 市场占有率 7.01%
-        - 利用插件系统提供了更强的模块化
-    3. Eclair
-        - 官方 ACINQ
-        - 语言 Scala
-        - 市场占有率 1.82%
-    4. Rust Lightning
-        - 官方 Square Crypto
-        - 语言 Rust
+    - **RSMC（Revocable Sequence Maturity Contract）**：序列到期可撤销合约，确保交易可撤销并防止作弊。
+    - **HTLC（Hashed Timelock Contract）**：哈希时间锁定合约，用于安全地跨通道路由支付，结合时间锁和哈希锁。
 
 ## 闪电网络钱包
-- 从用户的角度看，闪电网络的通道（闪电钱包）可以分成三种类型：
-    1. 标准支付通道（自主保管钱包）
-    2. 完全托管通道（托管式闪电钱包）
-    3. 零配置通道（一般搭配有闪电网络服务商）
-
-- 完全托管通道
-    1. Zap 钱包是适用于 Android 的较新的闪电兼容比特币钱包之一。 它有一个简单的界面，易于使用。 Zap 还允许您直接从应用程序买卖比特币。
-    2. 闪电钱包（Eclair Wallet）是另一种流行的 Android 闪电兼容比特币钱包。 它具有时尚的界面并且易于使用。 Eclair 还允许您直接从应用程序买卖比特币。
-    3. 闪电钱包（ightning Wallet）是一款流行的 Android 闪电兼容比特币钱包。 它有一个简单的界面，易于使用。 Lightning Wallet 还允许您直接从应用程序买卖比特币。
-    4. 玻尔兹曼钱包（Boltzmann）钱包是一个新的 Android 比特币钱包。 它有一个有吸引力的界面并且易于使用。 Boltzmann 还允许您直接从应用程序买卖比特币。
-    5. CashPay
-    6. Strike
-    7. Tippin.me
-    8. OneKey chrome-extension://jnmbobjmhlngoefaiojfljckilhhlhcj/
-
-- 自主保管钱包
-    - Phoenix 钱包
-    - Bitcoin Lightning Wallet
-    - 蓝钱包（BlueWallet）是一款流行的比特币钱包，也支持闪电网络。 它有一个简单的界面，易于使用。 BlueWallet 还允许您直接从应用程序买卖比特币。
+闪电网络钱包按用户控制程度分为三类：
+1. **标准支付通道（自主保管钱包）**：用户完全控制私钥和资金。
+   - **Phoenix 钱包**  
+   - **Bitcoin Lightning Wallet**  
+   - **蓝钱包（BlueWallet）**：简单易用，支持链上和闪电网络交易，可直接买卖比特币。
+2. **完全托管通道（托管式钱包）**：资金由第三方管理，适合新手。
+   - **Zap 钱包**：Android 钱包，界面简洁，支持买卖比特币。  
+   - **Eclair Wallet**：Android 钱包，时尚界面，支持买卖比特币。  
+   - **Lightning Wallet**：Android 钱包，简单易用，支持买卖比特币。  
+   - **Boltzmann 钱包**：Android 新钱包，界面吸引，支持买卖比特币。  
+   - **其他**：CashPay、Strike、Tippin.me、OneKey（Chrome 扩展）。  
+3. **零配置通道**：搭配闪电网络服务商（LSP），简化设置。
 
 
-## 注意
-- 闪电钱包也使用 BIP-39 助记词备份，但仅对链上资金有用。但是，因为通道的构造方式，助记词 不足以 复原出一个闪电节点。必须要有额外的备份方法，叫做 “静态通道备份（SCB）”。没有 SCB ，如果一个闪电节点的运营者弄丢了 TA 的闪电节点数据，TA 可能丢失 所有 放在通道中的资金。
+## 闪电网络协议与实现
+- **BOLTs 协议规格**：定义闪电网络标准（[GitHub](https://github.com/lightning/bolts)）。
+- **LNURL**：简化用户交互的协议（[GitHub](https://github.com/lnurl/luds)）。
+- **BOLT 12**：提供 LNURL 部分功能，无需 Web 服务器。
+- **主要客户端实现**：
+  1. **LND (Lightning Network Daemon)**  
+     - 开发：Lightning Labs  
+     - 语言：Golang  
+     - 市场占有率：91.17%  
+     - 链接：[GitHub](https://github.com/lightningnetwork/lnd)  
+  2. **Core Lightning (CLN)**  
+     - 开发：Blockstream  
+     - 语言：C  
+     - 市场占有率：7.01%  
+     - 特点：插件系统提供模块化  
+  3. **Eclair**  
+     - 开发：ACINQ  
+     - 语言：Scala  
+     - 市场占有率：1.82%  
+  4. **Rust Lightning**  
+     - 开发：Square Crypto  
+     - 语言：Rust  
 
-- 为了从一份 SCB 中恢复，你需要跟你的通道对手交互，祈祷他们不会尝试欺诈你，不论是给你一份旧的承诺交易，还是愚弄你的节点、让它广播已经过时的交易从而没收你的余额。虽然 SCB 有这些缺点，它也是有用的，你还是应该这么做。如果你不形成备份，又弄丢了你的节点数据，你会永远损失通道中的资金。无可挽回！但是，如果你 真的 做了 SCB，再弄丢你的节点数据时，你有不小的机率会遇上诚实的对等节点，然后从中恢复一些通道资金。
+## 闪电网络数据备份与恢复
+- **BIP-39 助记词**：用于备份链上资金，但无法恢复闪电通道状态。
+- **静态通道备份（SCB）**：专门备份闪电通道数据，至关重要。
+  - **重要性**：无 SCB，丢失节点数据可能导致通道资金永久损失。
+  - **恢复流程**：需与通道对手交互，依赖对手诚实性。存在风险（如对手提供旧交易或欺诈），但 SCB 仍能提高资金恢复概率。
+  - **建议**：始终启用 SCB，避免因数据丢失导致资金无法挽回。
 
 
+# 闪电网络节点部署
 ## LND
 - 部署参考教程 
     - Windows https://mirror.xyz/cyberscavenger.eth/5Z-v2tBGT1UYaDChOcVUy8tlcgbamLZb7Uhc-_p7hZI

@@ -6,7 +6,7 @@ created_date: 2022-06-11
 
 ## 以太坊
 
-1. [以太坊节点部署与指令操作](./node.md)
+1. [以太坊节点部署与指令操作](./ethnode.md)
 2. [以太坊虚拟机](./evm.md)
 3. [以太坊Leyer2生态](./layer2.md)
 4. [Solidity-总览](./contract/solidity.md)
