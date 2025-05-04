@@ -5,7 +5,7 @@ created_date: 2023-05-15
 
 [TOC]
 
-## 比特币地址类型 四种
+## 四种账户地址类型
 - 参考 https://richpool.pro/blog/21/
 
 1. Legacy 旧地址（P2PKH） 
@@ -28,37 +28,30 @@ created_date: 2023-05-15
     2. 未使用的主根地址。2023年11月，比特币网络将进行主根软分叉。这将为比特币地址启用许多新的智能合约功能，并提高花费此类交易的隐私性。
     3. 常规的主根交易比原生 segwit 略大，但比传统地址小。这是因为它们与公钥而不是公钥散列相关联。对于涉及多重签名脚本等复杂交易，主根地址节省了大量空间，成本更低。
 
-## 钱包的生成过程
-- 这套标准最初是由比特币的3个提案生成的
-    1. BIP-39 定义如何使用助记词生成seed
-        - https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki
-        - 
-    2. BIP-32 定义 HD Wallet（Hierarchical Deterministic Wallet）的规则
-        - https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki
-        - 如何从一个seed生成多层的私钥
-        - 没有私钥的情况下，私钥之间互相不能推导
-        
-    3. BIP-44 
-        - https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki
-        1. 定义HD Wallet中生成子私钥的规范
-        2. 不同链的生成子私钥规范约定 https://github.com/satoshilabs/slips/blob/master/slip-0044.md
+## 账户的相关提案
+- 账户生成标准是由比特币的3个提案组成
 
-- 生成过程
-    1. 随机熵（Random Entropy）
-    2. 随机生成助记词
-    3. 通过助记词生成512位的种子
-    4. 通过种子生成主私钥、主公钥、子链码
-    5. 生成公钥私钥
+1. BIP-39 定义如何使用助记词生成seed
+    - https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki
+    - 
+2. BIP-32 定义 HD Wallet（Hierarchical Deterministic Wallet）的规则
+    - https://github.com/bitcoin/bips/blob/master/bip-0032.mediawiki
+    - 如何从一个seed生成多层的私钥
+    - 没有私钥的情况下，私钥之间互相不能推导
+    
+3. BIP-44 
+    - https://github.com/bitcoin/bips/blob/master/bip-0044.mediawiki
+    1. 定义HD Wallet中生成子私钥的规范
+    2. 不同链的生成子私钥规范约定 https://github.com/satoshilabs/slips/blob/master/slip-0044.md
 
-### 熵
-1. 熵是随机生成的一段二进制数据，通常是 128 到 256 位。常见的熵长度：
+## 账户的生成过程
+- 熵是随机生成的一段二进制数据，通常是 128 到 256 位。常见的熵长度：
     1. 128 位熵 → 12 个助记词
     2. 160 位熵 → 15 个助记词
     3. 192 位熵 → 18 个助记词
     4. 224 位熵 → 21 个助记词
     5. 256 位熵 → 24 个助记词
 
-## 钱包的生成过程二
 1. 生成熵：128位熵（16 字节）
     1. 例如 f5 2c 3d 6b 9e 1a 84 cf b2 99 13 54 76 3f 5a 88
 2. 计算校验和：对熵进行 SHA-256 哈希，取前 N 位（N = 熵长度 / 32）。
@@ -75,7 +68,7 @@ created_date: 2023-05-15
 7. 私钥：使用主密钥并且根据BIP-44多币种派生路径标准进行计算，计算出派生私钥
     1. 例如 EVM使用的派生路径是 ECDSA secp256k1 m/44'/60'/0'/0/x
     2. 例如 SUI支持三种派生路径 Ed25519（默认方案） m/44'/784'/0'/0'/x' 、 ECDSA secp256k1 m/44'/60'/0'/0/x 、 ECDSA secp256r1 m/74'/784'/0'/0/x'
-8. 公钥：通过 公钥=私钥×G
+8.  公钥：通过 公钥=私钥×G
     1. 例如 EVM使用的G是secp256k1椭圆曲线生成点（即签名方案），计算出公钥
     2. 例如 Sui支持多种签名方案和路径，默认路径是 Ed25519
 9.  地址：地址生成基于签名方案和公钥

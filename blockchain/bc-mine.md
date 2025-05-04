@@ -5,6 +5,10 @@ created_date: 2022-03-20
 
 [TOC]
 
+## 链接
+- 芯片与算力 https://hashrate.no/GPUcalculator?
+- 矿池列表 https://miningpoolstats.stream/
+
 ## POW
 1. 通过对等节点，下载最新的块高（网络资源）
 2. 完成下载一个块高后，进行块高的验证（CPU资源）
@@ -51,7 +55,3 @@ created_date: 2022-03-20
 | 80   | 区块头     | 组成区块头的几个字段                                         |
 | 1-9  | 交易计数器 | 该区块包含的交易数量，包含coinbase交易                       |
 | 不定 | 交易       | 记录在区块里的交易信息，使用原生的交易信息格式，并且交易在数据流中的位置必须与Merkle树的叶子节点顺序一致 |
-
-## 链接
-- 芯片与算力 https://hashrate.no/GPUcalculator?
-- 矿池列表 https://miningpoolstats.stream/

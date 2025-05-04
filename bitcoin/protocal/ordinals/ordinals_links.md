@@ -53,6 +53,7 @@ created_date: 2023-05-15
 
 
 ## BRC20
+- brc20讲解 https://domo-2.gitbook.io/brc-20-experiment/
 - brc20生态和行情 https://brc-20.io/
 - brc20生态和行情 https://chaineye.tools/ord
 - 交易市场 https://unisat.io/market

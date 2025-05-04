@@ -29,6 +29,6 @@ created_date: 2020-11-16
     1. 通过 编译器 将 合约代码 编译为 符合运行在链上规格的 文件格式。
 
 
-## 钱包
-1. Externally Owned Accounts (EOA) 外部账户
-2. Account Abstraction (AA)
+## 账户
+1. EOA 外部账户 Externally Owned Accounts
+2. AA 抽象账户 Account Abstraction
