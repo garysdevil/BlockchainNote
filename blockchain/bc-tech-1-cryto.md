@@ -15,18 +15,17 @@ created_date: 2022-08-03
     3. 计算符合交换率、结合率、分配率
     4. 加法和乘法有单位元素（所有的集合内的值都有对应的负数，所有集合内非零值都有倒数）
 
-### 有有限 Galois Field
+### 有限域 Galois Field
 1. 具有有限个元素的域就是有限域 Galois Field。
     1. Galois Field这个名字纪念发明者Evariste Galois。
 
-2. 具有有限（Galois Field）的定义是有如下特性的集合
+2. 有限域（Galois Field）的定义是有如下特性的集合
     1. **定义模p加法和模p乘法（加或乘的结果超过p时，模p取余数。p为素数）**
     2. 集合内的元素经过加法和乘法计算，结果仍然在集合内
     3. 计算符合交换率、结合率、分配率
     4. 加法和乘法有单位元素（所有的集合内的值都有对应的负数，所有集合内非零值都有倒数）
 
-### 有限域中的计算
-- 一切有限域都有加法和乘法两种运算，并必须满足以下条件
+3. 一切有限域都有加法和乘法两种运算，并必须满足以下条件
     1. 封闭性：若任意两元素a·b∈GF(q)，则有``a+b∈GF(q) a·b∈GF(q)``
     2. 结合律：若任意a、b、c∈GF(q)，则有``(a+b)+c=a+(b+c)，(a·b)c=a(b·c)``
     3. 交换律，若任意a、b∈GF(q)，则有``a+b=b+a，a·b=b·a``
@@ -36,8 +35,7 @@ created_date: 2022-08-03
 
 
 ## 椭圆曲线
-- 参考
-    - https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/
+- 参考 https://andrea.corbellini.name/2015/05/17/elliptic-curve-cryptography-a-gentle-introduction/
 
 - 椭圆曲线是满足如下方程的点
     ```python

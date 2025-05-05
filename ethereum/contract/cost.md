@@ -172,13 +172,3 @@ print(fee_usdt, "USDT")
 4. 在循环中使用++i，而不是i+=1,i++
 5. 数组长度缓存到内存
 6. 缓存多次使用的数组元素到内存
-
-## 获取测试币
-
-1. https://faucet.goerli.mudit.blog/
-2. faucets.chain.link
-3. https://prealpha.scroll.io/faucet/ (Twitter 30个关注)
-
-4. https://linktr.ee/faucet_dao 购买测试币
-    1. https://app.uniswap.org/#/swap 在poligon网络购买FDT， 0x034f5bEc23a65a80dFd3A5A91dffa88274E9aB24
-    2.  https://www.faucetdao.shop/ 将FDT跨桥到poligon网络，购买tETH

@@ -29,7 +29,7 @@ created_date: 2022-06-07
 5. sync程序生成块并且广播。
 
 ## 矿池奖励分配方式
-- 参考  https://en.bitcoin.it/wiki/Comparison_of_mining_pools
+- 参考链接 https://en.bitcoin.it/wiki/Comparison_of_mining_pools
 
 1. PPS： 矿池每隔一个固定的时间区间就向矿工发放一笔固定金额的收益(算力占比没有变化的情况下)。
 2. FPPS： FPPS与PPS很类似，唯一不同的是，它不仅支付预期的出块奖励，还给与矿工预期的交易手续费。
@@ -37,7 +37,7 @@ created_date: 2022-06-07
 4. PPS+： 是PPS和PPLNS的混合体。出块奖励按PPS模型向矿工发放理论预期值。交易手续费则按照PPLNS方式向矿工分配矿池实际收到的交易手续费。
 
 ## Stratum 协议
-- https://braiins.com/stratum-v1/docs#/
+- 参考链接 https://braiins.com/stratum-v1/docs#/
 - stratum协议于2012年被引入来解决比特币行业的挖矿问题，是目前最常用的挖矿程序和矿池之间的TCP通讯协议。
 - 改进
     1. vs getwork协议
@@ -54,7 +54,7 @@ created_date: 2022-06-07
     4. 提交挖矿结果
     5. 难道调整
 
-- Coinbas e= Coinb1 + Extranonce1 + Extranonce2 + Coinb2
+- Coinbase= Coinb1 + Extranonce1 + Extranonce2 + Coinb2
     - Extranonce2 由矿工生成。
     - 其它 矿池生成。
 
@@ -168,24 +168,3 @@ created_date: 2022-06-07
      // params参数里填写难度值
      {"id":null,"method":"mining.set_difficulty","params":[2]}
      ```
-
-## 挖矿名词
-1. nTime  区块中nTime表示该区块产生的近似时间。
-    - 如果当前区块的时间戳大于前11个区块的的平均时间戳，并且小于“网络调整时间(Network-Adjusted Time)”+2小时，则认为该时间戳是有效的。
-    - “网络调整时间”是指与你相连接的所有节点的平均时间。当节点A连接到节点B时，A从B处得到一个UTC标准的时间戳，A先转换成本地UTC标准时间保存起来，”网络调整时间“等于所有节点的本地UTC时间+所有相连节点的偏移量平均值。
-    - ”网络调整时间“永远不会调整到超过本地系统时间70分钟以上。
-
-2. nBits  区块中nBits(算法难度目标值)表示区块中的难度目标，该值被存为 系数/指数 16进制格式，前2位为指数，接下来6位为系数。
-   1. 难度目标计算的公式： ``目标值 = 系数 * 2^(8 * (指数– 3))``
-   2. 假如一个难度为0x1903a30c，则``Target=0x03a30c * 2^(0x08 * (0x19 - 0x03))``
-
-3. 全网难度调整 
-   1. 比特币的全网难度调整公式 ```New Difficulty = Old Difficulty * (Actual Time of Last 2016 Blocks / 20160 minutes)```
-
-4. nNonce  区块中nNonce(工作量证明算法的计数器)
-   1. Nonce随机数通常不同，但是它以严格的线性方式增长，从0开始，每次HASH时都会增长，当Nonce溢出时(此事经常发生)，生产交易的extraNonce项会增长，将改变Merkle树的根节点。
-
-5. Block header
-    1. Block version, nbits, hash of previous block in the blockchain and some padding bytes, which are constants.
-    2. Nonce and ntime, which miner can modify already.
-    3. Merkle root hash, which is created by hashing of bitcoin transactions included in the particular mining job.

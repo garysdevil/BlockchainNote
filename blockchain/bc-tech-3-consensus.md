@@ -53,7 +53,7 @@ created_date: 2022-08-03
 10. 空间证明 (Proof-of-Space，PoSpace) 存储量的证明，PoSpace是PoW的一种，不同的是PoW使用的计算资源，而PoSpace使用的是存储资源。
 11. 时空证明 (Proof-of-Spacetime，PoSt) 证明在一段时间内，矿工在自己的存储设备上实际的存储了特定的数据。
 
-- 活跃证明（Proof of Activity，PoA） 是一种PoW+PoS混合共识机制
+12. 活跃证明（Proof of Activity，PoA） 是一种PoW+PoS混合共识机制
 
 
 ## 拜占庭将军问题
