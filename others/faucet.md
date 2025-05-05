@@ -1,3 +1,9 @@
+---
+created_date: 2025-05-05
+---
+
+[TOC]
+
 ## 多个测试网网络水龙头
 
 1. https://faucet.trade/
