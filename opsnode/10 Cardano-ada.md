@@ -5,10 +5,10 @@ created_date: 2020-11-16
 [TOC]
 
 - git仓库
-https://github.com/input-output-hk/jormungandr
+  https://github.com/input-output-hk/jormungandr
 - 相关资料
-https://iohk.zendesk.com/hc/en-us/articles/360039342934-How-to-install-Jormungandr-Networking-Linux-
-https://input-output-hk.github.io/jormungandr/introduction.html
+  https://iohk.zendesk.com/hc/en-us/articles/360039342934-How-to-install-Jormungandr-Networking-Linux-
+  https://input-output-hk.github.io/jormungandr/introduction.html
 - 技术问题：https://forum.cardano.org/c/developers/29/l/top
 - 本文档的安装部署未按照以上链接操作，主要基于尧神的文档
 - 团队：IOHK
@@ -17,6 +17,7 @@ https://input-output-hk.github.io/jormungandr/introduction.html
 - 代码：nodejs
 
 #### 安装部署
+
 - docker
 - ubuntu16.04+
 - nodejs v8
@@ -27,11 +28,14 @@ https://input-output-hk.github.io/jormungandr/introduction.html
 - NTP service on
 
 Setup adalite Guide
+
 ##### 安装全节点
+
 - 安装方式 docker-compose
 - 测试环境
-- 先安装docker和docker-compose 
+- 先安装docker和docker-compose
   - 参考文档： https://gist.github.com/garyssdevil/4697c90aff1a93341c4d8085e421dc3e
+
 ```bash
 # 1. 创建系统用户，此用户的UID必须是999.
 useradd -r -m cardano
@@ -60,6 +64,7 @@ chown -R cardano.cardano /data/docker_data
 ```
 
 ##### 区块链游览器 /基于尧神的文档
+
 ```bash
 git clone https://github.com/input-output-hk/cardano-sl.git
 cd cardano-sl
@@ -84,18 +89,20 @@ nohup /data/cardano-sl/connect-explorer-to-mainnet > ./logs/explorer`date '+%Y%m
 ```
 
 ##### 运维须知
+
 - 默认端口
+
   1. 数据库：5432
   2. ada-importer: 8200映射至8202
   3. ada-service: 8080
   4. rpc：8100 （需要安装区块链游览器）
+
 - 区块链游览器,主网
-https://adascan.net/
-https://cardanoexplorer.com/
+  https://adascan.net/
+  https://cardanoexplorer.com/
+
 - 查看官网块高
-https://cardanoexplorer.com/api/blocks/pages
+  https://cardanoexplorer.com/api/blocks/pages
 
 - API查看块高
-curl  127.0.0.1:8100/api/blocks/pages | grep cbeBlkHeight
-
-
+  curl 127.0.0.1:8100/api/blocks/pages | grep cbeBlkHeight

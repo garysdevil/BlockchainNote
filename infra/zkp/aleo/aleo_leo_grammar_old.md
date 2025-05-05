@@ -4,29 +4,39 @@ created_date: 2022-09-29
 
 [TOC]
 
-
 ## 变量
+
 ### 概览
+
 1. 变量赋值后是可以被改变的。
 2. 变量的传递，是直接传递变量的值。
 3. 变量没有 undefined 或者 null 值。
 4. 变量的类型必须被指定。
 5. 没有全局变量。
 
-
 ### 变量类型
+
 - Booleans 布尔类型
+
 - Integers 整型
+
 - 有符号整型 i8, i16, i32, i64, i128
+
 - 无符号整型 u8, u16, u32, u64, u128
-    - 变量的bit越长，需要circuit的约束越多，计算时间越长。
+
+  - 变量的bit越长，需要circuit的约束越多，计算时间越长。
+
 - field 域类型
+
 - Char 字符类型
+
 - Group 组/坐标对
+
 - Address 地址
 
 - Array 数组
-- tuple 元组 
+
+- tuple 元组
 
 ```rust
 // 要声明变量，必须使用 let 关键字。
@@ -71,12 +81,14 @@ let second = b.1;
 ```
 
 ## 算数操作
+
 ```rust
 let a = 4u32;
 let result = (a + 1) * 2; 
 ```
 
 ## 流程控制
+
 ```rust
 let is_valid = true;
 let b: u8 = is_valid ? 1 : 0;
@@ -95,6 +107,7 @@ for i in 0..4 {
 ```
 
 ## 函数
+
 ```rust
 function call(a: u32) {
     a = 0; // the copied value of `a` is set to 0
@@ -109,6 +122,7 @@ function main() -> u32 {
 ```
 
 ## 模块
+
 - vi src/bar.leo
 
 ```rust
@@ -122,6 +136,7 @@ function baz() -> u32 {
 ```
 
 - src/main.leo
+
 ```rust
 import bar.(
     Bar,
@@ -135,8 +150,10 @@ function main() {
 ```
 
 ## 程序输入参数
+
 - 程序输入参数可以被main函数使用。
 - 程序输入参数被定义在这个文件里 inputs/${project_name}.in
+
 ```conf
 [main] // <- section header
 a: u32 = 1;
@@ -156,6 +173,7 @@ function main(a: u32, const b: u32) -> u32 {
 ```
 
 ## Circuits 电路器
+
 ```rust
 // circuit 关键字类似于java中的class
 circuit Point {

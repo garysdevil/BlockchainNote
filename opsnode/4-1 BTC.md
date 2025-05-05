@@ -5,7 +5,9 @@ created_date: 2020-11-16
 [TOC]
 
 ### 部署BTC
+
 - 使用node进行安装部署
+
 ```shell
 apt-get install libzmq3-dev build-essential 
 
@@ -62,19 +64,23 @@ bitcored > ${logPath} 2>&1
 # 启动
 bash startBtc.sh
 ```
-### 运维须知
-1. 默认端口  
-    p2p: 8333  
-    rpc: 8332
-    bitcore: 3001  
-    ZMQ: 28332
 
-2. API获取块高  
-    curl http://localhost:3001/insight-api/sync
+### 运维须知
+
+1. 默认端口\
+   p2p: 8333\
+   rpc: 8332
+   bitcore: 3001\
+   ZMQ: 28332
+
+2. API获取块高\
+   curl http://localhost:3001/insight-api/sync
 
 3. 获取相关信息
-    curl http://localhost:3001/insight-api/status?=getTxOutSetInfo
+   curl http://localhost:3001/insight-api/status?=getTxOutSetInfo
+
 4. 区块链游览器
-  https://tbtc.bitaps.com/
+   https://tbtc.bitaps.com/
+
 5. 免费的接口调用（封装过的）
-  https://developer.bitaps.com/blockchain#Last_block
+   https://developer.bitaps.com/blockchain#Last_block

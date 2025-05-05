@@ -6,7 +6,9 @@ created_date: 2022-03-20
 [TOC]
 
 ## 模拟工具
+
 - 区块链模拟工具
+
 ```bash
 nvm use v8.17.0
 npm install blockchain-cli
@@ -14,28 +16,31 @@ blockchain help
 ```
 
 ## 测试网
+
 - 比特币测试网钱包生成器 https://www.bitaddress.org/
-    - bitcoin address是1开头的，是比特币主网地址
-    - 我的测试地址 1MbMM5hNuK6x2BrHKxtMUcoymbRZLQwHR6
-    - 我的测试私钥 KyTqqttrE28FPunLS3Cg5E8pFf6WNJirRCdCr9GUYQNFs1LTm3Xr
 
-- 比特币测试网水龙头 
-    - https://kuttler.eu/en/bitcoin/btc/faucet/
-    - https://coinfaucet.eu/en/btc-testnet/
-    - https://testnet-faucet.mempool.co/
+  - bitcoin address是1开头的，是比特币主网地址
+  - 我的测试地址 1MbMM5hNuK6x2BrHKxtMUcoymbRZLQwHR6
+  - 我的测试私钥 KyTqqttrE28FPunLS3Cg5E8pFf6WNJirRCdCr9GUYQNFs1LTm3Xr
 
+- 比特币测试网水龙头
 
-- 比特币测试网游览器 
-    - https://blockchair.com/zh/bitcoin/testnet
-    - https://live.blockcypher.com/btc-testnet/
-    - https://bitpay.com/insight/#/BTC/testnet/home
+  - https://kuttler.eu/en/bitcoin/btc/faucet/
+  - https://coinfaucet.eu/en/btc-testnet/
+  - https://testnet-faucet.mempool.co/
 
+- 比特币测试网游览器
+
+  - https://blockchair.com/zh/bitcoin/testnet
+  - https://live.blockcypher.com/btc-testnet/
+  - https://bitpay.com/insight/#/BTC/testnet/home
 
 - 比特币谷歌插件钱包（支持测试网）
-    - https://chrome.google.com/webstore/detail/pay-with-bitpay/jkjgekcefbkpogohigkgooodolhdgcda/related
 
+  - https://chrome.google.com/webstore/detail/pay-with-bitpay/jkjgekcefbkpogohigkgooodolhdgcda/related
 
 ## bitcoin
+
 ### windows 编译环境
 
 ```powershell
@@ -48,8 +53,10 @@ wsl --install
 # -d 指定使用的子系统  -u 指定用户
 wsl -d Ubuntu -u garysdevil
 ```
+
 ### 编译
-```bash
+
+````bash
 ## 配置
 ```bash
 ./autogen.sh
@@ -60,7 +67,7 @@ wsl -d Ubuntu -u garysdevil
 make        # use "-j N" here for N parallel jobs
 # 运行测试程序
 make check  # Run tests if Python 3 is available
-```
+````
 
 ```bash
 # 编译到指定目录
@@ -69,6 +76,7 @@ make deploy
 ```
 
 ### bitcoin 编译报错
+
 ```bash
 # Windows 环境编译报错 We could not detect the boost libraries (version 1.73.0 or higher)
 # 可能是因为在Windows Subsystem for Linux (WSL)中未安装或未正确配置Boost库的版本
@@ -80,7 +88,9 @@ dpkg -l | grep libboost
 ```
 
 ## bitcoin-cli 环境
+
 ### Linux
+
 ```bash
 mkdir -p ~/.bitcoin
 cd ~/.bitcoin
@@ -90,6 +100,7 @@ echo "rpcpassword=${password}" >> bitcoin.conf
 ```
 
 ### Mac
+
 ```bash
 # bitcoin/src/bitcoin-cli
 mv bitcoin-cli /usr/local/bin/
@@ -100,9 +111,10 @@ echo "rpcuser=${username}" >> bitcoin.conf
 echo "rpcpassword=${password}" >> bitcoin.conf
 ```
 
-
 ## bitcoin-cli 指令
+
 ### 基本指令
+
 ```bash
 # 生成一个钱包
 bitcoin-cli createwallet $wallet_name
@@ -141,6 +153,7 @@ bitcoin-cli deriveaddresses "wpkh([d34db33f/84h/0h/0h]xpub6DJ2dNUysrn5Vt36jH2KLB
 ```
 
 ### 用例
+
 ```bash
 # 签名与验证签名
 
@@ -151,7 +164,6 @@ bitcoin-cli signmessage "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX" "my message"
 # Verify the signature
 bitcoin-cli verifymessage "1D1ZrZNe3JUo7ZycKEYQQiQAWd9y54F4XX" "signature" "my message"
 ```
-
 
 ```bash
 # 指定区块，输出未被开销的UTXO所在的钱包地址
@@ -199,11 +211,12 @@ done
 ```
 
 ## 术语
+
 - 描述符（descriptors）
-    - 是一种用于描述如何从密钥派生地址的格式。
-    - 基本形式 `wpkh(<xpub>/0/*)`
-    - wpkh 是一个函数，表示要生成一个支付到公钥哈希的隔离见证类型（witness public key hash，简称wpkh）的地址。
-        - sh（表示统的支付到公钥哈希（P2PKH）地址）
-        - wsh（表示隔离见证脚本哈希地址）
-        - multi（表示多签名地址）
-    - /0/*: 这部分指定了要派生的子地址的索引，/0表示索引为0，/*表示可以生成更多的子地址。
+  - 是一种用于描述如何从密钥派生地址的格式。
+  - 基本形式 `wpkh(<xpub>/0/*)`
+  - wpkh 是一个函数，表示要生成一个支付到公钥哈希的隔离见证类型（witness public key hash，简称wpkh）的地址。
+    - sh（表示统的支付到公钥哈希（P2PKH）地址）
+    - wsh（表示隔离见证脚本哈希地址）
+    - multi（表示多签名地址）
+  - /0/\*: 这部分指定了要派生的子地址的索引，/0表示索引为0，/\*表示可以生成更多的子地址。

@@ -4,8 +4,10 @@ created_date: 2020-11-16
 
 [TOC]
 
- [官网详情链接](https://www.irisnet.org/docs/get-started/mainnet.html#upgrade-to-validator-node)
+[官网详情链接](https://www.irisnet.org/docs/get-started/mainnet.html#upgrade-to-validator-node)
+
 ### 部署Iris
+
 ```bash
 # 安装go环境
 goPath=~/go
@@ -39,21 +41,20 @@ rpcLogPath=/data/iris/iriscli/server.log
 irislcd  start --node=tcp://localhost:26657 --laddr=tcp://0.0.0.0:1317 --chain-id=irishub --home=${homePath} --trust-node >  ${rpcLogPath} 2>&1
 
 ```
-### 运维须知
-1. 默认端口
-    rpc: 1317
-    p2p: 26656
-2. 查看节点信息
-    iriscli status
-3. 指令查看块高
-    iriscli status | grep latest_block_height 
-1. API查看块高 
-    curl http://127.0.0.1:1317/blocks/latest
-2. 通过快照同步快高
-    iris snapshot --home=<path-to-your-home>
 
+### 运维须知
+
+1. 默认端口
+   rpc: 1317
+   p2p: 26656
+2. 查看节点信息
+   iriscli status
+3. 指令查看块高
+   iriscli status | grep latest_block_height
+4. API查看块高
+   curl http://127.0.0.1:1317/blocks/latest
+5. 通过快照同步快高
+   iris snapshot --home=<path-to-your-home>
 
 20191129更新：
 跳转：3447000
-
-

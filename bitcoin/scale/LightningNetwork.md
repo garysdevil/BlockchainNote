@@ -1,82 +1,92 @@
 ---
-title: "比特币闪电网络"
+title: 比特币闪电网络
 created_date: 2025-05-04
 ---
 
 # 闪电网络
+
 ## 相关链接
+
 - **区块链浏览器**：
-  - 主网：[1ml.com](https://1ml.com/)  
-  - 测试网：[1ml.com/testnet](https://1ml.com/testnet)  
-- **通道互助**：[lightningnetwork.plus](https://lightningnetwork.plus/)  
-- **视频教程**：[YouTube](https://www.youtube.com/watch?v=MFwdzZI5HJg)  
+  - 主网：[1ml.com](https://1ml.com/)
+  - 测试网：[1ml.com/testnet](https://1ml.com/testnet)
+- **通道互助**：[lightningnetwork.plus](https://lightningnetwork.plus/)
+- **视频教程**：[YouTube](https://www.youtube.com/watch?v=MFwdzZI5HJg)
 - **参考资料**：
-  - 运行闪电网络节点：[HackMD](https://hackmd.io/@lnbook-cn/r1I1FkC0s?utm_source=preview-mode&utm_medium=rec#Ch05-%E8%BF%90%E8%A1%8C%E4%B8%80%E4%B8%AA%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%E8%8A%82%E7%82%B9%EF%BC%88%E8%AF%91%E8%80%85%E5%AE%8C%E6%88%90%EF%BC%89)  
-  - 容错与自动化：[HackMD](https://hackmd.io/@lnbook-cn/r1I1FkC0s?utm_source=preview-mode&utm_medium=rec#%E5%AE%B9%E9%94%99%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96)  
-  - 闪电网络 DeFi 研究：[Zhihu](https://zhuanlan.zhihu.com/p/572666181)  
-  - 闪电网络历史：[BTCStudy](https://www.btcstudy.org/2020/09/03/history-lightning-brainstorm-beta/)  
+  - 运行闪电网络节点：[HackMD](https://hackmd.io/@lnbook-cn/r1I1FkC0s?utm_source=preview-mode&utm_medium=rec#Ch05-%E8%BF%90%E8%A1%8C%E4%B8%80%E4%B8%AA%E9%97%AA%E7%94%B5%E7%BD%91%E7%BB%9C%E8%8A%82%E7%82%B9%EF%BC%88%E8%AF%91%E8%80%85%E5%AE%8C%E6%88%90%EF%BC%89)
+  - 容错与自动化：[HackMD](https://hackmd.io/@lnbook-cn/r1I1FkC0s?utm_source=preview-mode&utm_medium=rec#%E5%AE%B9%E9%94%99%E4%B8%8E%E8%87%AA%E5%8A%A8%E5%8C%96)
+  - 闪电网络 DeFi 研究：[Zhihu](https://zhuanlan.zhihu.com/p/572666181)
+  - 闪电网络历史：[BTCStudy](https://www.btcstudy.org/2020/09/03/history-lightning-brainstorm-beta/)
   - 闪电钱包推荐：[Twitter](https://twitter.com/AurtrianAjian/status/1629039315748806657)
 
 ## 闪电网络
+
 - 闪电网络（Lightning Network）是比特币的第二层扩展解决方案，旨在实现快速、低成本的交易，同时保持去中心化和安全性。其核心通过链下支付通道处理交易，仅在必要时与比特币主链交互。
 
 - 核心原理
-    - **RSMC（Revocable Sequence Maturity Contract）**：序列到期可撤销合约，确保交易可撤销并防止作弊。
-    - **HTLC（Hashed Timelock Contract）**：哈希时间锁定合约，用于安全地跨通道路由支付，结合时间锁和哈希锁。
+
+  - **RSMC（Revocable Sequence Maturity Contract）**：序列到期可撤销合约，确保交易可撤销并防止作弊。
+  - **HTLC（Hashed Timelock Contract）**：哈希时间锁定合约，用于安全地跨通道路由支付，结合时间锁和哈希锁。
 
 ## 闪电网络钱包
+
 闪电网络钱包按用户控制程度分为三类：
+
 1. **标准支付通道（自主保管钱包）**：用户完全控制私钥和资金。
-   - **Phoenix 钱包**  
-   - **Bitcoin Lightning Wallet**  
+   - **Phoenix 钱包**
+   - **Bitcoin Lightning Wallet**
    - **蓝钱包（BlueWallet）**：简单易用，支持链上和闪电网络交易，可直接买卖比特币。
 2. **完全托管通道（托管式钱包）**：资金由第三方管理，适合新手。
-   - **Zap 钱包**：Android 钱包，界面简洁，支持买卖比特币。  
-   - **Eclair Wallet**：Android 钱包，时尚界面，支持买卖比特币。  
-   - **Lightning Wallet**：Android 钱包，简单易用，支持买卖比特币。  
-   - **Boltzmann 钱包**：Android 新钱包，界面吸引，支持买卖比特币。  
-   - **其他**：CashPay、Strike、Tippin.me、OneKey（Chrome 扩展）。  
+   - **Zap 钱包**：Android 钱包，界面简洁，支持买卖比特币。
+   - **Eclair Wallet**：Android 钱包，时尚界面，支持买卖比特币。
+   - **Lightning Wallet**：Android 钱包，简单易用，支持买卖比特币。
+   - **Boltzmann 钱包**：Android 新钱包，界面吸引，支持买卖比特币。
+   - **其他**：CashPay、Strike、Tippin.me、OneKey（Chrome 扩展）。
 3. **零配置通道**：搭配闪电网络服务商（LSP），简化设置。
 
-
 ## 闪电网络协议与实现
+
 - **BOLTs 协议规格**：定义闪电网络标准（[GitHub](https://github.com/lightning/bolts)）。
 - **LNURL**：简化用户交互的协议（[GitHub](https://github.com/lnurl/luds)）。
 - **BOLT 12**：提供 LNURL 部分功能，无需 Web 服务器。
 - **主要客户端实现**：
-  1. **LND (Lightning Network Daemon)**  
-     - 开发：Lightning Labs  
-     - 语言：Golang  
-     - 市场占有率：91.17%  
-     - 链接：[GitHub](https://github.com/lightningnetwork/lnd)  
-  2. **Core Lightning (CLN)**  
-     - 开发：Blockstream  
-     - 语言：C  
-     - 市场占有率：7.01%  
-     - 特点：插件系统提供模块化  
-  3. **Eclair**  
-     - 开发：ACINQ  
-     - 语言：Scala  
-     - 市场占有率：1.82%  
-  4. **Rust Lightning**  
-     - 开发：Square Crypto  
-     - 语言：Rust  
+  1. **LND (Lightning Network Daemon)**
+     - 开发：Lightning Labs
+     - 语言：Golang
+     - 市场占有率：91.17%
+     - 链接：[GitHub](https://github.com/lightningnetwork/lnd)
+  2. **Core Lightning (CLN)**
+     - 开发：Blockstream
+     - 语言：C
+     - 市场占有率：7.01%
+     - 特点：插件系统提供模块化
+  3. **Eclair**
+     - 开发：ACINQ
+     - 语言：Scala
+     - 市场占有率：1.82%
+  4. **Rust Lightning**
+     - 开发：Square Crypto
+     - 语言：Rust
 
 ## 闪电网络数据备份与恢复
+
 - **BIP-39 助记词**：用于备份链上资金，但无法恢复闪电通道状态。
 - **静态通道备份（SCB）**：专门备份闪电通道数据，至关重要。
   - **重要性**：无 SCB，丢失节点数据可能导致通道资金永久损失。
   - **恢复流程**：需与通道对手交互，依赖对手诚实性。存在风险（如对手提供旧交易或欺诈），但 SCB 仍能提高资金恢复概率。
   - **建议**：始终启用 SCB，避免因数据丢失导致资金无法挽回。
 
-
 # 闪电网络节点部署
+
 ## LND
-- 部署参考教程 
-    - Windows https://mirror.xyz/cyberscavenger.eth/5Z-v2tBGT1UYaDChOcVUy8tlcgbamLZb7Uhc-_p7hZI
-    - Ubuntu https://www.jianshu.com/p/da3d215ec57d
+
+- 部署参考教程
+  - Windows https://mirror.xyz/cyberscavenger.eth/5Z-v2tBGT1UYaDChOcVUy8tlcgbamLZb7Uhc-\_p7hZI
+  - Ubuntu https://www.jianshu.com/p/da3d215ec57d
 - 配置文件 https://github.com/lightningnetwork/lnd/blob/master/sample-lnd.conf
+
 ### lnd部署
+
 ```bash
 wget https://github.com/lightningnetwork/lnd/releases/download/v0.17.3-beta/lnd-linux-amd64-v0.17.3-beta.tar.gz
 tar xzvf lnd-linux-amd64-v0.17.3-beta.tar.gz
@@ -100,7 +110,9 @@ tail -n200 -f lnd_data/logs/bitcoin/testnet/lnd.log
 ```
 
 ### lnd配置
+
 - 默认路径 /root/.lnd/lnd.conf
+
 ```conf
 [Application Options]
 # 闪电网络的数据存储目录 如果不指定这个的话 默认在 /root/.lnd 路径下
@@ -158,6 +170,7 @@ wtclient.active=1
 ```
 
 ### lnd服务化
+
 ```conf
 [Unit]
 Description=LND Lightning Daemon
@@ -180,6 +193,7 @@ WantedBy=multi-user.target
 ```
 
 ### lncli客户端
+
 ```bash
 # --macaroonpath /data2/lnd/lnd_data/chain/bitcoin/mainnet/admin.macaroon
 # --macaroonpath /opt/lnd/lnd_data/chain/bitcoin/testnet/admin.macaroon
@@ -230,14 +244,16 @@ lncli listpayments
 ```
 
 ## Bitcoin全节点
+
 - 配置文件
-    - 配置文件  https://github.com/bitcoin/bitcoin/blob/master/doc/bitcoin-conf.md
-    - 自动配置网站 https://jlopp.github.io/bitcoin-core-config-generator/
-- 区块链游览器 
-    - https://blockstream.info/testnet/
-    - https://blockchair.com/bitcoin/testnet 可以查看手续费
+  - 配置文件 https://github.com/bitcoin/bitcoin/blob/master/doc/bitcoin-conf.md
+  - 自动配置网站 https://jlopp.github.io/bitcoin-core-config-generator/
+- 区块链游览器
+  - https://blockstream.info/testnet/
+  - https://blockchair.com/bitcoin/testnet 可以查看手续费
 
 ### bitcoind部署
+
 ```bash
 # 安装 bitcoind
 # https://bitcoincore.org/bin/bitcoin-core-26.0/
@@ -265,6 +281,7 @@ tail -n200 -f ~/.bitcoin/testnet3/debug.log
 ```
 
 ### bitcoind默认配置
+
 ```conf
 # 默认配置
 
@@ -291,6 +308,7 @@ debuglogfile=~/.bitcoin/debug.log # 测试网 ~/.bitcoin/testnet3/debug.log
 ```
 
 ### bitcoind配置
+
 ```conf
 # [core]
 # Specify a non-default location to store blockchain data.
@@ -323,6 +341,7 @@ zmqpubrawtx=tcp://127.0.0.1:28333
 ```
 
 ### bitcoind服务化
+
 ```conf
 [Unit]
 Description=Bitcoin deamon service
@@ -346,6 +365,7 @@ WantedBy=multi-user.target
 ```
 
 ### bitcoin-cli客户端
+
 ```bash
 bitcoin-cli getblockchaininfo
 ```

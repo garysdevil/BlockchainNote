@@ -5,9 +5,10 @@ created_date: 2020-11-16
 [TOC]
 
 #### 安装部署
+
 1. 硬件配置
-2c4g100g
-ubuntu
+   2c4g100g
+   ubuntu
 
 2. JRE1.8
 
@@ -56,6 +57,7 @@ journalctl -u vsys.service -f
 ```
 
 ## 运维须知
+
 API查看块高
 curl -X GET --header 'Accept: application/json' 'http://localhost:9922/blocks/height'
 测试节点

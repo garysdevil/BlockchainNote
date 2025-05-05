@@ -5,30 +5,33 @@ created_date: 2024-02-28
 [TOC]
 
 ## 链接
-- 部署文档 
+
+- 部署文档
   - https://docs.blastapi.io/running-a-node/supported-chains/ethereum/sepolia-testnet
   - https://docs.prylabs.network/docs/execution-node/authentication
 - 区块链浏览器 https://sepolia.etherscan.io/
 
 ## ETH节点客户端介绍
+
 - 执行客户端
-  | 客户端     | 语言    | 操作系统：            | 网络                                                         | 同步策略   | 状态缓冲        |
+  | 客户端 | 语言 | 操作系统： | 网络 | 同步策略 | 状态缓冲 |
   | ---------- | ------- | --------------------- | ------------------------------------------------------------ | ---------- | --------------- |
-  | Geth       | Go      | Linux, Windows, macOS | #M, Sepolia, Görli, Ropsten, Rinkeby                         | 快照、完全 | Archive, Pruned |
-  | Nethermind | C#. NET | Linux, Windows, macOS | 主网、Sepolia、Gorli、Ropsten、Rinkeby 快照（不提供服务）、快速、完 等 | 全         | Archive, Pruned |
-  | Besu       | Java    | Linux, Windows, macOS | #, Sepolia, Görli, Ropsten, Rinkeby 等                       | 快速、完全 | Archive, Pruned |
-  | Erigon     | Go      | Linux, Windows, macOS | 主网、 Sepolia, Görli, Rinkeby, Ropsten 等                   | 完全       | Archive, Pruned |
+  | Geth | Go | Linux, Windows, macOS | #M, Sepolia, Görli, Ropsten, Rinkeby | 快照、完全 | Archive, Pruned |
+  | Nethermind | C#. NET | Linux, Windows, macOS | 主网、Sepolia、Gorli、Ropsten、Rinkeby 快照（不提供服务）、快速、完 等 | 全 | Archive, Pruned |
+  | Besu | Java | Linux, Windows, macOS | #, Sepolia, Görli, Ropsten, Rinkeby 等 | 快速、完全 | Archive, Pruned |
+  | Erigon | Go | Linux, Windows, macOS | 主网、 Sepolia, Görli, Rinkeby, Ropsten 等 | 完全 | Archive, Pruned |
 
 - 共识客户端
-  | 客户端     | 语言       | 操作系统：            | 网络                                                |
+  | 客户端 | 语言 | 操作系统： | 网络 |
   | ---------- | ---------- | --------------------- | --------------------------------------------------- |
-  | Lighthouse | Rust       | Linux, Windows, macOS | 信标链、Goerli、Pyrmont、Sepolia、Ropsten 等        |
-  | Lodestar   | TypeScript | Linux, Windows, macOS | 信标链、Goerli、Sepolia、Ropsten 等                 |
-  | Nimbus     | Nim        | Linux, Windows, macos | 信标链、Goerli、Sepolia、Ropsten 等                 |
-  | Prysm      | Go         | Linux, Windows, macOS | 151TtE, Gnosis, Goerli, Pyrmont, Sepolia, Ropsten # |
-  | Teku       | Java       | Linux, Windows, macOS | 信标链、 Gnosis, Goerli, Sepolia, Ropsten #         |
+  | Lighthouse | Rust | Linux, Windows, macOS | 信标链、Goerli、Pyrmont、Sepolia、Ropsten 等 |
+  | Lodestar | TypeScript | Linux, Windows, macOS | 信标链、Goerli、Sepolia、Ropsten 等 |
+  | Nimbus | Nim | Linux, Windows, macos | 信标链、Goerli、Sepolia、Ropsten 等 |
+  | Prysm | Go | Linux, Windows, macOS | 151TtE, Gnosis, Goerli, Pyrmont, Sepolia, Ropsten # |
+  | Teku | Java | Linux, Windows, macOS | 信标链、 Gnosis, Goerli, Sepolia, Ropsten # |
 
 ## 部署节点 sepolia网络
+
 ```bash
 mkdir ethereum
 cd ethereum
@@ -36,6 +39,7 @@ mkdir consensus
 mkdir execution
 openssl rand -hex 32 | tr -d "\n" > "jwt.hex"
 ```
+
 ```bash
 # 下载执行客户端
 # https://geth.ethereum.org/downloads 或 https://geth.ethereum.org/docs/getting-started/installing-geth
@@ -43,6 +47,7 @@ openssl rand -hex 32 | tr -d "\n" > "jwt.hex"
 # 下载共识客户端
 curl https://raw.githubusercontent.com/prysmaticlabs/prysm/master/prysm.sh --output prysm.sh && chmod +x prysm.sh
 ```
+
 ```bash
 metrics_addr=127.0.0.1
 datadir=/data4/ethereum/data
@@ -56,13 +61,16 @@ tail -f /opt/ethereum/logs/beacon.log
 ```
 
 ## 运维节点
+
 ### 端口
+
 1. 默认端口
-	1. p2p：30303
-	2. rpc: 8545
-	3. ws: 8546
+   1. p2p：30303
+   2. rpc: 8545
+   3. ws: 8546
 
 ### API
+
 ```bash
 curl -H "Content-Type: application/json" -d '{"id":1, "jsonrpc":"2.0", "method": "eth_syncing","params": []}' 127.0.0.1:8545 | jq
 
@@ -85,6 +93,7 @@ wscat --connect ws://localhost:8546
 ### geth控制台指令
 
 - 基本指令
+
 ```js
 web3 // 查看所有的控制台指令
 
@@ -130,6 +139,7 @@ web3.fromWei(${value}) // 将wei换算为以太币
 ```
 
 ### 部署合约调用合约
+
 ```js
 abivar=abi内容 // abi内容
 binvar="0x"+"bin内容" // 字节码内容

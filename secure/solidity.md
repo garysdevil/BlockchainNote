@@ -5,11 +5,14 @@ created_date: 2022-04-07
 [TOC]
 
 # 安全
+
 - 参考
-    - https://ethereum.org/zh/developers/docs/security/
-    - 最佳安全开发指南 https://github.com/ConsenSys/smart-contract-best-practices
-    - 以太坊官方博客，带有Security标签的博客 https://blog.ethereum.org/category/security/
+  - https://ethereum.org/zh/developers/docs/security/
+  - 最佳安全开发指南 https://github.com/ConsenSys/smart-contract-best-practices
+  - 以太坊官方博客，带有Security标签的博客 https://blog.ethereum.org/category/security/
+
 ## 常见的 Solidity 的漏洞类型
+
 - Reentrancy - 重入
 - Access Control - 访问控制
 - Arithmetic Issues - 算术问题（整数上下溢出）
@@ -22,18 +25,21 @@ created_date: 2022-04-07
 - Unknown Unknowns - 其他未知
 
 ### 重入漏洞
+
 - 重入漏洞存在于合约之间的交互过程
-    - 攻击方发送一笔交易，导致合约代码重复执行直到将合约账户的资源消耗完。这有点类似于C语言的递归函数。攻击方能成功进行可重入攻击，主要依赖于Soildity为智能合约提供的fallback和call函数
+  - 攻击方发送一笔交易，导致合约代码重复执行直到将合约账户的资源消耗完。这有点类似于C语言的递归函数。攻击方能成功进行可重入攻击，主要依赖于Soildity为智能合约提供的fallback和call函数
 - 重入漏洞成立的条件
-    1. 有转账功能（Payable）
-    2. 状态变量在call函数调用之后
-    
+  1. 有转账功能（Payable）
+  2. 状态变量在call函数调用之后
+
 ## 审计
+
 - slither
-    - 用 Python 3 编写的 Solidity 静态分析框架
-    - https://github.com/crytic/slither
+  - 用 Python 3 编写的 Solidity 静态分析框架
+  - https://github.com/crytic/slither
 
 ## 反编译
+
 - 参考
-    - https://github.com/comaeio/porosity
-    - https://www.pnfsoftware.com/blog/ethereum-smart-contract-decompiler/
+  - https://github.com/comaeio/porosity
+  - https://www.pnfsoftware.com/blog/ethereum-smart-contract-decompiler/

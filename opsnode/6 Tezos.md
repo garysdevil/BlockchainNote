@@ -5,10 +5,13 @@ created_date: 2020-11-16
 [TOC]
 
 - 参考文档
-https://tezos.gitlab.io
+  https://tezos.gitlab.io
+
 ### 部署 Tezos
+
 - 部署方式docker
-1. 硬件要求  
+
+1. 硬件要求\
    最低2C4G，否则会出现同步缓慢，磁盘吞吐量飙升
 
 ```shell
@@ -40,28 +43,33 @@ mainnet.sh node start --rpc-port 0.0.0.0:8732
 ```
 
 ### 运维须知
+
 1. 默认端口
-    - p2p：9732
-    - rpc：8732
+
+   - p2p：9732
+   - rpc：8732
 
 2. 浏览器
-    - 主网  
-    https://tzscan.io/ 废弃
-    https://tezos.id/
-    - 测试网  
-    https://alphanet.tzscan.io/ 废弃
-    https://babylonnet.tezos.id/
 
-3. 数据目录  
-   /data/docker/volumes/mainnet_node_data/_data/data
-    
+   - 主网\
+     https://tzscan.io/ 废弃
+     https://tezos.id/
+   - 测试网\
+     https://alphanet.tzscan.io/ 废弃
+     https://babylonnet.tezos.id/
+
+3. 数据目录\
+   /data/docker/volumes/mainnet_node_data/\_data/data
+
 4. 常用命令
-mainnet.sh node <start|stop|status|log>
+   mainnet.sh node \<start|stop|status|log>
 
-5. 指令查看块高 
-  - mainnet.sh head
+5. 指令查看块高
+
+- mainnet.sh head
 
 6. tezos-node shell 内的命令
+
 ```shell
 1. 生成节点id  
   tezos-node identity generate
@@ -78,5 +86,6 @@ mainnet.sh node <start|stop|status|log>
 ```
 
 7. API查看块高
-  - 本地 curl http://127.0.0.1:8732/chains/main/blocks/head/header | grep level
-  - 官网主网 curl https://api.tzstats.com/explorer/block/head | grep height
+
+- 本地 curl http://127.0.0.1:8732/chains/main/blocks/head/header | grep level
+- 官网主网 curl https://api.tzstats.com/explorer/block/head | grep height

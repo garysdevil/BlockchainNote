@@ -7,7 +7,9 @@ created_date: 2020-11-16
 - 5M带宽跑，块高完成同步失败；10M带宽跑,失败。
 - 使用apt的包进行安装
 - rippled version 1.3.1
+
 ### 部署Ripple XRP
+
 ```shell
 apt -y update
 
@@ -38,16 +40,18 @@ vim /opt/ripple/etc/validators.txt
     [validator_list_sites] https://vl.ripple.com
     [validator_list_keys] ED2677ABFFD1B33AC6FBC3062B71F1E8397C1505E1C42C64D11AD1B28FF73F4734
 ```
+
 ### 运维须知
-1. 默认端口  
-    p2p：51235  
-    RPC：5005  
-    ws: 6006  
-2. 查看连接上的节点  
-    /opt/ripple/bin/rippled peers  
-3. 手动连接一个节点  
-    connect <ip> [<port>]  
-4. 指令查看块高  
-    /opt/ripple/bin/rippled ledger | grep seqNum
-5. 获取本地节点的信息  
-    /opt/ripple/bin/rippled server_info  
+
+1. 默认端口\
+   p2p：51235\
+   RPC：5005\
+   ws: 6006
+2. 查看连接上的节点\
+   /opt/ripple/bin/rippled peers
+3. 手动连接一个节点\
+   connect <ip> \[<port>\]
+4. 指令查看块高\
+   /opt/ripple/bin/rippled ledger | grep seqNum
+5. 获取本地节点的信息\
+   /opt/ripple/bin/rippled server_info

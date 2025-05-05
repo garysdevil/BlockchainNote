@@ -5,6 +5,7 @@ created_date: 2022-09-24
 [TOC]
 
 ## 相关资料链接
+
 1. Aleo SDK https://github.com/AleoHQ/aleo
 2. Aleo SDK主要贡献者entropy1729团队官网 https://www.entropy1729.com/
 3. Aleo SDK主要贡献者entropy1729团队GIthub https://github.com/Entropy1729
@@ -13,28 +14,32 @@ created_date: 2022-09-24
 6. Aleo SDK基本语法 https://www.entropy1729.com/aleo-development-starter-pack/
 
 - 编程案例
-    - https://github.com/zkprivacy/aleo-vote
+  - https://github.com/zkprivacy/aleo-vote
 
 ## Aleo SDK 安装
+
 - 通过Rust宝箱仓库安装
-    ```bash
-    # 官方代码在快速迭代中，更加推荐通过源码进行安装
-    cargo install aleo
-    ```
+
+  ```bash
+  # 官方代码在快速迭代中，更加推荐通过源码进行安装
+  cargo install aleo
+  ```
 
 - 通过编译源码安装
-    ```bash
-    # 下载源码 
-    git clone https://github.com/AleoHQ/aleo.git
-    # 进入源码目录
-    cd aleo
-    # 安装 aleo sdk 程序 # rust安装教程 https://www.rust-lang.org/tools/install
-    cargo install --path .
-    # 查看是否安装成功
-    aleo -h
-    ```
+
+  ```bash
+  # 下载源码 
+  git clone https://github.com/AleoHQ/aleo.git
+  # 进入源码目录
+  cd aleo
+  # 安装 aleo sdk 程序 # rust安装教程 https://www.rust-lang.org/tools/install
+  cargo install --path .
+  # 查看是否安装成功
+  aleo -h
+  ```
 
 ## Aleo SDK 指令
+
 ```bash
 # 创建一个包
 aleo new 包名字
@@ -71,27 +76,29 @@ aleo clean
 ```
 
 ## Aleo SDK 的Hello World程序
-- 编写一个函数，从外部输入两个数字，然后进行相加，最后输出结果。
-    ```bash
-    aleo new aleo_hello
-    cd aleo_hello
-    vim main.aleo # 输入下面的代码片段
-    aleo run add_fun 2021u32 1u32 # 执行add_fun相加函数，传入2021和1两个数字
-    aleo node start # 本地运行一个开发节点，并且部署运行程序
-    ```
-- 代码片段
-    ```rs
-    program aleo_hello.aleo;
 
-    // 运行方式 aleo run add_fun 2021u32 1u32
-    function add_fun: // 通过 function 关键字定义一个函数
-        input r0 as u32.public; // 定义一个输入参数r0，类型为u32，可见性为public
-        input r1 as u32.private;
-        add r0 r1 into r2; // 调用sdk的函数add
-        output r2 as u32.private; // 定义一个输出参数r2，类型为u32，可见性为private
-    ```
+- 编写一个函数，从外部输入两个数字，然后进行相加，最后输出结果。
+  ```bash
+  aleo new aleo_hello
+  cd aleo_hello
+  vim main.aleo # 输入下面的代码片段
+  aleo run add_fun 2021u32 1u32 # 执行add_fun相加函数，传入2021和1两个数字
+  aleo node start # 本地运行一个开发节点，并且部署运行程序
+  ```
+- 代码片段
+  ```rs
+  program aleo_hello.aleo;
+
+  // 运行方式 aleo run add_fun 2021u32 1u32
+  function add_fun: // 通过 function 关键字定义一个函数
+      input r0 as u32.public; // 定义一个输入参数r0，类型为u32，可见性为public
+      input r1 as u32.private;
+      add r0 r1 into r2; // 调用sdk的函数add
+      output r2 as u32.private; // 定义一个输出参数r2，类型为u32，可见性为private
+  ```
 
 ## Aleo SDK 本地开发节点API
+
 ```bash
 # 查看最新的块高
 curl http://localhost:4180/testnet3/latest/block/height

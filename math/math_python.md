@@ -6,14 +6,17 @@ created_date: 2022-08-28
 [TOC]
 
 ## Python求数学题
+
 - C(n,m)
 - C上标是m下标是n，表示从n个不同元素中任取m个元素的不同取法的种数，称为组合数。
-- C上标是m下标是n，等于 (n!) / (m!*(n-m)!)
+- C上标是m下标是n，等于 (n!) / (m!\*(n-m)!)
+
 ```python
 math.factorial(n) / ( math.factorial(m) * math.factorial(n-m) )
 ```
 
 - 使用python求阶乘
+
 ```python
 import math
 number=3
@@ -21,6 +24,7 @@ math.factorial(number)
 ```
 
 - 使用python求根
+
 ```python
 import cmath
 cmath.sqrt(num)

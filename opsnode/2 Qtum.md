@@ -4,10 +4,12 @@ created_date: 2020-11-16
 
 [TOC]
 
-
 ## 部署Qtum
+
 - 使用源码进行安装部署
+
 ### 1.安装gcc
+
 yum -y update gcc
 yum -y install gcc+ gcc-c++
 
@@ -54,7 +56,9 @@ reboot
 gcc -v
 cc -v
 ```
+
 ### 4.日志配置
+
 ```bash
 mkdir /data/logs
 yum install rsyslog -y
@@ -460,32 +464,37 @@ access_log /var/log/nginx/qtum.info.access.log;
 error_log /var/log/nginx/qtum.info.error.log;
 }
 ```
+
 ## 2 Qtum运维须知
 
 1. 启动服务进程 rsyslog
-    - 作为qtum-core服务 和 qtuminfo服务 的日志模块
+
+   - 作为qtum-core服务 和 qtuminfo服务 的日志模块
 
 2. qtum-core：扫描公网同步块高的核心二进制程序
-    - 服务化qtum-core二进制程序为qtumd服务
-    - 启动服务进程 qtumd 默认p2p端口: 3888
+
+   - 服务化qtum-core二进制程序为qtumd服务
+   - 启动服务进程 qtumd 默认p2p端口: 3888
 
 3. qtuminfo 和 qtuminfo-api 模块 基于node编写而成
 
 4. qtuminfo：将数据块存在mysql里
-    - 服务化qtuminfo程序为qtuminfod服务，强依赖于qtumd服务
-    - 启动服务进程 mysql-v8 默认端口: 3006
-    - 启动服务进程 qtuminfod 默认端口: 3001
+
+   - 服务化qtuminfo程序为qtuminfod服务，强依赖于qtumd服务
+   - 启动服务进程 mysql-v8 默认端口: 3006
+   - 启动服务进程 qtuminfod 默认端口: 3001
 
 5. qtuminfo-api
-    - 后台启动进程 redis-v5 默认端口: 6379
-    - 启动qtuminfo-api进程 npm start 默认RPC端口: 7001
+
+   - 后台启动进程 redis-v5 默认端口: 6379
+   - 启动qtuminfo-api进程 npm start 默认RPC端口: 7001
 
 6. 日志位置
-    - /data/logs目录下：mysqld.log qtumd.log qtuminfod.log
-    - qtuminfo-api的日志在启动程序用户的家目录下
-    - redis日志在 /data/redis
+
+   - /data/logs目录下：mysqld.log qtumd.log qtuminfod.log
+   - qtuminfo-api的日志在启动程序用户的家目录下
+   - redis日志在 /data/redis
 
 7. API查看块高命令
-    - curl localhost:7001/info
 
-
+   - curl localhost:7001/info

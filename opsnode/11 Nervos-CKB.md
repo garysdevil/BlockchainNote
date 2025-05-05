@@ -5,11 +5,14 @@ created_date: 2020-11-16
 [TOC]
 
 - git仓库
-https://github.com/nervosnetwork/ckb
+  https://github.com/nervosnetwork/ckb
 - 代币：CKB
 - 链：Nervos
+
 ### 部署Nevos
+
 - 使用二进制进行安装部署
+
 ```bash
 useradd -r -m nervos && chown nervos.nervos /data && su - nervos && cd /data/
 # 1. 下载资源
@@ -30,19 +33,25 @@ wget https://gist.github.com/doitian/573513c345165c0fe4f3504ebc1c8f9f/raw/3032be
 # 5. 启动进程
 nohup /data/ckb/ckb run -C /data/ckb/ > /data/debug.log 2>&1 &
 ```
+
 ### 运维须知
+
 - 区块链游览器 https://explorer.nervos.org/
+
 - API文档 https://docs.nervos.org/api/rpc.html
 
 - 默认端口
-    1. rpc: 8114
-    2. p2p: 8115
+
+  1. rpc: 8114
+  2. p2p: 8115
 
 - 常用CLI
-    1. 查看节点信息 ./ckb-cli rpc get_blockchain_info
-    2. 查看块高 ./ckb-cli rpc get_tip_block_number
-    
+
+  1. 查看节点信息 ./ckb-cli rpc get_blockchain_info
+  2. 查看块高 ./ckb-cli rpc get_tip_block_number
+
 - API查看块高
+
 ```bash
 echo '{
     "id": 2,

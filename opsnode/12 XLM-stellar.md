@@ -7,22 +7,25 @@ created_date: 2020-11-16
 Git
 https://github.com/stellar/stellar-core
 https://github.com/stellar/docker-stellar-core-horizon
+
 - 链： steller
 - 代币： XLM
 
 #### 安装部署
+
 Requirement
-    Ubuntu 16.04
-    docker 17.03.2-ce
-    Ubuntu 16.04+
-    docker 17.03.2-ce+
-    2 Core CPU or above
-    8G Memory or above
-    300G Storage or above
-    10Mbit/s bandwidth or above
-    NTP service on
+Ubuntu 16.04
+docker 17.03.2-ce
+Ubuntu 16.04+
+docker 17.03.2-ce+
+2 Core CPU or above
+8G Memory or above
+300G Storage or above
+10Mbit/s bandwidth or above
+NTP service on
 
 - 通过容器进行部署
+
 ```bash
 # mainnet:
 docker run --rm -it -v "/data/stellar:/opt/stellar" -p "8000:8000" --name stellar stellar/quickstart --pubnet
@@ -36,6 +39,7 @@ docker run  -it -p "8000:8000" -v "/data/stellar:/opt/stellar" --name stellar st
 # 设置完数据库的密码后，退出，再启动容器。
 docker start 容器id
 ```
+
 ```bash
 nginx 连接节点的配置示范。
 server {
@@ -51,12 +55,14 @@ server {
        error_log  /var/log/nginx/xml-testnet_error.log ;
 }
 ```
+
 #### 运维须知
+
 - 默认端口
-    rpc和p2p: 8000
+  rpc和p2p: 8000
 
 - 指令查看块高（容器内操作）
-    /usr/local/bin/stellar-core offline-info | grep num
+  /usr/local/bin/stellar-core offline-info | grep num
 
 - API查看块高
-    curl 127.0.0.1:8000 | grep core_latest_ledger
+  curl 127.0.0.1:8000 | grep core_latest_ledger
