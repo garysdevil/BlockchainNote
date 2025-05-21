@@ -5,6 +5,17 @@ created_date: 2022-03-20
 
 [TOC]
 
+## 链接
+1. 区块链浏览器
+  1. https://blockstream.info/
+  2. https://mempool.space/
+  3. https://live.blockcypher.com/
+2. 测试网区块链浏览器
+  1. https://blockchair.com/zh/bitcoin/testnet
+  2. https://live.blockcypher.com/btc-testnet/
+  3. https://bitpay.com/insight/#/BTC/testnet/home
+3. 比特币测试网钱包生成器 https://www.bitaddress.org/
+
 ## 模拟工具
 
 - 区块链模拟工具
@@ -14,36 +25,6 @@ nvm use v8.17.0
 npm install blockchain-cli
 blockchain help
 ```
-
-## 浏览器
-
-1. https://blockstream.info/
-2. https://mempool.space/
-3. https://live.blockcypher.com/
-
-## 测试网
-
-- 比特币测试网钱包生成器 https://www.bitaddress.org/
-
-  - bitcoin address是1开头的，是比特币主网地址
-  - 我的测试地址 1MbMM5hNuK6x2BrHKxtMUcoymbRZLQwHR6
-  - 我的测试私钥 KyTqqttrE28FPunLS3Cg5E8pFf6WNJirRCdCr9GUYQNFs1LTm3Xr
-
-- 比特币测试网水龙头
-
-  - https://kuttler.eu/en/bitcoin/btc/faucet/
-  - https://coinfaucet.eu/en/btc-testnet/
-  - https://testnet-faucet.mempool.co/
-
-- 比特币测试网游览器
-
-  - https://blockchair.com/zh/bitcoin/testnet
-  - https://live.blockcypher.com/btc-testnet/
-  - https://bitpay.com/insight/#/BTC/testnet/home
-
-- 比特币谷歌插件钱包（支持测试网）
-
-  - https://chrome.google.com/webstore/detail/pay-with-bitpay/jkjgekcefbkpogohigkgooodolhdgcda/related
 
 ## bitcoin
 
