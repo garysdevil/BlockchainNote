@@ -6,15 +6,16 @@ created_date: 2022-03-20
 [TOC]
 
 ## 链接
+
 1. 区块链浏览器
-  1. https://blockstream.info/
-  2. https://mempool.space/
-  3. https://live.blockcypher.com/
-2. 测试网区块链浏览器
-  1. https://blockchair.com/zh/bitcoin/testnet
-  2. https://live.blockcypher.com/btc-testnet/
-  3. https://bitpay.com/insight/#/BTC/testnet/home
-3. 比特币测试网钱包生成器 https://www.bitaddress.org/
+2. https://blockstream.info/
+3. https://mempool.space/
+4. https://live.blockcypher.com/
+5. 测试网区块链浏览器
+6. https://blockchair.com/zh/bitcoin/testnet
+7. https://live.blockcypher.com/btc-testnet/
+8. https://bitpay.com/insight/#/BTC/testnet/home
+9. 比特币测试网钱包生成器 https://www.bitaddress.org/
 
 ## 模拟工具
 

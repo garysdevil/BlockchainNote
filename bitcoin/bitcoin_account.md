@@ -7,12 +7,11 @@ created_date: 2023-05-15
 
 ## 四种账户地址类型
 
-- 参考 https://richpool.pro/blog/21/
+1. Legacy Address（P2PK和P2PKH）
 
-1. Legacy 旧地址（P2PKH）
-
-   1. 旧地址是以数字 1 开头的地址。例如 15e15hWo6CShMgbAfo8c2Ykj4C6BLq6Not
-   2. 旧地址只是公钥和私钥的散列。早在 2009 年比特币推出时，这是创建地址的唯一方法。今天，这在交易中使用最多的空间，因此交易时gas费很贵。
+   1. P2PK = IP Addresses: The Original Address for Bitcoin
+   2. 旧地址是以数字 1 开头的地址。例如 15e15hWo6CShMgbAfo8c2Ykj4C6BLq6Not
+   3. 旧地址只是公钥和私钥的散列。早在 2009 年比特币推出时，这是创建地址的唯一方法。今天，这在交易中使用最多的空间，因此交易时gas费很贵。
 
 2. 支付脚本哈希（P2SH）
 
@@ -37,10 +36,10 @@ created_date: 2023-05-15
 
 - 账户生成标准是由比特币的3个提案组成
 
-1. BIP-39 定义如何使用助记词生成seed
+1. BIP-39 定义如何使用熵生成助记词，如何使用助记词生成种子
 
    - https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki
-   -
+   - 类似标准 Electrum v2 Aezeed Muun SLIP39
 
 2. BIP-32 定义 HD Wallet（Hierarchical Deterministic Wallet）的规则
 

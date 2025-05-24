@@ -30,7 +30,8 @@ created_date: 2021-11-23
 1. Infura https://infura.io/
 
 2. Alchemy https://www.alchemy.com/
-  - 支持solana网络
+
+- 支持solana网络
 
 3. Moralis[ https://moralis.io/](https://moralis.io/)
 
@@ -39,7 +40,8 @@ created_date: 2021-11-23
 5. https://dashboard.instantnodes.io/
 
 6. https://publicnode.com/
-  1. 免费不需要注册
+
+7. 免费不需要注册
 
 ## 比特币网络资料库
 
