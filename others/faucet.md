@@ -9,7 +9,7 @@ created_date: 2025-05-05
 1. https://faucet.trade/
 2. faucets.chain.link
 
-## Goerli 水龙头
+## 以太坊 Goerli 网络水龙头
 
 1. 官方水龙头 https://faucet.paradigm.xyz/
 
@@ -41,7 +41,7 @@ created_date: 2025-05-05
 
 8. https://faucet.goerli.mudit.blog/
 
-## Sepolia网络水龙头地址列表
+## 以太坊 Sepolia 网络水龙头
 
 - 资料
   - 其它水龙头地址列表 https://faucetlink.to/sepolia
@@ -66,7 +66,7 @@ created_date: 2025-05-05
 6. https://faucet.trade/sepolia-eth-faucet
    1. 领取条件： 推特注册时间大于1个月，关注者大于5。
 
-## 以太坊二层测试网 ETH测试币
+## 以太坊 Layer2 网络
 
 1. Starknet测试网ETH代币 https://faucet.goerli.starknet.io/
 
@@ -85,7 +85,7 @@ created_date: 2025-05-05
    1. https://app.uniswap.org/#/swap 在poligon网络购买FDT， 0x034f5bEc23a65a80dFd3A5A91dffa88274E9aB24
    2. https://www.faucetdao.shop/ 将FDT跨桥到poligon网络，购买tETH
 
-## 比特币水龙头
+## 比特币网络水龙头
 
 - testnet3
   1. https://bitcoinfaucet.uo1.net/send.php
