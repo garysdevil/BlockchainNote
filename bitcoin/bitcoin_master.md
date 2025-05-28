@@ -18,3 +18,7 @@ created_date: 2024-01-25
   4. A mechanism for reaching global decentralized consensus on the valid block‐ chain (proof-of-work algorithm)
 
 3. 比特币提案 Bitcoin Improvement Proposals (BIPs).
+
+The Bitcoin transaction script language contains many operators, but is deliberately
+limited in one important way—there are no loops or complex flow control capabili‐
+ties other than conditional flow control. 
