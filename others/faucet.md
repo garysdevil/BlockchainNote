@@ -47,24 +47,28 @@ created_date: 2025-05-05
   - 其它水龙头地址列表 https://faucetlink.to/sepolia
 
 1. https://faucet.quicknode.com/ethereum/sepolia
-   1. 领取条件： 以太坊主网需要有 0.001 ETH 以上。
+   1. 领取条件： 
+      1. 以太坊主网需要有 0.001 ETH 以上。
 2. https://www.alchemy.com/faucets/ethereum-sepolia （备用网站 https://sepoliafaucet.com/）
    1. 领取条件：
       1. 以太坊主网需要有 0.001 ETH 以上。
       2. 谷歌账户注册登入alchemy（有时需要手机号）。
 3. https://www.infura.io/faucet/sepolia
    1. 领取条件：
-      1. 太坊主网上有过交易记录。
-      2. 注册infura账户才能领水。 （注册infura账户教程 https://www.youtube.com/watch?v=WkojkWkVdZY）
+      1. 需要注册登入infura。 （注册infura账户教程 https://www.youtube.com/watch?v=WkojkWkVdZY）
+      2. 太坊主网上有过交易记录。
 4. https://sepolia-faucet.pk910.de/
    1. 领取条件：
       1. Gitcoin Passport 分数需要大于等于 2分。
       2. 通过POW挖矿模式领取测试代币。
 5. https://faucet-sepolia.rockx.com/ 或 https://access.rockx.com/faucet-sepolia
    1. 领取条件：
-      1. 以太坊主网需要有 0.0011 ETH 以上。
+      1. 需要注册登入rockx
+      2. 以太坊主网需要有 0.0011 ETH 以上。
 6. https://faucet.trade/sepolia-eth-faucet
-   1. 领取条件： 推特注册时间大于1个月，关注者大于5。
+   1. 领取条件：
+      1. 推特注册时间大于1个月，关注者大于5。
+      2. 有人机验证码。
 
 ## 以太坊 Layer2 网络
 
@@ -84,6 +88,8 @@ created_date: 2025-05-05
 
    1. https://app.uniswap.org/#/swap 在poligon网络购买FDT， 0x034f5bEc23a65a80dFd3A5A91dffa88274E9aB24
    2. https://www.faucetdao.shop/ 将FDT跨桥到poligon网络，购买tETH
+
+6. https://www.l2faucet.com/
 
 ## 比特币网络水龙头
 
