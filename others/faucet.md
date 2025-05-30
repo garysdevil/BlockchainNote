@@ -8,6 +8,8 @@ created_date: 2025-05-05
 
 1. https://faucet.trade/
 2. faucets.chain.link
+3. https://learnweb3.io/faucets/ 需要认证Github
+4. https://bisell.site/ 购买
 
 ## 以太坊 Goerli 网络水龙头
 
