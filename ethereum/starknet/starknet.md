@@ -29,6 +29,8 @@ created_date: 2025-05-20
   - starkscan.co
   - https://voyager.online/
 
+- 学习教程
+  - book.cairo-lang.org
 
 V神的zk-EVM分类
 
@@ -39,3 +41,35 @@ V神的zk-EVM分类
 | Type2 | Storage data structure       | High          | Slow        | -                                      |
 | Type3 | Storage, hashes, precompiles | Partial       | Fast        | Kakarot, zkSync, Scroll, Polygon zkEVM |
 | Type4 | Completely different VM      | None          | Very Fast   | Starknet, Aztec*, Polygon Miden        |
+
+
+
+- Cairo 最初是Starkware创建的一种计算机架构，用于程序执行和生成有效性证明。
+- Cairo 名字的由来 CPU AIR Operation
+- 由Cairo执行的低级字节码称为“Cairo Assembly” 或 CASM。
+- Cairo语言 --> 编译为 Sierra --> 编译为 CASM
+
+## Cairo
+- Field elements = felt
+- 默认数据类型是 felt252
+- felt 可以表示的直 0 < X < p
+
+## Starklings
+- https://starklings.app
+1. Starklings 是交互式学习 Cairo 的工具
+2. 由 Shramee 创建  @shrameetweets
+3. Starklings App 由 Damian创建 @dpinoness
+
+
+## 项目管理工具
+1. starkli
+  1. https://github.com/xJonathanLEI/starkli/releases/
+  2. curl https://get.starkli.sh | sh
+
+2. scarb
+  1. https://docs.swmansion.com/scarb/download.html
+  2. `curl --proto '=https' --tlsv1.2 -sSf https://docs.swmansion.com/scarb/install.sh | sh`
+
+
+- Cairo 1.0编译器依赖Rust
+

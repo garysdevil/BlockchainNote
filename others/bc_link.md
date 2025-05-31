@@ -9,6 +9,9 @@ created_date: 2021-11-23
 1. 以太坊是全球金融中心 https://forum.degate.com/t/topic/71/3
 2. 2024 Cosmos生态 https://public.bnbstatic.com/static/files/research/orbiting-the-cosmos-ecosystem.pdf
 
+## 学习平台
+1. https://openbuild.xyz/
+
 ## 区块链
 
 - 区块链生态服务商 https://consensys.net/
