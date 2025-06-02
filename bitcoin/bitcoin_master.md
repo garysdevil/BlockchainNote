@@ -21,4 +21,4 @@ created_date: 2024-01-25
 
 The Bitcoin transaction script language contains many operators, but is deliberately
 limited in one important way—there are no loops or complex flow control capabili‐
-ties other than conditional flow control. 
+ties other than conditional flow control.

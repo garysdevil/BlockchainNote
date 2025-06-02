@@ -10,6 +10,7 @@ created_date: 2021-11-23
 2. 2024 Cosmos生态 https://public.bnbstatic.com/static/files/research/orbiting-the-cosmos-ecosystem.pdf
 
 ## 学习平台
+
 1. https://openbuild.xyz/
 
 ## 区块链

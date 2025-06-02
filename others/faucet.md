@@ -49,7 +49,7 @@ created_date: 2025-05-05
   - 其它水龙头地址列表 https://faucetlink.to/sepolia
 
 1. https://faucet.quicknode.com/ethereum/sepolia
-   1. 领取条件： 
+   1. 领取条件：
       1. 以太坊主网需要有 0.001 ETH 以上。
 2. https://www.alchemy.com/faucets/ethereum-sepolia （备用网站 https://sepoliafaucet.com/）
    1. 领取条件：

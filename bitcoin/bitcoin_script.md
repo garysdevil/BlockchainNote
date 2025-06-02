@@ -51,7 +51,7 @@ created_date: 2024-09-13
   3. 6 会被 push 进栈，现在栈里面有 5 和 6。
   4. OP_EQUAL 会把 6 和 5 都 pop 出来，然后把比较结果 false push 进栈。
 
-```json
+```json P2PKH脚本
 {
   "version": 1,
   "locktime": 0,
@@ -78,10 +78,9 @@ created_date: 2024-09-13
 
 - scriptSig
 
-  - 格式： $signature $public_key
+  - 格式： $signature $publicKey
   - 内容： 一项是数字签名，另一项是公钥（比特币地址）。
   - 功能： 设置解锁条件，接收方满足这个条件，才能花费这个UTXO。
-  -
 
 - scriptPubKey
 
@@ -91,15 +90,15 @@ created_date: 2024-09-13
 
 - 代码执行过程
 
-  1. 解锁脚本和锁定脚本的连接
-     1. $signature $publicKey OP_DUP OP_HASH160 $pubKeyHash OP_EQUALVERIFY OP_CHECKSIG
-  2. OP_DUP 把栈最顶端的一项 $publicKey 复制一下，然后把结果 push 回栈。
+  - 解锁脚本和锁定脚本的连接 $signature $publicKey OP_DUP OP_HASH160 $pubKeyHash OP_EQUALVERIFY OP_CHECKSIG
+
+  1. OP_DUP 把栈最顶端的一项 $publicKey 复制一下，然后把结果 push 回栈。
      1. $signature $publicKey $publicKey OP_HASH160 $pubKeyHash OP_EQUALVERIFY OP_CHECKSIG
-  3. OP_HASH160 把栈最顶端的一项 $publicKey 取出并对其进行双重哈希运算 RIPEMD160(SHA-256($publicKey)) ，然后把结果 push 回栈。
+  2. OP_HASH160 把栈最顶端的一项 $publicKey 取出并对其进行双重哈希运算 RIPEMD160(SHA-256($publicKey)) ，然后把结果 push 回栈。
      1. $signature $publicKey $pubKeyHash $pubKeyHash OP_EQUALVERIFY OP_CHECKSIG
-  4. OP_EQUALVERIFY 比较堆栈顶部的两项是否相等，并删除它们，如果不相等则脚本失败。
+  3. OP_EQUALVERIFY 比较堆栈顶部的两项是否相等，并删除它们，如果不相等则脚本失败。
      1. [signature, publicKey] OP_CHECKSIG
-  5. OP_CHECKSIG：验证签名是否与提供的公钥匹配。
+  4. OP_CHECKSIG：验证签名是否与提供的公钥匹配。
      1. 如果验证通过，脚本执行成功
 
 ## 被禁止的操作码
