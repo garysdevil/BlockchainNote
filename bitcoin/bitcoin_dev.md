@@ -36,6 +36,8 @@ blockchain help
 # wsl --list --onlin
 # wsl --list 
 # wsl --status
+# wsl -t ubuntu 关闭ubuntu
+# wsl --shutdown 关闭所有系统及虚拟机引擎
 # 安装子系统 # 默认安装Ubuntu子系统
 wsl --install
 # -d 指定使用的子系统  -u 指定用户
