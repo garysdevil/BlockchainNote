@@ -107,7 +107,7 @@ created_date: 2022-08-03
 
 - 以太坊系统与Account模型
 
-  - Account模型态通过默克尔树的结构保存了所以状态。链的状态在区块中以 StateRoot 和 ReceiptRoot 等形式进行共识。
+  - Account模型态通过默克尔树的结构保存了所有状态。链的状态在区块中以 StateRoot 和 ReceiptRoot 等形式进行共识。
   - 太坊系统就像一个状态机，它接受一个又一个的 Transaction 并不停改变自己的状态。
   - 只要全网保留了最新的状态，以太坊链就能运行。
 
@@ -150,8 +150,8 @@ created_date: 2022-08-03
 
 - 以太坊账户余额这样的数据并不直接保存在以太坊区块链的区块中。区块中只保存三种树的根节点哈希值。
 
-  - 交易树 Transaction Trie
   - 世界状态树 World State Trie， 世界状态树是地址和帐户状态之间的映射。账户存储树（account storage contents trie）在世界状态树中构造叶节点。
+  - 交易树 Transaction Trie
   - 收据树 Receipt Trie
 
 ## 区块链系统的分叉问题
