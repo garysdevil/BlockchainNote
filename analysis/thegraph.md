@@ -83,8 +83,8 @@ graph codegen # 根据schema.graphql生成了ts文件，默认放进generated文
 graph build # 本地构建wasm文件核实是否有语法错误，结果默认创建并放进build文件夹内
 
 # 5. 部署进官方的Subgraph Studio
-graph auth --studio $DEPLOY_KEY # 从官网 https://thegraph.com/studio/ 获取 DEPLOY_KEY
-graph deploy --studio $SUBGRAPH_SLUG
+graph auth $DEPLOY_KEY # 从官网 https://thegraph.com/studio/ 获取 DEPLOY_KEY
+graph deploy $SUBGRAPH_SLUG
 
 # 假如需要部署进去中心化区块链网络里则需要在网页上支付对应的链上代币进行部署
 ```
