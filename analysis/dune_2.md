@@ -1,7 +1,3 @@
-## 链接
-
-1. 官网 https://dune.com/
-
 ## 实例一
 
 ```sql
@@ -55,4 +51,21 @@ WHERE
     AND block_date < CURRENT_DATE
 GROUP BY block_date
 ORDER BY block_date DESC;
+```
+
+
+## 实例 三
+
+```sql
+SELECT
+  evt_block_date,
+  COUNT(DISTINCT tokenId) AS total_tokenId,
+  COUNT(evt_tx_hash) AS total_tx,
+  COUNT(DISTINCT tokenId)/CAST(36651 as double) as total_tokenId_percent,
+  COUNT(evt_tx_hash)/CAST(COUNT(DISTINCT tokenId) as double) as avg_tokenId_tx
+FROM dxterminal_base.dxterminal_evt_transfer
+GROUP BY
+  evt_block_date
+ORDER BY
+  evt_block_date DESC
 ```
