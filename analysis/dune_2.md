@@ -57,15 +57,44 @@ ORDER BY block_date DESC;
 ## 实例 三
 
 ```sql
+-- 分析 dx-terminal NFT的交易状况
+-- NFT平均交易次数=当日交易的总量/当日被交易过的NFT，
+WITH dxterminal AS (
+  SELECT
+    evt_block_date as block_date,
+    COUNT(DISTINCT tokenId) AS total_tokenId,
+    COUNT(evt_tx_hash) AS total_tx
+  FROM dxterminal_base.dxterminal_evt_transfer
+  GROUP BY evt_block_date
+)
 SELECT
-  evt_block_date,
-  COUNT(DISTINCT tokenId) AS total_tokenId,
-  COUNT(evt_tx_hash) AS total_tx,
-  COUNT(DISTINCT tokenId)/CAST(36651 as double) as total_tokenId_percent,
-  COUNT(evt_tx_hash)/CAST(COUNT(DISTINCT tokenId) as double) as avg_tokenId_tx
-FROM dxterminal_base.dxterminal_evt_transfer
-GROUP BY
-  evt_block_date
-ORDER BY
-  evt_block_date DESC
+  block_date as "日期",
+  total_tokenId as "NFT交易数量",
+  total_tx as "交易总量",
+  total_tokenId/CAST(36651 as double) AS "NFT交易数量占总量的比例",
+  total_tx/CAST(total_tokenId as double) AS "NFT平均交易次数"
+FROM dxterminal
+ORDER BY block_date DESC
+```
+
+```sql
+WITH nft AS (
+    SELECT 
+        block_date, 
+        COUNT(DISTINCT token_id) AS total_tokenId,
+        COUNT(tx_hash) AS total_tx
+    FROM nft.transfers 
+    WHERE blockchain = 'base' AND contract_address = 0xf20a43f8396f8e28100d6d454e34483d78094c29 
+    GROUP BY block_date
+    ORDER BY block_date DESC
+    LIMIT 100
+)
+SELECT
+  block_date as "日期",
+  total_tokenId as "NFT交易数量",
+  total_tx as "交易总量",
+  total_tokenId/CAST(36651 as double) AS "NFT交易数量占总量的比例",
+  total_tx/CAST(total_tokenId as double) AS "NFT平均交易次数"
+FROM nft
+ORDER BY block_date DESC
 ```
